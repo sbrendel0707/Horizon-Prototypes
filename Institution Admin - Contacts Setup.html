@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contacts Setup — Nelnet Campus Commerce</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0a1628;
+  --navy2: #111f3a;
+  --navy3: #1a2f55;
+  --blue: #2563eb;
+  --blue-light: #3b82f6;
+  --blue-pale: rgba(37,99,235,.12);
+  --green: #10b981;
+  --green-pale: rgba(16,185,129,.12);
+  --amber: #f59e0b;
+  --amber-pale: rgba(245,158,11,.12);
+  --red: #ef4444;
+  --red-pale: rgba(239,68,68,.1);
+  --border: rgba(255,255,255,.08);
+  --border2: rgba(255,255,255,.13);
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --card: rgba(255,255,255,.04);
+  --card2: rgba(255,255,255,.07);
+  --input-bg: rgba(255,255,255,.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--text); overflow: hidden; }
+
+/* ── LAYOUT ── */
+#app { display: flex; height: 100vh; }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: 280px; flex-shrink: 0; background: var(--navy2);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto;
+}
+.sidebar-logo { padding: 22px 24px 18px; border-bottom: 1px solid var(--border); }
+.logo-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.logo-n {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: #fff;
+}
+.logo-name { font-size: 15px; font-weight: 700; }
+.logo-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.sidebar-uni { padding: 14px 24px; border-bottom: 1px solid var(--border); }
+.uni-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 3px; }
+.uni-name { font-size: 14px; font-weight: 600; }
+.steps-section { padding: 16px 0 24px; flex: 1; }
+.steps-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; padding: 0 24px; margin-bottom: 10px; }
+.step-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 24px; position: relative; cursor: default;
+}
+.step-item:not(:last-child)::after {
+  content: ''; position: absolute; left: 34px; top: 38px; height: 14px;
+  width: 1px; background: var(--border2);
+}
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; margin-top: 1px;
+  background: var(--card2); border: 1.5px solid var(--border2); color: var(--text3);
+  transition: all .2s;
+}
+.step-item.active .step-num { background: var(--blue); border-color: var(--blue); color: #fff; }
+.step-item.done .step-num { background: var(--green); border-color: var(--green); color: #fff; }
+.step-title { font-size: 13px; font-weight: 600; color: var(--text3); line-height: 1.3; }
+.step-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.step-item.active .step-title { color: var(--text); }
+.step-item.done .step-title { color: var(--text2); }
+
+/* ── TOPBAR ── */
+#topbar {
+  height: 52px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
+  background: rgba(17,31,58,.6); backdrop-filter: blur(8px);
+}
+.topbar-breadcrumb { font-size: 12px; color: var(--text3); }
+.topbar-breadcrumb span { color: var(--text2); font-weight: 500; }
+.topbar-user {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+}
+
+/* ── MAIN ── */
+#main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#main { flex: 1; overflow-y: auto; padding: 40px 48px; display: flex; flex-direction: column; }
+
+/* ── PANELS ── */
+.panel { display: none; flex-direction: column; flex: 1; animation: fadeIn .2s ease; }
+.panel.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 32px; }
+.page-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--blue-light); font-weight: 600; margin-bottom: 8px; }
+.page-title { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+.page-sub { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 560px; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  background: var(--card); border: 1.5px dashed var(--border2); border-radius: var(--radius);
+  padding: 44px 24px; text-align: center; margin-bottom: 20px;
+}
+.empty-icon { font-size: 36px; margin-bottom: 12px; }
+.empty-title { font-size: 15px; font-weight: 600; color: var(--text2); margin-bottom: 4px; }
+.empty-sub { font-size: 13px; color: var(--text3); }
+
+/* ── CONTACTS GRID ── */
+.contacts-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+.contact-card {
+  background: var(--card2); border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 16px 18px; position: relative; display: flex; flex-direction: column; gap: 5px;
+  transition: border-color .15s;
+}
+.contact-card:hover { border-color: rgba(255,255,255,.2); }
+.contact-name { font-size: 14px; font-weight: 600; color: var(--text); padding-right: 24px; }
+.contact-meta { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); }
+.contact-meta svg { flex-shrink: 0; opacity: .6; }
+.contact-delete {
+  position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border-radius: 6px;
+  background: transparent; border: none; cursor: pointer; color: var(--text3);
+  display: flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.contact-delete:hover { background: var(--red-pale); color: var(--red); }
+
+/* ── ADD CONTACT FORM ── */
+.add-form {
+  background: var(--navy3); border: 1px solid var(--border2); border-radius: var(--radius);
+  padding: 22px; margin-bottom: 20px; display: none;
+}
+.add-form.open { display: block; animation: fadeIn .15s ease; }
+.form-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-grid.full { grid-template-columns: 1fr; }
+.field-label {
+  font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px;
+  font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;
+}
+.req { color: var(--red); }
+.field-opt { font-size: 10px; color: var(--text3); font-weight: 400; text-transform: none; letter-spacing: 0; }
+.field-input {
+  width: 100%; background: var(--input-bg); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); padding: 10px 13px; font-size: 13px; color: var(--text);
+  outline: none; font-family: 'DM Sans', sans-serif; transition: border-color .15s, background .15s;
+}
+.field-input:focus { border-color: var(--blue-light); background: rgba(37,99,235,.06); }
+.field-input.error { border-color: var(--red); }
+.field-error { font-size: 11px; color: #fca5a5; margin-top: 5px; display: none; }
+.field-error.show { display: block; }
+.form-actions { display: flex; gap: 8px; justify-content: flex-end; padding-top: 4px; }
+
+/* ── BUTTONS ── */
+.btn-ghost {
+  padding: 8px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+}
+.btn-ghost:hover { background: var(--card2); color: var(--text); }
+.btn-primary {
+  padding: 8px 20px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  border: none; background: var(--blue); color: #fff;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+}
+.btn-primary:hover { background: var(--blue-light); }
+.btn-add {
+  padding: 10px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  border: 1.5px dashed var(--border2); background: transparent; color: var(--text3);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.btn-add:hover { border-color: var(--blue-light); color: var(--blue-light); background: var(--blue-pale); }
+
+/* ── STEP FOOTER ── */
+.step-footer {
+  margin-top: auto; padding-top: 28px; margin-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-hint { font-size: 13px; color: var(--text3); }
+.btn-next {
+  padding: 11px 26px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+  border: none; background: var(--blue); color: #fff;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s, opacity .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-next:hover:not(:disabled) { background: var(--blue-light); }
+.btn-next:disabled { opacity: .35; cursor: not-allowed; }
+.btn-back {
+  padding: 11px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-back:hover { background: var(--card2); color: var(--text); }
+
+/* ── CATEGORIES ── */
+.categories-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.cat-row {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 16px 20px; display: flex; align-items: center; gap: 16px; transition: border-color .2s;
+}
+.cat-row.has-error { border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.03); }
+.cat-icon {
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+  background: var(--blue-pale);
+}
+.cat-info { flex: 1; min-width: 0; }
+.cat-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; line-height: 1.35; }
+.cat-desc { font-size: 11px; color: var(--text3); line-height: 1.5; }
+.cat-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nelnet-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--blue-pale); border: 1px solid rgba(37,99,235,.25);
+  border-radius: 6px; padding: 3px 8px; font-size: 10px; font-weight: 600; color: var(--blue-light);
+  white-space: nowrap;
+}
+.cat-select-wrap { position: relative; }
+.cat-select {
+  appearance: none; -webkit-appearance: none;
+  background: var(--input-bg); border: 1px solid var(--border2); border-radius: var(--radius-sm);
+  padding: 8px 34px 8px 12px; font-size: 13px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; outline: none; cursor: pointer;
+  min-width: 210px; transition: border-color .15s, background .15s;
+}
+.cat-select:focus { border-color: var(--blue-light); background: rgba(37,99,235,.06); }
+.cat-select.unset { border-color: rgba(239,68,68,.5); color: var(--text2); }
+.cat-select option { background: #0d1630; color: var(--text); }
+.select-arrow {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; color: var(--text3);
+}
+.cat-status-icon { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.icon-check { color: var(--green); display: none; }
+.icon-warn { color: var(--amber); display: none; }
+.cat-row.is-set .icon-check { display: flex; }
+.cat-row:not(.is-set) .icon-warn { display: flex; }
+
+/* ── VALIDATION BANNER ── */
+.val-banner {
+  display: none; background: var(--red-pale); border: 1px solid rgba(239,68,68,.25);
+  border-radius: var(--radius-sm); padding: 11px 16px; font-size: 13px; color: #fca5a5;
+  margin-bottom: 18px; display: none; align-items: center; gap: 8px;
+}
+.val-banner.show { display: flex; }
+
+/* ── SUCCESS ── */
+#panel-success {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 40px; flex: 1;
+}
+#panel-success.active { display: flex; animation: fadeIn .3s ease; }
+.success-ring {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--green-pale); border: 2px solid rgba(16,185,129,.35);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+}
+.success-title { font-family: 'DM Serif Display', serif; font-size: 28px; margin-bottom: 10px; }
+.success-sub { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 440px; margin-bottom: 28px; }
+.summary-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; max-width: 520px; }
+.summary-chip {
+  background: var(--card2); border: 1px solid var(--border2); border-radius: 8px;
+  padding: 6px 13px; font-size: 12px; color: var(--text2);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+</style>
+</head>
+<body>
+
+<a href="/" style="position:fixed;top:16px;left:16px;z-index:9999;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:7px 13px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;backdrop-filter:blur(8px);transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Home</a>
+
+<div id="app">
+
+<!-- ── SIDEBAR ── -->
+<div id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-n">N</div>
+      <div><div class="logo-name">Nelnet Campus Commerce</div></div>
+    </div>
+    <div class="logo-sub">Institution Admin Portal</div>
+  </div>
+  <div class="sidebar-uni">
+    <div class="uni-label">Setting up</div>
+    <div class="uni-name">Claude University</div>
+  </div>
+  <div class="steps-section">
+    <div class="steps-label">Contact Setup</div>
+    <div class="step-item active" id="nav-1">
+      <div class="step-num" id="num-1">1</div>
+      <div>
+        <div class="step-title">Add Contacts</div>
+        <div class="step-sub">Add department contacts</div>
+      </div>
+    </div>
+    <div class="step-item" id="nav-2">
+      <div class="step-num" id="num-2">2</div>
+      <div>
+        <div class="step-title">Assign Categories</div>
+        <div class="step-sub">Map contacts to question types</div>
+      </div>
+    </div>
+    <div class="step-item" id="nav-3">
+      <div class="step-num" id="num-3">3</div>
+      <div>
+        <div class="step-title">Complete</div>
+        <div class="step-sub">Contact setup finished</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN WRAP ── -->
+<div id="main-wrap">
+  <div id="topbar">
+    <div class="topbar-breadcrumb">Claude University &rsaquo; <span id="topbar-step">Add Contacts</span></div>
+    <div class="topbar-user">SA</div>
+  </div>
+  <div id="main">
+
+    <!-- ══ STEP 1: ADD CONTACTS ══ -->
+    <div class="panel active" id="panel-1">
+      <div class="page-header">
+        <div class="page-eyebrow">Step 1 of 2</div>
+        <div class="page-title">Add Your Contacts</div>
+        <div class="page-sub">Add a contact for each department your students may need to reach. Each contact needs a name and phone number — email is optional. You can add as many as you need.</div>
+      </div>
+
+      <div id="contacts-container"></div>
+
+      <div style="margin-bottom:20px;">
+        <button class="btn-add" id="btn-toggle-form" onclick="toggleForm()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Add a contact
+        </button>
+      </div>
+
+      <!-- Add contact form -->
+      <div class="add-form" id="add-form">
+        <div class="form-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          New Contact
+        </div>
+        <div class="form-grid">
+          <div>
+            <div class="field-label"><span class="req">*</span> Contact Name</div>
+            <input type="text" class="field-input" id="f-name" placeholder="e.g. Bursar's Office"/>
+            <div class="field-error" id="err-name">Contact name is required</div>
+          </div>
+          <div>
+            <div class="field-label"><span class="req">*</span> Phone Number</div>
+            <input type="tel" class="field-input" id="f-phone" placeholder="(555) 000-0000"/>
+            <div class="field-error" id="err-phone">A valid phone number is required</div>
+          </div>
+        </div>
+        <div class="form-grid full">
+          <div>
+            <div class="field-label">Email Address <span class="field-opt">(optional)</span></div>
+            <input type="email" class="field-input" id="f-email" placeholder="office@university.edu"/>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-ghost" onclick="cancelForm()">Cancel</button>
+          <button class="btn-primary" onclick="saveContact()">Save Contact</button>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <span class="footer-hint" id="contact-hint">Add at least one contact to continue</span>
+        <button class="btn-next" id="btn-continue" disabled onclick="goStep2()">
+          Continue to Categories
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2: ASSIGN CATEGORIES ══ -->
+    <div class="panel" id="panel-2">
+      <div class="page-header">
+        <div class="page-eyebrow">Step 2 of 2</div>
+        <div class="page-title">Assign Question Categories</div>
+        <div class="page-sub">For each type of student question, choose which contact handles it. Categories marked Nelnet default are pre-filled — you can keep or override them. All categories must be assigned before saving.</div>
+      </div>
+
+      <div class="val-banner" id="val-banner">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        Please assign a contact to every category before saving.
+      </div>
+
+      <div class="categories-list" id="categories-list"></div>
+
+      <div class="step-footer">
+        <button class="btn-back" onclick="goStep1()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back
+        </button>
+        <button class="btn-next" id="btn-save" onclick="saveAndComplete()">
+          Save &amp; Complete
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ SUCCESS ══ -->
+    <div id="panel-success">
+      <div class="success-ring">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <div class="success-title">Contacts Setup Complete</div>
+      <div class="success-sub">Your contacts have been saved and assigned to all question categories. Students will now see the right contact for each type of question they have.</div>
+      <div class="summary-row" id="summary-chips"></div>
+      <button class="btn-next" onclick="window.location.href='/'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Prototypes
+      </button>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /main-wrap -->
+</div><!-- /app -->
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────────
+let contacts = [];
+let nextId = 1;
+
+const CATS = [
+  { id: 'pot-daily',     icon: '📅', name: 'Pay over time day-to-day questions and changes',  desc: 'Routine questions about payment plans, adjustments, and account updates',              nelnet: true  },
+  { id: 'pot-extend',    icon: '🤝', name: 'Pay over time extension / inability to pay',       desc: 'Students struggling with payments or needing plan modifications',                    nelnet: false },
+  { id: 'how-pay',       icon: '💳', name: 'How to make a payment',                            desc: 'General payment process questions and troubleshooting',                              nelnet: true  },
+  { id: 'how-login',     icon: '🔐', name: 'How to login to pay',                              desc: 'Login, account access, and portal navigation questions',                             nelnet: true  },
+  { id: 'financial-aid', icon: '🎓', name: 'Financial Aid questions',                          desc: 'Questions about grants, loans, scholarships, and aid disbursement',                  nelnet: false },
+  { id: 'charges-tuition', icon: '🧾', name: 'Charges for tuition and other student account fees', desc: 'Questions about tuition charges, fees, and other items on the student account',   nelnet: false },
+  { id: 'charges-housing', icon: '🏠', name: 'Housing charges',                                desc: 'Questions about room, board, and housing-related charges',                            nelnet: false },
+  { id: 'charges-parking', icon: '🚗', name: 'Parking charges',                                desc: 'Questions about parking permits, fines, and related fees',                            nelnet: false },
+];
+
+// selections: catId -> 'nelnet' | contactId (number) | '' (unset)
+const sel = {};
+CATS.forEach(c => { sel[c.id] = c.nelnet ? 'nelnet' : ''; });
+
+// ── HELPERS ─────────────────────────────────────────────────────────
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const $  = id => document.getElementById(id);
+
+// ── STEP 1 — CONTACTS ───────────────────────────────────────────────
+function renderContacts() {
+  const wrap = $('contacts-container');
+  const hint = $('contact-hint');
+  const btn  = $('btn-continue');
+
+  if (contacts.length === 0) {
+    wrap.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">👥</div>
+        <div class="empty-title">No contacts added yet</div>
+        <div class="empty-sub">Use the button below to add your first department contact</div>
+      </div>`;
+    hint.textContent = 'Add at least one contact to continue';
+    btn.disabled = true;
+  } else {
+    const cards = contacts.map(c => `
+      <div class="contact-card">
+        <button class="contact-delete" onclick="removeContact(${c.id})" title="Remove">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="contact-name">${esc(c.name)}</div>
+        <div class="contact-meta">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.5 2 2 0 0 1 3.62 1.32h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          ${esc(c.phone)}
+        </div>
+        ${c.email ? `<div class="contact-meta"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>${esc(c.email)}</div>` : ''}
+      </div>`).join('');
+    wrap.innerHTML = `<div class="contacts-grid">${cards}</div>`;
+    const n = contacts.length;
+    hint.textContent = `${n} contact${n !== 1 ? 's' : ''} added`;
+    btn.disabled = false;
+  }
+}
+
+function removeContact(id) {
+  contacts = contacts.filter(c => c.id !== id);
+  // reset any category that was pointing to this contact
+  CATS.forEach(c => {
+    if (String(sel[c.id]) === String(id)) {
+      sel[c.id] = c.nelnet ? 'nelnet' : '';
+    }
+  });
+  renderContacts();
+}
+
+function toggleForm() {
+  const form = $('add-form');
+  const open = form.classList.contains('open');
+  if (open) { cancelForm(); return; }
+  form.classList.add('open');
+  $('btn-toggle-form').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg> Cancel`;
+  setTimeout(() => $('f-name').focus(), 50);
+}
+
+function cancelForm() {
+  $('add-form').classList.remove('open');
+  $('btn-toggle-form').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Add a contact`;
+  ['f-name','f-phone','f-email'].forEach(id => { $(id).value = ''; $(id).classList.remove('error'); });
+  ['err-name','err-phone'].forEach(id => $(id).classList.remove('show'));
+}
+
+function saveContact() {
+  const name  = $('f-name').value.trim();
+  const phone = $('f-phone').value.trim();
+  const email = $('f-email').value.trim();
+  let ok = true;
+  if (!name)  { $('f-name').classList.add('error');  $('err-name').classList.add('show');  ok = false; }
+  else        { $('f-name').classList.remove('error'); $('err-name').classList.remove('show'); }
+  if (!phone || phone.replace(/\D/g,'').length < 7) {
+                $('f-phone').classList.add('error'); $('err-phone').classList.add('show'); ok = false; }
+  else        { $('f-phone').classList.remove('error'); $('err-phone').classList.remove('show'); }
+  if (!ok) return;
+  contacts.push({ id: nextId++, name, phone, email });
+  cancelForm();
+  renderContacts();
+}
+
+// Enter key submits form
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && $('add-form').classList.contains('open')) saveContact();
+});
+
+// ── STEP 2 — CATEGORIES ─────────────────────────────────────────────
+function buildOpts(catId) {
+  const cat = CATS.find(c => c.id === catId);
+  let html = '';
+  if (!cat.nelnet) html += `<option value="">— Select a contact —</option>`;
+  html += `<option value="nelnet" ${sel[catId]==='nelnet'?'selected':''}>Nelnet Support (Nelnet)</option>`;
+  contacts.forEach(c => {
+    html += `<option value="${c.id}" ${String(sel[catId])===String(c.id)?'selected':''}>${esc(c.name)}</option>`;
+  });
+  return html;
+}
+
+function renderCategories() {
+  $('categories-list').innerHTML = CATS.map(cat => {
+    const isSet    = sel[cat.id] !== '';
+    const isNelnet = sel[cat.id] === 'nelnet';
+    return `
+      <div class="cat-row ${isSet ? 'is-set' : ''}" id="cr-${cat.id}">
+        <div class="cat-icon">${cat.icon}</div>
+        <div class="cat-info">
+          <div class="cat-name">${cat.name}</div>
+          <div class="cat-desc">${cat.desc}</div>
+        </div>
+        <div class="cat-right">
+          ${isNelnet ? `<span class="nelnet-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nelnet Default</span>` : ''}
+          <div class="cat-select-wrap">
+            <select class="cat-select ${!isSet?'unset':''}" onchange="onSelChange('${cat.id}',this.value)">
+              ${buildOpts(cat.id)}
+            </select>
+            <svg class="select-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="cat-status-icon">
+            <svg class="icon-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <svg class="icon-warn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function onSelChange(catId, val) {
+  sel[catId] = val === '' ? '' : (val === 'nelnet' ? 'nelnet' : Number(val));
+  const isSet    = sel[catId] !== '';
+  const isNelnet = sel[catId] === 'nelnet';
+  const row      = $(`cr-${catId}`);
+  row.className  = `cat-row ${isSet ? 'is-set' : ''}`;
+  row.querySelector('.cat-select').className = `cat-select ${!isSet ? 'unset' : ''}`;
+  // Nelnet badge
+  const right  = row.querySelector('.cat-right');
+  const badge  = right.querySelector('.nelnet-badge');
+  if (isNelnet && !badge) right.insertAdjacentHTML('afterbegin', `<span class="nelnet-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Nelnet Default</span>`);
+  if (!isNelnet && badge) badge.remove();
+  // hide error banner if all now set
+  if (CATS.every(c => sel[c.id] !== '')) $('val-banner').classList.remove('show');
+  row.classList.remove('has-error');
+}
+
+// ── NAVIGATION ──────────────────────────────────────────────────────
+function goStep2() {
+  $('panel-1').classList.remove('active');
+  $('panel-2').classList.add('active');
+  $('nav-1').classList.remove('active'); $('nav-1').classList.add('done');
+  $('num-1').innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+  $('nav-2').classList.add('active');
+  $('topbar-step').textContent = 'Assign Categories';
+  renderCategories();
+  $('main').scrollTop = 0;
+}
+
+function goStep1() {
+  $('panel-2').classList.remove('active');
+  $('panel-1').classList.add('active');
+  $('nav-2').classList.remove('active');
+  $('nav-1').classList.remove('done'); $('nav-1').classList.add('active');
+  $('num-1').textContent = '1';
+  $('topbar-step').textContent = 'Add Contacts';
+  $('main').scrollTop = 0;
+}
+
+function saveAndComplete() {
+  const incomplete = CATS.filter(c => sel[c.id] === '');
+  if (incomplete.length > 0) {
+    $('val-banner').classList.add('show');
+    incomplete.forEach(c => $(`cr-${c.id}`).classList.add('has-error'));
+    $('main').scrollTop = 0;
+    return;
+  }
+  $('panel-2').classList.remove('active');
+  $('nav-2').classList.remove('active'); $('nav-2').classList.add('done');
+  $('num-2').innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+  $('nav-3').classList.add('active');
+  $('topbar-step').textContent = 'Complete';
+  // build chips
+  $('summary-chips').innerHTML = contacts.map(c =>
+    `<div class="summary-chip"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>${esc(c.name)}</div>`
+  ).join('') + `<div class="summary-chip" style="color:#10b981;border-color:rgba(16,185,129,.25)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>All 6 categories assigned</div>`;
+  $('panel-success').classList.add('active');
+  $('main').scrollTop = 0;
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+renderContacts();
+</script>
+</body>
+</html>
