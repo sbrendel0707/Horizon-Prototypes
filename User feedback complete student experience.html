@@ -346,7 +346,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   <div class="proto-divider"></div>
   <div class="proto-body">
     The student you are about to see is a <span class="proto-highlight">freshman logging into the Claude University payment portal for the very first time</span>.<br><br>
-    This student does <strong style="color:rgba(255,255,255,.7);">not</strong> have an SSO login set up by their school. Instead, they received an <span class="proto-highlight">email invitation</span> to create an account and pay their school costs.<br><br>
+    This school only has <span class="proto-highlight">RTAA integration</span> for their current term. Demographics are set to edit, and we do <strong style="color:rgba(255,255,255,.7);">not</strong> get their text opt-in information. This student's aid has been accepted but <span class="proto-highlight">not yet disbursed</span> to their account.<br><br>
     Walk through the full account setup experience.
   </div>
   <button class="proto-btn" onclick="protoStart()">I understand — begin setup</button>
@@ -398,9 +398,6 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
         </button>
         <div id="pw-reqs-body" style="display:none;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 10px 10px;padding:10px 12px;">
           <div id="req-len" style="font-size:12px;color:rgba(255,255,255,.32);line-height:1.9;">&#9675; At least 8 characters</div>
-          <div id="req-upper" style="font-size:12px;color:rgba(255,255,255,.32);line-height:1.9;">&#9675; At least one uppercase letter</div>
-          <div id="req-num" style="font-size:12px;color:rgba(255,255,255,.32);line-height:1.9;">&#9675; At least one number</div>
-          <div id="req-special" style="font-size:12px;color:rgba(255,255,255,.32);line-height:1.9;">&#9675; At least one special character</div>
         </div>
         <div class="ie" id="e-l-pass"></div>
       </div>
@@ -529,51 +526,6 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   </div>
 </div>
 
-<!-- METHOD -->
-<div id="s-method" style="display:none;flex-direction:column;height:100%;">
-  <div class="prog" id="prog-method"></div>
-  <div class="back-row"><button class="back-btn" onclick="goBack()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg> Back</button></div>
-  <div class="shdr"><div class="seye">Account setup</div><div class="stitle">Set a default payment method</div><div class="ssub">Don&#39;t worry, you are the only one that will be able to use your default payment method.</div></div>
-  <div class="scroll">
-    <div style="height:12px;"></div>
-    <div style="display:flex;gap:8px;margin-bottom:14px;">
-      <button id="mt-ach" onclick="mtype('ach')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(74,222,128,.1);border:1.5px solid #4ade80;color:#4ade80;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">&#127970; Bank (ACH)</button>
-      <button id="mt-card" onclick="mtype('card')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.55);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">&#128179; Credit card</button>
-    </div>
-    <div id="m-ach" class="card">
-      <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;">&#128161; This is your account and routing number shown in your online banking under account details.</div>
-      <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="ach-nick" placeholder="e.g. My Checking Account"/></div>
-      <div class="iw"><div class="il">Account holder name <span class="req">*</span></div><input class="inp" id="ach-name" placeholder="Name on account" oninput="clearBad('ach-name')"/><div class="ie" id="e-ach-name">Required.</div></div>
-      <div class="iw"><div class="il">Routing number <span class="req">*</span></div><input class="inp" id="ach-rt" placeholder="9 digits" maxlength="9" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('ach-rt')"/><div class="ie" id="e-ach-rt">Must be exactly 9 digits.</div></div>
-      <div class="iw"><div class="il">Account number <span class="req">*</span></div><input class="inp" id="ach-ac" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('ach-ac')"/><div class="ie" id="e-ach-ac">Required.</div></div>
-      <div class="iw">
-        <div class="il">Account type <span class="req">*</span></div>
-        <div style="position:relative;">
-          <select class="inp" id="ach-type" onchange="clearBad('ach-type')">
-            <option value="" disabled selected>Select type...</option>
-            <option value="checking">Checking</option>
-            <option value="savings">Savings</option>
-          </select>
-          <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
-        </div>
-        <div class="ie" id="e-ach-type">Please select an account type.</div>
-      </div>
-    </div>
-    <div id="m-card" class="card" style="display:none;">
-      <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#fde68a;line-height:1.6;">&#9888; A 2.75% processing fee applies when paying by credit card. ACH bank transfers have no fee.</div>
-      <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="cd-nick" placeholder="e.g. My Visa"/></div>
-      <div class="iw"><div class="il">Card number <span class="req">*</span></div><input class="inp" id="cd-num" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" oninput="fmtCard(this);clearBad('cd-num')"/><div class="ie" id="e-cd-num">Enter a valid 16-digit card number.</div></div>
-      <div style="display:flex;gap:10px;">
-        <div class="iw" style="flex:1;"><div class="il">Expiry <span class="req">*</span></div><input class="inp" id="cd-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this);clearBad('cd-exp')"/><div class="ie" id="e-cd-exp">Enter MM / YY.</div></div>
-        <div class="iw" style="flex:1;"><div class="il">CVV <span class="req">*</span></div><input class="inp" id="cd-cvv" placeholder="3-4 digits" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('cd-cvv')"/><div class="ie" id="e-cd-cvv">3 or 4 digits.</div></div>
-      </div>
-      <div class="iw"><div class="il">Cardholder name <span class="req">*</span></div><input class="inp" id="cd-name" placeholder="Name on card" oninput="clearBad('cd-name')"/><div class="ie" id="e-cd-name">Required.</div></div>
-    </div>
-    <button class="btn primary" onclick="methodNext()">Save payment method</button>
-    <button class="btn ghost" onclick="methodSkip()">Skip for now</button>
-  </div>
-</div>
-
 <!-- HOW TO PAY -->
 <div id="s-howpay" style="display:none;flex-direction:column;height:100%;">
   <div class="prog" id="prog-howpay"></div>
@@ -584,9 +536,9 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
     <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg,rgba(26,58,110,.6),rgba(10,20,48,.8));border-color:rgba(96,165,250,.2);">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
         <div>
-          <div style="font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">Balance due</div>
-          <div style="font-family:'DM Serif Display',serif;font-size:34px;color:#fff;line-height:1;">$6,200.00</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.42);margin-top:4px;">Total charges minus applied aid</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px;">Amount due</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:34px;color:#fff;line-height:1;">$5,200.00</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.42);margin-top:4px;">Total charges minus aid (applied and anticipated)</div>
         </div>
         <div style="background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:6px 10px;text-align:center;flex-shrink:0;">
           <div style="font-size:10px;color:#fca5a5;font-weight:600;text-transform:uppercase;letter-spacing:.4px;">Due by</div>
@@ -601,7 +553,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
       <div id="bal-detail" style="display:none;margin-top:10px;">
         <div class="sr"><div class="sr-h" id="h-charges" onclick="srTog('charges')"><div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);"></div><span style="font-size:13px;font-weight:600;color:rgba(255,255,255,.7);">Total charges</span></div><div style="display:flex;align-items:center;gap:6px;"><span style="font-size:13px;color:rgba(255,255,255,.6);">$8,500</span><svg id="a-charges" width="12" height="12" viewBox="0 0 24 24" fill="none" style="transition:transform .2s;"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg></div></div><div class="sr-b" id="b-charges"><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Tuition</span><span>$5,800.00</span></div><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Housing</span><span>$2,200.00</span></div><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Technology fee</span><span>$300.00</span></div><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Activity fee</span><span>$200.00</span></div></div></div>
         <div class="sr" style="margin-top:5px;"><div class="sr-h" id="h-aid" onclick="srTog('aid')"><div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:#4ade80;"></div><span style="font-size:13px;font-weight:600;color:#4ade80;">Applied aid</span></div><div style="display:flex;align-items:center;gap:6px;"><span style="font-size:13px;color:#4ade80;">−$2,300</span><svg id="a-aid" width="12" height="12" viewBox="0 0 24 24" fill="none" style="transition:transform .2s;"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg></div></div><div class="sr-b" id="b-aid"><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Merit scholarship</span><span style="color:#4ade80;">−$1,200</span></div><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Pell Grant</span><span style="color:#4ade80;">−$1,100</span></div></div></div>
-        <div style="font-size:10px;color:rgba(34,211,238,.6);margin-bottom:4px;padding:4px 8px;background:rgba(34,211,238,.06);border-radius:6px;">&#9432; Anticipated aid is not yet counted in your balance due — it will reduce your balance if and when it posts.</div>
+        <div style="font-size:10px;color:rgba(34,211,238,.6);margin-bottom:4px;padding:4px 8px;background:rgba(34,211,238,.06);border-radius:6px;">&#9432; Anticipated aid has not yet been finalized on your account, but it is expected to be on your account by April 1st. It is already subtracted from the amount due.</div>
         <div class="sr" style="margin-top:2px;"><div class="sr-h" id="h-ant" onclick="srTog('ant')"><div style="display:flex;align-items:center;gap:8px;"><div style="width:8px;height:8px;border-radius:50%;background:#22d3ee;"></div><span style="font-size:13px;font-weight:600;color:#22d3ee;">Anticipated aid</span></div><div style="display:flex;align-items:center;gap:6px;"><span style="font-size:13px;color:#22d3ee;">−$1,000</span><svg id="a-ant" width="12" height="12" viewBox="0 0 24 24" fill="none" style="transition:transform .2s;"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg></div></div><div class="sr-b" id="b-ant"><div class="sr-row"><span style="color:rgba(255,255,255,.5);">Fed. Subsidized Loan</span><span style="color:#22d3ee;">−$1,000 <span style="font-size:10px;color:rgba(255,255,255,.3);">pending</span></span></div></div></div>
       </div>
     </div>
@@ -609,7 +561,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
       <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:12px;">Choose how to pay</div>
       <button class="opt" id="hp-pot" onclick="hpSel('pot')">
         <div class="opt-icon" style="background:rgba(96,165,250,.1);">📅</div>
-        <div style="flex:1;"><div class="choice-title">Pay Over Time <span style="font-size:10px;background:rgba(74,222,128,.15);border-radius:5px;padding:1px 6px;color:#4ade80;margin-left:4px;">Suggested</span></div><div class="choice-sub">Spread payments through September 2026 with 0% interest</div></div>
+        <div style="flex:1;"><div class="choice-title">Pay Over Time <span style="font-size:10px;background:rgba(74,222,128,.15);border-radius:5px;padding:1px 6px;color:#4ade80;margin-left:4px;">Suggested</span></div><div class="choice-sub">Spread payments out until August 1st with 0% interest</div></div>
       </button>
       <button class="opt" id="hp-full" onclick="hpSel('full')">
         <div class="opt-icon" style="background:rgba(74,222,128,.1);">💳</div>
@@ -618,7 +570,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
       </button>
       <div id="det-full" style="display:none;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.16);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
         <div style="font-size:12px;color:rgba(255,255,255,.45);margin-bottom:10px;">Full balance due by <strong style="color:#fff;">May 1</strong>.</div>
-        <div style="display:flex;gap:8px;"><button class="btn primary" style="flex:1;margin-bottom:0;" onclick="hpConfirm('full-now')">Pay $6,200 today</button><button class="btn" style="flex:1;margin-bottom:0;" onclick="hpConfirm('full-sched')">Schedule</button></div>
+        <div style="display:flex;gap:8px;"><button class="btn primary" style="flex:1;margin-bottom:0;" onclick="hpConfirm('full-now')">Pay $5,200 today</button><button class="btn" style="flex:1;margin-bottom:0;" onclick="hpConfirm('full-sched')">Schedule</button></div>
       </div>
       <button class="opt" id="hp-later" onclick="hpSel('later')">
         <div class="opt-icon" style="background:rgba(251,191,36,.1);">🕐</div>
@@ -637,7 +589,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
 <div id="s-pot" style="display:none;flex-direction:column;height:100%;">
   <div class="prog" id="prog-pot"></div>
   <div class="back-row"><button class="back-btn" onclick="goBack()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg> Back</button></div>
-  <div class="shdr"><div class="seye">Pay Over Time setup</div><div class="stitle" id="pot-title">How often would you like to pay?</div><div class="ssub" id="pot-sub">Choose the frequency that works best for you.</div></div>
+  <div class="shdr"><div class="seye">Pay Over Time setup</div><div class="stitle" id="pot-title">How often would you like to pay?</div><div class="ssub" id="pot-sub">All $5,200 must be paid by <strong style="color:#fff;">August 1st</strong>. Choose the frequency that works best for you.</div></div>
   <div class="scroll">
     <div style="height:12px;"></div>
 
@@ -694,17 +646,29 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
     <div id="pot-C" style="display:none;">
       <div class="card">
         <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:12px;">How quickly would you like to pay it off?</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:12px;line-height:1.5;">All <strong style="color:#fff;">$5,200</strong> must be paid by <strong style="color:#fff;">August 1st</strong>.</div>
+        <button class="opt" id="pts-full" onclick="potSpeed('full')" style="margin-bottom:8px;">
+          <div class="opt-icon" style="background:rgba(74,222,128,.1);">🗓</div>
+          <div style="flex:1;"><div class="choice-title">Spread out as long as possible</div><div class="choice-sub">Lowest payment amount — all paid by August 1st</div></div>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div id="pot-C-full" style="display:none;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.16);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
+          <div id="pot-full-sum" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.8;"></div>
+          <button id="pot-sched-full-btn" onclick="potTogSched('full')" style="font-size:11px;color:#60a5fa;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:6px;padding:0;">▸ View full payment schedule</button>
+          <div id="pot-sched-full" style="display:none;margin-bottom:8px;"></div>
+          <button class="btn primary" onclick="potGotoConfirm('full')" style="margin-bottom:0;">Confirm this plan</button>
+        </div>
         <button class="opt" id="pts-fast" onclick="potSpeed('fast')" style="margin-bottom:8px;">
           <div class="opt-icon" style="background:rgba(251,191,36,.1);">⚡</div>
-          <div style="flex:1;"><div class="choice-title">As quickly as possible</div><div class="choice-sub">Set your installment amount — we calculate the end date</div></div>
+          <div style="flex:1;"><div class="choice-title">As quickly as possible</div><div class="choice-sub">Set your installment amount — we calculate how many payments you need</div></div>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
         <div id="pot-C-fast" style="display:none;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.18);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-          <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:6px;">Min. to pay off by Aug 30, 2026: <strong style="color:#fff;" id="pot-min-lbl">—</strong></div>
+          <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:6px;">Min. to pay off by Aug 1, 2026: <strong style="color:#fff;" id="pot-min-lbl">—</strong></div>
           <div class="iw" style="margin-bottom:8px;">
             <div class="il">Amount per <span id="pot-freq-lbl">payment</span></div>
             <input class="inp" id="pot-fast-inp" placeholder="e.g. $700.00" inputmode="decimal" oninput="potFastPreview()"/>
-            <div class="ie" id="e-pot-fast">Amount must be at least the minimum to pay off by Aug 30, 2026.</div>
+            <div class="ie" id="e-pot-fast">Amount must be at least the minimum to pay off by Aug 1, 2026.</div>
           </div>
           <div id="pot-fast-prev" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;">
             <div style="font-size:13px;font-weight:600;color:#4ade80;margin-bottom:3px;" id="pot-fast-sum"></div>
@@ -713,17 +677,6 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
           <button id="pot-sched-fast-btn" onclick="potTogSched('fast')" style="display:none;font-size:11px;color:#60a5fa;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:6px;padding:0;">▸ View full payment schedule</button>
           <div id="pot-sched-fast" style="display:none;margin-bottom:8px;"></div>
           <button class="btn primary" id="pot-fast-ok" onclick="potGotoConfirm('fast')" style="display:none;margin-bottom:0;">Confirm this plan</button>
-        </div>
-        <button class="opt" id="pts-full" onclick="potSpeed('full')" style="margin-bottom:8px;">
-          <div class="opt-icon" style="background:rgba(74,222,128,.1);">🗓</div>
-          <div style="flex:1;"><div class="choice-title">Spread over full allowed period</div><div class="choice-sub">Lowest installment · plan ends August 30, 2026</div></div>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.3)" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <div id="pot-C-full" style="display:none;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.16);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-          <div id="pot-full-sum" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:13px;color:rgba(255,255,255,.8);line-height:1.8;"></div>
-          <button id="pot-sched-full-btn" onclick="potTogSched('full')" style="font-size:11px;color:#60a5fa;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:6px;padding:0;">▸ View full payment schedule</button>
-          <div id="pot-sched-full" style="display:none;margin-bottom:8px;"></div>
-          <button class="btn primary" onclick="potGotoConfirm('full')" style="margin-bottom:0;">Confirm this plan</button>
         </div>
       </div>
     </div>
@@ -737,7 +690,31 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   <div class="shdr"><div class="seye">Pay Over Time setup</div><div class="stitle">Confirm your plan</div><div class="ssub">Review all details before we finalize your enrollment.</div></div>
   <div class="scroll">
     <div style="height:12px;"></div>
+    <!-- 1. Plan summary -->
     <div class="card">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Plan summary</div>
+      <div id="potc-plan-sum" style="font-size:13px;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:10px;"></div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;overflow:hidden;margin-bottom:10px;">
+        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.42);">Auto-pay method</span><span style="font-size:13px;color:#fff;font-weight:500;" id="potc-confirm-method">—</span></div>
+        <div style="padding:9px 14px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.42);">Plan ends</span><span style="font-size:13px;color:#fff;">Aug 1, 2026</span></div>
+      </div>
+      <button onclick="togglePotcSchedule()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:9px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;">
+        <span style="font-size:12px;color:rgba(255,255,255,.5);font-weight:600;">View full payment schedule</span>
+        <svg id="potc-sched-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" style="transition:transform .2s;flex-shrink:0;"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div id="potc-sched-body" style="display:none;margin-top:6px;"></div>
+    </div>
+    <!-- 2. Down payment due today -->
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Down payment due today</div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;overflow:hidden;margin-bottom:4px;">
+        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.52);">School down payment (10% of $5,200)</span><span style="font-size:13px;color:#fff;">$520.00</span></div>
+        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.52);">Nelnet enrollment fee</span><span style="font-size:13px;color:#fff;">$25.00</span></div>
+        <div style="padding:9px 14px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);"><span style="font-size:13px;font-weight:600;color:#fff;">Total due today</span><span style="font-size:14px;font-weight:700;color:#fbbf24;">$545.00</span></div>
+      </div>
+    </div>
+    <!-- 3. Payment method — saved method OR inline form -->
+    <div class="card" id="potc-method-saved-card" style="display:none;">
       <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">Auto-pay method</div>
       <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:12px;">Your scheduled installments will process automatically from this method. You can change it anytime.</div>
       <div id="potc-method-row" style="display:flex;align-items:center;gap:12px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.22);border-radius:12px;padding:12px 14px;margin-bottom:10px;">
@@ -747,27 +724,45 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
       </div>
       <button class="btn ghost" style="font-size:13px;margin-bottom:0;" onclick="showToast('You can change auto-pay method after setup in plan settings.')">Use a different method</button>
     </div>
-    <div class="card">
-      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Down payment due today</div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;overflow:hidden;margin-bottom:4px;">
-        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.52);">School down payment (10% of $5,200)</span><span style="font-size:13px;color:#fff;">$520.00</span></div>
-        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.52);">Nelnet enrollment fee</span><span style="font-size:13px;color:#fff;">$25.00</span></div>
-        <div style="padding:9px 14px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);"><span style="font-size:13px;font-weight:600;color:#fff;">Total due today</span><span style="font-size:14px;font-weight:700;color:#fbbf24;">$545.00</span></div>
+    <div class="card" id="potc-method-inline-card">
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">Payment method</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:12px;">Add a payment method for your down payment and auto-pay installments.</div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;">
+        <button id="potc-mt-ach" onclick="potcMtype('ach')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(74,222,128,.1);border:1.5px solid #4ade80;color:#4ade80;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">&#127970; Bank (ACH)</button>
+        <button id="potc-mt-card" onclick="potcMtype('card')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.55);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">&#128179; Credit card</button>
       </div>
-    </div>
-    <div class="card">
-      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Plan summary</div>
-      <div id="potc-plan-sum" style="font-size:13px;color:rgba(255,255,255,.72);line-height:1.85;margin-bottom:10px;"></div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;overflow:hidden;margin-bottom:10px;">
-        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.42);">Auto-pay method</span><span style="font-size:13px;color:#fff;font-weight:500;" id="potc-confirm-method">—</span></div>
-        <div style="padding:9px 14px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:12px;color:rgba(255,255,255,.42);">Plan ends</span><span style="font-size:13px;color:#fff;">Aug 30, 2026</span></div>
+      <div id="potc-m-ach" class="card">
+        <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;">&#128161; This is your account and routing number shown in your online banking under account details.</div>
+        <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="potc-ach-nick" placeholder="e.g. My Checking Account"/></div>
+        <div class="iw"><div class="il">Account holder name <span class="req">*</span></div><input class="inp" id="potc-ach-name" placeholder="Name on account" oninput="clearBad('potc-ach-name')"/><div class="ie" id="e-potc-ach-name">Required.</div></div>
+        <div class="iw"><div class="il">Routing number <span class="req">*</span></div><input class="inp" id="potc-ach-rt" placeholder="9 digits" maxlength="9" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('potc-ach-rt')"/><div class="ie" id="e-potc-ach-rt">Must be exactly 9 digits.</div></div>
+        <div class="iw"><div class="il">Account number <span class="req">*</span></div><input class="inp" id="potc-ach-ac" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('potc-ach-ac')"/><div class="ie" id="e-potc-ach-ac">Required.</div></div>
+        <div class="iw">
+          <div class="il">Account type <span class="req">*</span></div>
+          <div style="position:relative;">
+            <select class="inp" id="potc-ach-type" onchange="clearBad('potc-ach-type')">
+              <option value="" disabled selected>Select type...</option>
+              <option value="checking">Checking</option>
+              <option value="savings">Savings</option>
+            </select>
+            <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="ie" id="e-potc-ach-type">Please select an account type.</div>
+        </div>
       </div>
-      <button onclick="togglePotcSchedule()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:9px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;">
-        <span style="font-size:12px;color:rgba(255,255,255,.5);font-weight:600;">View full payment schedule</span>
-        <svg id="potc-sched-chev" width="12" height="12" viewBox="0 0 24 24" fill="none" style="transition:transform .2s;flex-shrink:0;"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
-      </button>
-      <div id="potc-sched-body" style="display:none;margin-top:6px;"></div>
+      <div id="potc-m-card" class="card" style="display:none;">
+        <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#fde68a;line-height:1.6;">&#9888; A 2.75% processing fee applies when paying by credit card. ACH bank transfers have no fee.</div>
+        <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="potc-cd-nick" placeholder="e.g. My Visa"/></div>
+        <div class="iw"><div class="il">Card number <span class="req">*</span></div><input class="inp" id="potc-cd-num" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" oninput="fmtCard(this);clearBad('potc-cd-num')"/><div class="ie" id="e-potc-cd-num">Enter a valid 16-digit card number.</div></div>
+        <div style="display:flex;gap:10px;">
+          <div class="iw" style="flex:1;"><div class="il">Expiry <span class="req">*</span></div><input class="inp" id="potc-cd-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this);clearBad('potc-cd-exp')"/><div class="ie" id="e-potc-cd-exp">Enter MM / YY.</div></div>
+          <div class="iw" style="flex:1;"><div class="il">CVV <span class="req">*</span></div><input class="inp" id="potc-cd-cvv" placeholder="3-4 digits" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('potc-cd-cvv')"/><div class="ie" id="e-potc-cd-cvv">3 or 4 digits.</div></div>
+        </div>
+        <div class="iw"><div class="il">Cardholder name <span class="req">*</span></div><input class="inp" id="potc-cd-name" placeholder="Name on card" oninput="clearBad('potc-cd-name')"/><div class="ie" id="e-potc-cd-name">Required.</div></div>
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:12px;"><input type="checkbox" id="potc-save-default" checked style="width:18px;height:18px;flex-shrink:0;accent-color:#4ade80;cursor:pointer;margin-top:1px;"/><span style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.4;">Save as my default payment method</span></label>
     </div>
+    <!-- 4. Disclosure agreement -->
     <div class="card">
       <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">Disclosure agreement</div>
       <div class="disc-box">
@@ -778,7 +773,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
         3. Remaining installments will be processed automatically on the scheduled dates using my selected payment method.<br>
         4. I may pay extra or pay off the balance early at any time without penalty.<br>
         5. If an automatic payment fails, I will be notified and must resolve it within 5 business days to avoid a late fee.<br>
-        6. The final payment date is <strong style="color:#fff;">August 30, 2026</strong>. Failure to pay by this date may result in a hold on my student account and academic record.<br>
+        6. The final payment date is <strong style="color:#fff;">August 1, 2026</strong>. Failure to pay by this date may result in a hold on my student account and academic record.<br>
         7. This plan carries 0% interest. No interest or finance charges will be assessed.<br>
         8. I authorize Claude University / Nelnet Campus Commerce to debit my selected payment method for each scheduled installment as described above.<br><br>
         By checking the box below, I confirm I have read, understood, and agree to all terms of this disclosure.
@@ -804,8 +799,8 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
     <div class="card">
       <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Payment summary</div>
       <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;overflow:hidden;margin-bottom:14px;">
-        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;"><span style="font-size:12px;color:rgba(255,255,255,.5);">Balance due (charges minus applied aid)</span><span style="font-size:13px;color:#fff;">$6,200.00</span></div>
-        <div style="padding:9px 14px;display:flex;justify-content:space-between;background:rgba(255,255,255,.03);"><span style="font-size:13px;font-weight:600;color:#fff;">Total due today</span><span style="font-size:14px;font-weight:700;color:#fbbf24;">$6,200.00</span></div>
+        <div style="padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;"><span style="font-size:12px;color:rgba(255,255,255,.5);">Amount due (charges minus applied and anticipated aid)</span><span style="font-size:13px;color:#fff;">$5,200.00</span></div>
+        <div style="padding:9px 14px;display:flex;justify-content:space-between;background:rgba(255,255,255,.03);"><span style="font-size:13px;font-weight:600;color:#fff;">Total due today</span><span style="font-size:14px;font-weight:700;color:#fbbf24;">$5,200.00</span></div>
       </div>
       <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Payment method</div>
       <div id="pcf-meth-saved">
@@ -830,7 +825,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 24px;text-align:center;">
     <div style="width:72px;height:72px;border-radius:50%;background:rgba(74,222,128,.15);border:2px solid rgba(74,222,128,.35);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:18px;">✅</div>
     <div style="font-family:'DM Serif Display',serif;font-size:24px;color:#fff;margin-bottom:8px;">Payment successful!</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:24px;" id="pay-success-msg">$6,200.00 has been submitted via Bank account (ACH). Processing time: 1-2 business days.</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:24px;" id="pay-success-msg">$5,200.00 has been submitted via Bank account (ACH). Processing time: 1-2 business days.</div>
     <div style="background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.18);border-radius:14px;padding:14px 16px;width:100%;text-align:left;margin-bottom:0;">
       <div style="font-size:12px;color:#4ade80;font-weight:600;margin-bottom:4px;">What happens next?</div>
       <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;">Your payment will process in 1-2 business days. A confirmation will be sent to your email. If the payment fails, you will be notified to try a different method.</div>
@@ -851,7 +846,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
         <span style="font-size:20px;">🏦</span>
         <div style="flex:1;"><div style="font-size:14px;color:#fff;font-weight:500;">Bank account (ACH)</div><div style="font-size:11px;color:rgba(255,255,255,.35);">Default · No fees</div></div>
       </div>
-      <button class="btn primary" onclick="schedPayConfirm()">Schedule $6,200.00</button>
+      <button class="btn primary" onclick="schedPayConfirm()">Schedule $5,200.00</button>
     </div>
   </div>
 </div>
@@ -866,47 +861,46 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
 
     <!-- Step A: Yes/No -->
     <div id="ins-A">
-      <div class="card" style="background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.2);margin-bottom:14px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:20px;">🛡️</span><div style="font-size:14px;font-weight:600;color:#fff;">GradGuard Tuition Insurance</div></div>
-        <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;">Covers 100% of tuition, room, and board for medical withdrawals. Accepted at over 400 universities. Plans start as low as $150/year.</div>
-      </div>
       <div id="ins-sel-required" style="display:none;background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:8px 12px;font-size:12px;color:#fca5a5;margin-bottom:10px;text-align:center;">Please make a selection to continue.</div>
-      <button class="opt" id="ins-yes" onclick="insSel('yes')" style="border-width:2px;"><div class="opt-icon" style="background:rgba(74,222,128,.1);">✅</div><div style="flex:1;"><div class="choice-title">Yes — let me see the offer</div><div class="choice-sub">View personalized coverage and pricing</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;opacity:.35;"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <button class="opt" id="ins-no" onclick="insSel('no')" style="margin-top:10px;border-width:2px;"><div class="opt-icon" style="background:rgba(248,113,113,.1);">✕</div><div style="flex:1;"><div class="choice-title">No — skip tuition insurance</div><div class="choice-sub">You can still add this later from your account</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;opacity:.35;"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-      <div style="font-size:11px;color:rgba(255,255,255,.32);text-align:center;margin-top:10px;line-height:1.5;">If you decline now, you will have a second chance to accept this offer later.</div>
-    </div>
-
-    <!-- Step B: State check -->
-    <div id="ins-B" style="display:none;">
-      <div class="card">
-        <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">What is your state of residence?</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:14px;line-height:1.5;">Tuition insurance offers vary by state. We need your state of residence during the school year to show you the right offer.</div>
-        <button class="opt" id="ins-state-yes" onclick="insState('yes')" style="margin-bottom:8px;"><div class="opt-icon" style="background:rgba(96,165,250,.1);">🏛️</div><div style="flex:1;"><div class="choice-title">Yes, I live in the state of Claude</div><div class="choice-sub">Show me the Claude state offer</div></div></button>
-        <button class="opt" id="ins-state-no" onclick="insState('no')"><div class="opt-icon" style="background:rgba(167,139,250,.1);">🗺️</div><div style="flex:1;"><div class="choice-title">No, I live in a different state</div><div class="choice-sub">Select your state to see your offer</div></div></button>
-        <div id="ins-state-picker" style="display:none;margin-top:10px;">
-          <div class="iw"><div class="il">Your state of residence <span class="req">*</span></div>
-          <div style="position:relative;">
-            <select class="inp" id="ins-state-sel" onchange="insStateSelected()">
-              <option value="" disabled selected>Select your state...</option>
-              <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
-              <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
-              <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-              <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
-              <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
-              <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-              <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
-              <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
-              <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-              <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
-              <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
-              <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
-              <option>Wisconsin</option><option>Wyoming</option>
-            </select>
-            <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
-          </div></div>
+      <button class="opt" id="ins-yes" onclick="insSelMark('yes')" style="border-width:2px;"><div class="opt-icon" style="background:rgba(74,222,128,.1);">🛡️</div><div style="flex:1;"><div class="choice-title">Yes — let me see the offer</div><div class="choice-sub">View personalized coverage and pricing</div></div></button>
+      <!-- State of residence inline (shown when Yes is selected) -->
+      <div id="ins-state-inline" style="display:none;margin:10px 0 0 0;">
+        <div class="card">
+          <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">What is your state of residence?</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.42);margin-bottom:14px;line-height:1.5;">Tuition insurance offers vary by state. We need your state of residence during the school year to show you the right offer.</div>
+          <button class="opt" id="ins-state-yes" onclick="insState('yes')" style="margin-bottom:8px;"><div class="opt-icon" style="background:rgba(96,165,250,.1);">🏛️</div><div style="flex:1;"><div class="choice-title">Yes, I live in the state of Claude</div><div class="choice-sub">Show me the Claude state offer</div></div></button>
+          <button class="opt" id="ins-state-no" onclick="insState('no')"><div class="opt-icon" style="background:rgba(167,139,250,.1);">🗺️</div><div style="flex:1;"><div class="choice-title">No, I live in a different state</div><div class="choice-sub">Select your state to see your offer</div></div></button>
+          <div id="ins-state-picker" style="display:none;margin-top:10px;">
+            <div class="iw"><div class="il">Your state of residence <span class="req">*</span></div>
+            <div style="position:relative;">
+              <select class="inp" id="ins-state-sel" onchange="insStateSelected()">
+                <option value="" disabled selected>Select your state...</option>
+                <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+                <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+                <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+                <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+                <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+                <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+                <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+                <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+                <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+                <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+                <option>Wisconsin</option><option>Wyoming</option>
+              </select>
+              <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
+            </div></div>
+          </div>
         </div>
       </div>
+      <button class="opt" id="ins-no" onclick="insSelMark('no')" style="margin-top:10px;border-width:2px;"><div class="opt-icon" style="background:rgba(248,113,113,.1);">✖️</div><div style="flex:1;"><div class="choice-title">No — skip tuition insurance</div><div class="choice-sub">You can still add this later from your account</div></div></button>
+      <div style="font-size:11px;color:rgba(255,255,255,.32);text-align:center;margin-top:10px;line-height:1.5;">If you decline now, you will have a second chance to accept this offer later.</div>
+      <button class="btn primary" onclick="insANext()" style="margin-top:14px;">Continue</button>
     </div>
+
+    <!-- Step B: State check (kept for backwards-compat, now unused — state shown inline above) -->
+    <div id="ins-B" style="display:none;"></div>
 
     <!-- Step C: Offer -->
     <div id="ins-C" style="display:none;">
@@ -915,7 +909,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
         <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;margin-bottom:12px;">
           <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:rgba(255,255,255,.5);">Coverage amount</span><span style="color:#4ade80;font-weight:600;" id="ins-coverage">$8,500.00</span></div>
           <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);"><span style="color:rgba(255,255,255,.5);">Policy cost today</span><span style="color:#fff;font-weight:600;" id="ins-cost">$162.00</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;"><span style="color:rgba(255,255,255,.5);">Provider</span><span style="color:#fff;">GradGuard / Markel Insurance</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0;"><span style="color:rgba(255,255,255,.5);">Provider</span><span style="color:#fff;">GradGuard</span></div>
         </div>
         <button onclick="insToggleDetails()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;padding:8px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:10px;">
           <span style="font-size:12px;color:#60a5fa;">What does this cover?</span>
@@ -946,19 +940,41 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
           <div style="padding:9px 14px;display:flex;justify-content:space-between;background:rgba(255,255,255,.03);"><span style="font-size:13px;font-weight:600;color:#fff;">Total due today</span><span style="font-size:13px;font-weight:700;color:#fbbf24;" id="ins-pay-total">$162.00</span></div>
         </div>
         <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:10px;">Payment method</div>
-        <div id="ins-use-default" style="display:block;">
-          <div style="display:flex;align-items:center;gap:12px;background:rgba(74,222,128,.06);border:1.5px solid #4ade80;border-radius:12px;padding:12px 14px;margin-bottom:10px;" id="ins-meth-row">
-            <span style="font-size:20px;" id="ins-meth-icon">🏦</span>
-            <div style="flex:1;"><div style="font-size:14px;color:#fff;font-weight:500;" id="ins-meth-name">Bank account (ACH)</div><div style="font-size:11px;color:rgba(255,255,255,.38);">Default payment method</div></div>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#4ade80" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/></svg>
+        <div style="display:flex;gap:8px;margin-bottom:14px;">
+          <button id="ins-mt-ach" onclick="insMtype('ach')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(74,222,128,.1);border:1.5px solid #4ade80;color:#4ade80;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">&#127970; Bank (ACH)</button>
+          <button id="ins-mt-card" onclick="insMtype('card')" style="flex:1;padding:11px 0;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.55);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">&#128179; Credit card</button>
+        </div>
+        <div id="ins-m-ach" class="card">
+          <div style="background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;">&#128161; This is your account and routing number shown in your online banking under account details.</div>
+          <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="ins-ach-nick" placeholder="e.g. My Checking Account"/></div>
+          <div class="iw"><div class="il">Account holder name <span class="req">*</span></div><input class="inp" id="ins-ach-name" placeholder="Name on account" oninput="clearBad('ins-ach-name')"/><div class="ie" id="e-ins-ach-name">Required.</div></div>
+          <div class="iw"><div class="il">Routing number <span class="req">*</span></div><input class="inp" id="ins-ach-rt" placeholder="9 digits" maxlength="9" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('ins-ach-rt')"/><div class="ie" id="e-ins-ach-rt">Must be exactly 9 digits.</div></div>
+          <div class="iw"><div class="il">Account number <span class="req">*</span></div><input class="inp" id="ins-ach-ac" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('ins-ach-ac')"/><div class="ie" id="e-ins-ach-ac">Required.</div></div>
+          <div class="iw">
+            <div class="il">Account type <span class="req">*</span></div>
+            <div style="position:relative;">
+              <select class="inp" id="ins-ach-type" onchange="clearBad('ins-ach-type')">
+                <option value="" disabled selected>Select type...</option>
+                <option value="checking">Checking</option>
+                <option value="savings">Savings</option>
+              </select>
+              <svg style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,.4)" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="ie" id="e-ins-ach-type">Please select an account type.</div>
           </div>
-          <button class="btn ghost" style="font-size:13px;margin-bottom:10px;" onclick="showToast('Payment method selection coming soon')">Use a different method</button>
         </div>
-        <div id="ins-no-default" style="display:none;">
-          <div style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.18);border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#fde68a;line-height:1.5;">No default payment method saved. Please add one to pay for this insurance.</div>
-          <button class="btn" onclick="nav('s-method')" style="margin-bottom:10px;">Add payment method</button>
+        <div id="ins-m-card" class="card" style="display:none;">
+          <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:12px;color:#fde68a;line-height:1.6;">&#9888; A 2.75% processing fee applies when paying by credit card. ACH bank transfers have no fee.</div>
+          <div class="iw"><div class="il">Nickname <span style="font-size:10px;color:rgba(255,255,255,.28);text-transform:none;letter-spacing:0;">Optional</span></div><input class="inp" id="ins-cd-nick" placeholder="e.g. My Visa"/></div>
+          <div class="iw"><div class="il">Card number <span class="req">*</span></div><input class="inp" id="ins-cd-num" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" oninput="fmtCard(this);clearBad('ins-cd-num')"/><div class="ie" id="e-ins-cd-num">Enter a valid 16-digit card number.</div></div>
+          <div style="display:flex;gap:10px;">
+            <div class="iw" style="flex:1;"><div class="il">Expiry <span class="req">*</span></div><input class="inp" id="ins-cd-exp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this);clearBad('ins-cd-exp')"/><div class="ie" id="e-ins-cd-exp">Enter MM / YY.</div></div>
+            <div class="iw" style="flex:1;"><div class="il">CVV <span class="req">*</span></div><input class="inp" id="ins-cd-cvv" placeholder="3-4 digits" maxlength="4" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'');clearBad('ins-cd-cvv')"/><div class="ie" id="e-ins-cd-cvv">3 or 4 digits.</div></div>
+          </div>
+          <div class="iw"><div class="il">Cardholder name <span class="req">*</span></div><input class="inp" id="ins-cd-name" placeholder="Name on card" oninput="clearBad('ins-cd-name')"/><div class="ie" id="e-ins-cd-name">Required.</div></div>
         </div>
-        <button class="btn primary" id="ins-pay-btn" onclick="insPayConfirm()">Confirm and pay</button>
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin-top:12px;"><input type="checkbox" id="ins-save-default" checked style="width:18px;height:18px;flex-shrink:0;accent-color:#4ade80;cursor:pointer;margin-top:1px;"/><span style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.4;">Save as my default payment method</span></label>
+        <button class="btn primary" id="ins-pay-btn" onclick="insPayConfirm()" style="margin-top:14px;">Confirm and pay</button>
       </div>
     </div>
 
@@ -1031,12 +1047,14 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   <div class="scroll" style="padding-top:0;">
     <div id="home-banners" style="margin-top:10px;"></div>
     <div class="card" style="margin-top:4px;">
-      <div style="font-family:'DM Serif Display',serif;font-size:20px;color:#fff;margin-bottom:8px;">Cost &amp; payment summary</div>
-      <div style="height:9px;border-radius:99px;display:flex;gap:2px;overflow:hidden;margin-bottom:8px;" id="home-bar"></div>
-      <div style="display:flex;justify-content:space-between;margin-bottom:10px;">
-        <div style="font-size:12px;color:rgba(255,255,255,.35);" id="home-bal-lbl">Remaining: $5,200</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.35);" id="home-total-lbl">of $8,500 total</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-family:'DM Serif Display',serif;font-size:20px;color:#fff;">Balance summary</div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px;">Amount due</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#fff;" id="home-amount-due">$5,200</div>
+        </div>
       </div>
+      <div style="height:9px;border-radius:99px;display:flex;gap:2px;overflow:hidden;margin-bottom:10px;" id="home-bar"></div>
       <div id="home-sumrows" style="margin-bottom:10px;"></div>
       <div style="height:1px;background:rgba(255,255,255,.07);margin-bottom:8px;"></div>
 
@@ -1131,7 +1149,7 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
   <div class="scroll">
     <div id="pn-step1" class="card">
       <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:12px;">How much would you like to pay?</div>
-      <button class="opt" id="pn-opt-balance" onclick="pnChoose('balance')" style="margin-bottom:8px;"><div style="flex:1;text-align:left;"><div class="choice-title">Current balance <span style="font-size:10px;background:rgba(74,222,128,.15);border-radius:5px;padding:1px 6px;color:#4ade80;margin-left:4px;">Recommended</span></div><div class="choice-sub">$6,200.00 — clears your open balance</div></div></button>
+      <button class="opt" id="pn-opt-balance" onclick="pnChoose('balance')" style="margin-bottom:8px;"><div style="flex:1;text-align:left;"><div class="choice-title">Current balance <span style="font-size:10px;background:rgba(74,222,128,.15);border-radius:5px;padding:1px 6px;color:#4ade80;margin-left:4px;">Recommended</span></div><div class="choice-sub">$5,200.00 — clears your open balance</div></div></button>
       <button class="opt" id="pn-opt-custom" onclick="pnChoose('custom')" style="margin-bottom:0;"><div style="flex:1;text-align:left;"><div class="choice-title">Custom amount</div><div class="choice-sub">Enter a specific dollar amount</div></div></button>
       <div id="pn-custom-wrap" style="display:none;padding-top:10px;">
         <div class="iw"><div class="il">Amount</div><input class="inp" id="pn-amt-inp" placeholder="$0.00" inputmode="decimal" oninput="pnFmtAmt(this)"/><div class="ie" id="e-pn-amt">Please enter a valid amount.</div></div>
@@ -1437,23 +1455,24 @@ body{display:flex;justify-content:center;align-items:flex-start;min-height:100vh
     <div class="info-card"><div class="info-card-header blue"><span class="info-card-tag blue"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="3" stroke="#bfdbfe" stroke-width="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke="#bfdbfe" stroke-width="2" stroke-linecap="round"/></svg>Auto-payment coming up</span></div><div class="info-card-body"><div><div class="info-card-title">$900 will be paid on Nov 15</div><div class="info-card-sub">Via ACH ••••4321</div></div><button class="info-card-btn" onclick="nav('manage-plan')">See details</button></div></div>
     <!-- Informational — balance change -->
     <div class="info-card"><div class="info-card-header" style="background:rgba(167,139,250,.12);border-bottom:1px solid rgba(167,139,250,.18);"><span class="info-card-tag" style="color:#c4b5fd;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#c4b5fd" stroke-width="2.5"/><path d="M12 8v4M12 16h.01" stroke="#c4b5fd" stroke-width="2.5" stroke-linecap="round"/></svg>Informational</span></div><div class="info-card-body"><div style="flex:1;margin-right:10px;"><div class="info-card-title" style="font-size:13px;line-height:1.4;">A $4,500 in new charges were added to your account</div><div class="info-card-sub">Added Nov 7, 2026</div></div><button class="info-card-btn" onclick="nav('hist-balance-detail')" style="white-space:nowrap;flex-shrink:0;">See details</button></div></div>
-    <!-- Cost and payment summary -->
+    <!-- Balance summary -->
     <div class="card" style="margin-bottom:14px;">
-      <!-- Card header: large title + total subtext -->
-      <div style="margin-bottom:10px;">
-        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.2;">Cost and payment summary</div>
+      <!-- Card header: title + amount due -->
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-family:'DM Serif Display',serif;font-size:22px;color:#fff;line-height:1.2;">Balance summary</div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px;">Amount due</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#fff;">$5,300</div>
+        </div>
       </div>
-      <!-- Color bar: green=covered, amber=scheduled, ghost=unscheduled -->
-      <div style="height:10px;border-radius:99px;display:flex;gap:2px;margin-bottom:6px;overflow:hidden;">
-        <div style="width:37.6%;background:#4ade80;border-radius:99px 0 0 99px;"></div>
-        <div style="width:21.2%;background:#fbbf24;"></div>
-        <div style="flex:1;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:0 99px 99px 0;"></div>
+      <!-- Color bar: green=aid (applied+anticipated), amber=scheduled, blue=payments made, ghost=remaining -->
+      <div style="height:10px;border-radius:99px;display:flex;gap:2px;margin-bottom:10px;overflow:hidden;">
+        <div style="width:27.1%;background:#4ade80;border-radius:99px 0 0 99px;" title="Applied aid"></div>
+        <div style="width:11.8%;background:#4ade80;" title="Anticipated aid"></div>
+        <div style="width:21.2%;background:#fbbf24;" title="Scheduled payments"></div>
+        <div style="flex:1;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:0 99px 99px 0;" title="Amount due"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-        <div style="font-size:12px;color:rgba(255,255,255,.38);">Balance remaining: $5,300</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.38);">of $8,500 total</div>
-      </div>
-      <!-- Unscheduled balance — FIRST -->
+      <!-- Sumrows dynamically populated -->
       <div id="p2-sumrows">
 <!-- dynamically populated by updateP2Sumrows() -->
 </div>
@@ -3389,13 +3408,13 @@ var addType = '';
 var pnChosenAmt = 0;
 
 var TAKEN = ['ajohnson2024', 'bmurphy', 'csmith2023', 'djones', 'ejackson'];
-var POT_BALANCE = 5655; // after down payment ($6200 - $545 down)
+var POT_BALANCE = 4655; // after down payment ($5200 - $545 down)
 var POT_DOWN_TOTAL = 545;
 var POT_TOTAL = 6200;
 
 // --- Screens ---
 var SCREENS = ['s-welcome','s-login','s-contact','s-comms','s-payer','s-invite',
-               's-method','s-insurance','s-howpay','s-pot','s-pot-confirm',
+               's-insurance','s-howpay','s-pot','s-pot-confirm',
                's-pay-confirm-full','s-pay-success','s-pay-sched','s-complete','s-home',
                's-costs','s-print','s-pay-now','s-guest','s-manage-pot','s-history'];
 
@@ -3416,7 +3435,7 @@ function togglePwReqs() {
 function checkPassBlur() {
   var p = document.getElementById('l-pass'); if (!p || !p.value) return;
   var v = p.value;
-  var ok = v.length>=8 && /[A-Z]/.test(v) && /[0-9]/.test(v) && /[^A-Za-z0-9]/.test(v);
+  var ok = v.length >= 8;
   if (!ok) {
     var body = document.getElementById('pw-reqs-body');
     var chev = document.getElementById('pw-reqs-chev');
@@ -3452,9 +3471,9 @@ function obGoBack() { var p = obNavStack.pop(); if (p) obShowS(p); else obShowS(
 
 // --- Progress ---
 // Max steps: login, contact/comms, payer, invite, method, insurance, howpay, pot, pot-confirm = 9
-var MAX_STEPS = 9;
-var STEP_ORDER = ['s-login','s-comms','s-payer','s-invite','s-method','s-insurance','s-howpay','s-pot','s-pot-confirm'];
-var SKIPPABLE_FOR_OTHER = ['s-method','s-insurance','s-howpay','s-pot','s-pot-confirm']; // steps other-only payers skip
+var MAX_STEPS = 8;
+var STEP_ORDER = ['s-login','s-comms','s-payer','s-invite','s-insurance','s-howpay','s-pot','s-pot-confirm'];
+var SKIPPABLE_FOR_OTHER = ['s-insurance','s-howpay','s-pot','s-pot-confirm']; // steps other-only payers skip
 
 function renderProg(id) {
   var cur = STEP_ORDER.indexOf(id);
@@ -3555,20 +3574,17 @@ function checkUsername(inp) {
 
 function checkPass() {
   var p = val('l-pass');
-  var reqs = { len: p.length >= 8, upper: /[A-Z]/.test(p), num: /[0-9]/.test(p), special: /[^A-Za-z0-9]/.test(p) };
-  var labels = { len: 'At least 8 characters', upper: 'At least one uppercase letter', num: 'At least one number', special: 'At least one special character' };
-  Object.keys(reqs).forEach(function(k) {
-    var el = document.getElementById('req-' + k); if (!el) return;
-    el.style.color = reqs[k] ? '#4ade80' : 'rgba(255,255,255,.28)';
-    el.textContent = (reqs[k] ? '✓ ' : '○ ') + labels[k];
-  });
-  var score = Object.keys(reqs).filter(function(k) { return reqs[k]; }).length;
-  var cols = ['#f87171','#f87171','#fbbf24','#4ade80','#4ade80'];
-  var lbls = ['Too short','Weak','Fair','Strong','Very strong'];
-  var pcts = [15, 25, 50, 80, 100];
+  var meets = p.length >= 8;
+  var el = document.getElementById('req-len'); if (el) {
+    el.style.color = meets ? '#4ade80' : 'rgba(255,255,255,.28)';
+    el.textContent = (meets ? '✓ ' : '○ ') + 'At least 8 characters';
+  }
+  var pct = p.length === 0 ? 0 : Math.min(100, Math.round((p.length / 8) * 100));
+  var col = meets ? '#4ade80' : (pct >= 50 ? '#fbbf24' : '#f87171');
+  var lbl = meets ? 'Meets requirements' : (pct >= 50 ? 'Almost there' : 'Too short');
   var f = document.getElementById('str-fill'); var l = document.getElementById('str-lbl');
-  if (f) { f.style.width = (p ? pcts[score] || 100 : 0) + '%'; f.style.background = cols[score] || '#4ade80'; }
-  if (l) l.textContent = p ? (lbls[score] || 'Very strong') : '';
+  if (f) { f.style.width = (p ? pct : 0) + '%'; f.style.background = col; }
+  if (l) l.textContent = p ? lbl : '';
   checkPass2();
 }
 
@@ -3627,7 +3643,7 @@ function startAdd(type) {
   document.getElementById('add-form').style.display = 'block';
   var lbl = document.getElementById('add-lbl'); var inp = document.getElementById('add-inp');
   if (lbl) lbl.textContent = type === 'phone' ? 'Phone number' : 'Email address';
-  if (inp) { inp.value = ''; inp.placeholder = type === 'phone' ? '555-000-0000' : 'name@example.com'; inp.focus(); }
+  if (inp) { inp.value = ''; inp.placeholder = type === 'phone' ? '555-000-0000' : 'name@example.com'; inp.type = type === 'email' ? 'email' : 'tel'; if (type === 'phone') { inp.oninput = function() { fmtPhone(this); }; } else { inp.oninput = null; } inp.focus(); }
   var e = document.getElementById('e-add'); if (e) e.style.display = 'none';
 }
 function saveAdd() {
@@ -3713,7 +3729,7 @@ function payerSel(type) {
       if (sub) sub.textContent = 'Add the person who will also contribute to payments.';
       nav('s-invite');
     } else {
-      nav('s-method');
+      nav('s-insurance'); insInit();
     }
   }, 180);
 }
@@ -3731,7 +3747,7 @@ function inviteSend() {
   if (!invValidate()) return;
   showToast('Invite sent to ' + val('inv-em') + '!');
   if (S.payer === 'other') { obFinish(); }
-  else { nav('s-method'); }
+  else { nav('s-insurance'); insInit(); }
 }
 function inviteSendAnother() {
   if (!invValidate()) return;
@@ -3741,7 +3757,7 @@ function inviteSendAnother() {
 function inviteSkip() {
   S.skippedInvite = true;
   if (S.payer === 'other') { obFinish(); }
-  else { nav('s-method'); }
+  else { nav('s-insurance'); insInit(); }
 }
 
 // --- METHOD ---
@@ -3809,8 +3825,8 @@ function hpConfirm(type) {
     S.pendingFullPayment = true;
     pnReset();
     // Pre-select balance
-    pnChosenAmt = 6200;
-    var lbl=document.getElementById('pn-amt-lbl'); if(lbl) lbl.textContent='Paying $6,200.00 today';
+    pnChosenAmt = 5200;
+    var lbl=document.getElementById('pn-amt-lbl'); if(lbl) lbl.textContent='Paying $5,200.00 today';
     var s1=document.getElementById('pn-step1'); if(s1) s1.style.display='none';
     var s2=document.getElementById('pn-step2'); if(s2) s2.style.display='block';
     // Override pnSubmit to go to obFinish after success
@@ -3829,7 +3845,7 @@ function potInit() {
   });
   document.getElementById('pot-A').style.display = 'block';
   var t = document.getElementById('pot-title'); if (t) t.textContent = 'How often would you like to pay?';
-  var s = document.getElementById('pot-sub'); if (s) s.textContent = 'Choose the frequency that works best for you.';
+  var s = document.getElementById('pot-sub'); if (s) s.innerHTML = 'All $5,200 must be paid by <strong style="color:#fff;">August 1st</strong>. Choose the frequency that works best for you.';
   ['monthly','twice','biweekly'].forEach(function(k) { var b = document.getElementById('ptf-' + k); if (b) b.classList.remove('sel'); });
 }
 
@@ -3995,7 +4011,7 @@ function potShowC() {
   var fl2 = document.getElementById('pot-freq-lbl'); if (fl2) fl2.textContent = fl;
   var fullAmt = POT_BALANCE / maxPmts;
   var fs = document.getElementById('pot-full-sum');
-  if (fs) fs.innerHTML = '<strong style="color:#4ade80;">$' + fullAmt.toFixed(2) + '</strong> per ' + fl + ' &nbsp;·&nbsp; <strong style="color:#fff;">' + maxPmts + '</strong> payments &nbsp;·&nbsp; Last payment: <strong style="color:#fff;">Aug 30, 2026</strong>';
+  if (fs) fs.innerHTML = '<strong style="color:#4ade80;">$' + fullAmt.toFixed(2) + '</strong> per ' + fl + ' &nbsp;·&nbsp; <strong style="color:#fff;">' + maxPmts + '</strong> payments &nbsp;·&nbsp; Last payment: <strong style="color:#fff;">Aug 1, 2026</strong>';
   potBuildSched('full', fullAmt, maxPmts);
   setTimeout(function() { document.getElementById('pot-C').scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
 }
@@ -4021,7 +4037,7 @@ function potFastPreview() {
   var v = parseFloat(inp.value.replace(/[^0-9.]/g, ''));
   if (isNaN(v) || v <= 0) { if (prev) prev.style.display='none'; if(e) e.style.display='none'; if(ok) ok.style.display='none'; if(sb) sb.style.display='none'; return; }
   if (v < S.potMinInstall) {
-    if (e) { e.style.display='block'; e.textContent='Minimum to pay off by Aug 30, 2026 is $'+S.potMinInstall.toFixed(2)+' per '+S.potFreqLabel+'.'; }
+    if (e) { e.style.display='block'; e.textContent='Minimum to pay off by Aug 1, 2026 is $'+S.potMinInstall.toFixed(2)+' per '+S.potFreqLabel+'.'; }
     if (prev) prev.style.display='none'; if(ok) ok.style.display='none'; if(sb) sb.style.display='none'; return;
   }
   if (e) e.style.display = 'none';
@@ -4031,7 +4047,7 @@ function potFastPreview() {
   var endMons2 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug'];
   var monthsNeeded = Math.ceil(count / paymentsPerMonth);
   var endDate = endMons2[Math.min(monthsNeeded - 1, 7)] + ' 2026';
-  if (monthsNeeded > 7) endDate = 'Aug 30, 2026';
+  if (monthsNeeded > 7) endDate = 'Aug 1, 2026';
   if (prev) prev.style.display = 'block';
   if (sum) sum.innerHTML = '<strong style="color:#4ade80;">$'+v.toFixed(2)+'</strong> per '+S.potFreqLabel+' &nbsp;·&nbsp; <strong style="color:#fff;">'+count+'</strong> payments';
   if (det) det.textContent = 'Plan ends: ' + endDate + ' — paid off before the deadline.';
@@ -4067,6 +4083,17 @@ function potTogSched(type) {
   if (btn) btn.textContent = (open ? '▸ ' : '▾ ') + 'View full payment schedule';
 }
 
+function potcMtype(t) {
+  S.potcMethType = t;
+  var ach=document.getElementById('potc-mt-ach'); var card=document.getElementById('potc-mt-card');
+  var ma=document.getElementById('potc-m-ach'); var mc=document.getElementById('potc-m-card');
+  if(ma) ma.style.display=t==='ach'?'block':'none';
+  if(mc) mc.style.display=t==='card'?'block':'none';
+  var selStyle='flex:1;padding:11px 0;border-radius:12px;background:rgba(74,222,128,.1);border:1.5px solid #4ade80;color:#4ade80;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;';
+  var defStyle='flex:1;padding:11px 0;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.52);font-size:13px;cursor:pointer;font-family:"DM Sans",sans-serif;';
+  if(ach) ach.style.cssText=t==='ach'?selStyle:defStyle;
+  if(card) card.style.cssText=t==='card'?selStyle:defStyle;
+}
 function potGotoConfirm(speed) {
   S.potSpeed = speed;
   if (speed === 'full') {
@@ -4075,27 +4102,28 @@ function potGotoConfirm(speed) {
   } else {
     S.potCount = S.potFastCount || Math.ceil(POT_BALANCE / S.potInstall);
   }
-  // populate confirm screen
-  var mn = document.getElementById('potc-method-name');
-  var ms = document.getElementById('potc-method-sub');
-  var mi = document.getElementById('potc-method-icon');
-  var mr = document.getElementById('potc-method-row');
+  // Show/hide method cards based on whether method is already saved
+  var savedCard = document.getElementById('potc-method-saved-card');
+  var inlineCard = document.getElementById('potc-method-inline-card');
   if (S.methodSaved) {
+    if (savedCard) savedCard.style.display = 'block';
+    if (inlineCard) inlineCard.style.display = 'none';
+    var mn = document.getElementById('potc-method-name');
+    var ms = document.getElementById('potc-method-sub');
+    var mi = document.getElementById('potc-method-icon');
     if (mn) mn.textContent = S.methodType === 'ach' ? 'Bank account (ACH)' : 'Credit card';
     if (mi) mi.textContent = S.methodType === 'ach' ? '🏦' : '💳';
     if (ms) ms.textContent = 'Default payment method · ' + (S.methodType === 'ach' ? 'No fees' : '2.75% fee per payment');
-    if (mr) mr.style.borderColor = 'rgba(74,222,128,.22)';
   } else {
-    if (mn) mn.textContent = 'No default method saved';
-    if (ms) ms.textContent = 'Add a payment method to enroll in auto-pay';
-    if (mr) mr.style.background = 'rgba(248,113,113,.06)'; mr && (mr.style.borderColor = 'rgba(248,113,113,.25)');
-    if (mi) mi.textContent = '⚠️';
+    if (savedCard) savedCard.style.display = 'none';
+    if (inlineCard) inlineCard.style.display = 'block';
+    S.potcMethType = 'ach';
   }
   var ps = document.getElementById('potc-plan-sum');
   var fLabel = S.potFreq==='twice'?'twice monthly':S.potFreq==='biweekly'?'every two weeks':S.potFreqLabel+'ly';
   if (ps) ps.innerHTML = '<strong style="color:#fbbf24;">$'+S.potInstall.toFixed(2)+'</strong> per payment &nbsp;·&nbsp; <strong style="color:#fff;">'+S.potCount+'</strong> payments &nbsp;·&nbsp; '+fLabel;
   var cm = document.getElementById('potc-confirm-method');
-  if (cm) cm.textContent = S.methodSaved ? (S.methodType==='ach'?'Bank account (ACH)':'Credit card') : 'No method saved';
+  if (cm) cm.textContent = S.methodSaved ? (S.methodType==='ach'?'Bank account (ACH)':'Credit card') : 'To be added';
   var schedEl = document.getElementById('potc-sched-body');
   if (schedEl) { schedEl.id='pot-sched-confirm'; potBuildSched('confirm',S.potInstall,S.potCount); schedEl.id='potc-sched-body'; }
   nav('s-pot-confirm');
@@ -4116,6 +4144,25 @@ function potEnroll() {
   if (!document.getElementById('disc-chk').checked) {
     var e = document.getElementById('e-disc'); if (e) e.style.display = 'block'; return;
   }
+  // If no method saved, validate the inline form
+  if (!S.methodSaved) {
+    var ok = true;
+    var t = S.potcMethType || 'ach';
+    if (t === 'ach') {
+      if (!val('potc-ach-name')) { setBad('potc-ach-name','Required.'); ok=false; }
+      if (!/^\d{9}$/.test(val('potc-ach-rt'))) { setBad('potc-ach-rt','Must be exactly 9 digits.'); ok=false; }
+      if (!val('potc-ach-ac')) { setBad('potc-ach-ac','Required.'); ok=false; }
+      var at=document.getElementById('potc-ach-type'); if(at && !at.value) { setBad('potc-ach-type','Please select an account type.'); ok=false; }
+    } else {
+      if (val('potc-cd-num').replace(/\s/g,'').length!==16) { setBad('potc-cd-num','Enter a valid 16-digit card number.'); ok=false; }
+      if (!/^\d{2} \/ \d{2}$/.test(val('potc-cd-exp'))) { setBad('potc-cd-exp','Enter MM / YY.'); ok=false; }
+      if (val('potc-cd-cvv').length<3) { setBad('potc-cd-cvv','3 or 4 digits required.'); ok=false; }
+      if (!val('potc-cd-name')) { setBad('potc-cd-name','Required.'); ok=false; }
+    }
+    if (!ok) return;
+    var saveChk=document.getElementById('potc-save-default');
+    if (saveChk && saveChk.checked) { S.methodSaved=true; S.methodType=t; }
+  }
   S.payPlan = 'pot';
   S.adjNew = 'spread';   // Default: spread new charges across remaining payments
   S.adjCred = 'reduce';  // Default: reduce installments when credits applied
@@ -4131,7 +4178,7 @@ function obFinish() {
   if (S.skippedInvite) lines.push({ icon: '⚠️', text: 'Authorized payer invite pending — you\'ll be reminded.' });
   if (S.methodSaved) lines.push({ icon: S.methodType === 'ach' ? '🏦' : '💳', text: 'Default payment method: ' + (S.methodType === 'ach' ? 'Bank account (ACH)' : 'Credit card') });
   if (S.skippedMethod) lines.push({ icon: '⚠️', text: 'No default payment method saved — you\'ll be reminded.' });
-  if (S.payPlan === 'pot') lines.push({ icon: '📅', text: 'Pay Over Time enrolled — $' + S.potInstall.toFixed(2) + ' per ' + S.potFreqLabel + ' · ' + S.potCount + ' payments · ends Aug 30, 2026' });
+  if (S.payPlan === 'pot') lines.push({ icon: '📅', text: 'Pay Over Time enrolled — $' + S.potInstall.toFixed(2) + ' per ' + S.potFreqLabel + ' · ' + S.potCount + ' payments · ends Aug 1, 2026' });
   else if (S.payPlan === 'full-now') lines.push({ icon: '✅', text: 'Full payment of $5,200 submitted today.' });
   else if (S.payPlan === 'full-sched') lines.push({ icon: '🗓', text: '$5,200 payment scheduled before May 1, 2026.' });
   else if (S.payPlan === 'later') lines.push({ icon: '🕐', text: 'Payment decision deferred — reminder set for May 1, 2026.' });
@@ -4145,7 +4192,7 @@ function obFinish() {
     payStatusLine = S.payPlan === 'full-now' ? 'You have paid your account in full — you are good to go.' : 'Your full balance is scheduled to be paid — you are good to go.';
     lines.push({ icon: '🎉', text: payStatusLine });
   } else if (S.payPlan === 'later') {
-    lines.push({ icon: '⚠️', text: 'You have not scheduled any payments yet — $6,200 is still due and not scheduled. Remember to pay before May 1, 2026.' });
+    lines.push({ icon: '⚠️', text: 'You have not scheduled any payments yet — $5,200 is still due and not scheduled. Remember to pay before May 1, 2026.' });
   }
   var msg = S.payPlan === 'later' ? 'Remember to choose how to pay before May 1, 2026.' : S.payer === 'other' ? 'Awaiting your authorized payer\'s setup.' : 'Your account is ready.';
   document.getElementById('complete-msg').textContent = msg;
@@ -4175,9 +4222,10 @@ function buildHome() {
     if (btnLabel && btnFn) { var btn=d.querySelector('.ic-btn'); if(btn) btn.onclick=new Function(btnFn); }
     banners.appendChild(d);
   }
-  if (S.payPlan === 'later') addBanner('red', '$6,200 due by May 1', 'Action required before May 1, 2026.', 'Take action', "nav('s-howpay')");
+  if (S.payPlan === 'later') addBanner('red', '$5,200 due by May 1', 'Action required before May 1, 2026.', 'Take action', "nav('s-howpay')");
   if (S.skippedInvite) addBanner('blue', 'Invite an authorized payer', "Don't forget to invite them", 'Send invite', "nav('s-invite')");
-  if (S.skippedMethod) addBanner('blue', 'Add a payment method', 'Required to make payments', 'Add now', "nav('s-method')");
+  if (S.skippedMethod) addBanner('blue', 'Add a payment method', 'Required to make payments', 'Add now', "showToast('Add a payment method in account settings.')");
+
   // AP reminder banner: only shown if it has been ~30 days since invite (not shown on first home visit)
   if ((S.payer==='other'||S.payer==='combo') && S.authPayers.length>0 && !S.apActive && S.apInvitedDaysAgo >= 30) {
     var apName = S.authPayers[0]?S.authPayers[0].name:'Your authorized payer';
@@ -4186,22 +4234,36 @@ function buildHome() {
   var antMsg = S.payPlan==='full-now' ? "Once applied you'll receive a $1,000 refund from your school." : "Once applied, your balance will decrease by $1,000.";
   addBanner('info', 'You have $1,000 in anticipated aid', 'Your school expects this to post by end of semester. '+antMsg, null, null);
 
-  // Color bar
+  // Compute amounts
+  var totalCharges = 8500;
+  var appliedAid = 2300;   // merit + pell
+  var anticipatedAid = 1000; // fed subsidized loan
+  var paymentsMade = S.payPlan==='pot' ? 545 : (S.payPlan==='full-now' ? 5200 : 0);
+  var scheduledPmts = S.payPlan==='pot' ? (S.potInstall * S.potCount) : 0;
+  var amountDue = totalCharges - appliedAid - anticipatedAid - scheduledPmts - paymentsMade;
+  if (amountDue < 0) amountDue = 0;
+
+  // Update amount-due display
+  var adEl = document.getElementById('home-amount-due');
+  if (adEl) adEl.textContent = '$' + Math.round(amountDue).toLocaleString();
+
+  // Color bar: charges (grey), applied aid (green), anticipated aid (green), scheduled (amber), payments (blue), remaining (dark)
   var bar = document.getElementById('home-bar');
   if (bar) {
-    var aidPct = 27.1;
-    var schedPct = S.payPlan==='pot' ? 55.8 : (S.payPlan==='full-now' ? 72.9 : 0);
-    if (S.payPlan==='full-now') {
-      bar.innerHTML = '<div style="flex:1;background:#4ade80;border-radius:99px;height:10px;"></div>';
-    } else {
-      bar.innerHTML =
-        '<div style="width:'+aidPct+'%;background:#4ade80;border-radius:99px 0 0 99px;height:10px;"></div>' +
-        (schedPct>0?'<div style="width:'+schedPct+'%;background:#fbbf24;height:10px;"></div>':'') +
-        '<div style="flex:1;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:0 99px 99px 0;height:10px;"></div>';
-    }
+    var total = totalCharges;
+    var appliedPct = (appliedAid / total) * 100;
+    var antPct = (anticipatedAid / total) * 100;
+    var schedPct = (scheduledPmts / total) * 100;
+    var paidPct = (paymentsMade / total) * 100;
+    var remPct = Math.max(0, 100 - appliedPct - antPct - schedPct - paidPct);
+    var barHtml = '';
+    if (appliedPct > 0) barHtml += '<div style="width:'+appliedPct+'%;background:#4ade80;height:9px;border-radius:99px 0 0 99px;"></div>';
+    if (antPct > 0) barHtml += '<div style="width:'+antPct+'%;background:#4ade80;height:9px;"></div>';
+    if (schedPct > 0) barHtml += '<div style="width:'+schedPct+'%;background:#fbbf24;height:9px;"></div>';
+    if (paidPct > 0) barHtml += '<div style="width:'+paidPct+'%;background:#60a5fa;height:9px;"></div>';
+    if (remPct > 0) barHtml += '<div style="width:'+remPct+'%;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);height:9px;border-radius:0 99px 99px 0;"></div>';
+    bar.innerHTML = barHtml;
   }
-  var bl = document.getElementById('home-bal-lbl');
-  if (bl) bl.textContent = S.payPlan==='full-now' ? 'Balance remaining: $0' : 'Balance remaining: $6,200';
 
   // Sumrows
   var sr = document.getElementById('home-sumrows'); sr.innerHTML = '';
@@ -4227,39 +4289,52 @@ function buildHome() {
       '<span class="sumrow-detail-val"'+(col?' style="color:'+col+';"':'')+'>'+val+'</span></div>';
   }
 
-  // Unscheduled balance
-  if (S.payPlan !== 'full-now' && S.payPlan !== 'pot') {
-    var unschedBody = dr('Due May 1, 2026', '$6,200.00', '#fca5a5') + '<button class="action-inline-btn" data-nav="s-howpay">Take action on $6,200</button>';
-    makeSR('sum-unscheduled','rgba(255,255,255,.35)','rgba(255,255,255,.75)','Unscheduled balance','$6,200',unschedBody);
+  // 1. Amount due
+  var amountDueStr = '$' + Math.round(amountDue).toLocaleString();
+  var amountDueBody = '';
+  if (amountDue > 0) {
+    amountDueBody += dr('Due', 'May 1, 2026', '#fca5a5');
+    if (S.payPlan !== 'pot') amountDueBody += '<button class="action-inline-btn" data-nav="s-howpay">Take action</button>';
+  } else {
+    amountDueBody += '<div style="font-size:12px;color:#4ade80;padding:4px 0;">All charges accounted for — you are good to go!</div>';
   }
+  makeSR('sum-amount-due','rgba(255,255,255,.35)','rgba(255,255,255,.75)','Amount due',amountDueStr,amountDueBody);
 
-  // Scheduled payments
+  // 2. Scheduled payments
+  var schedAmt = S.payPlan==='pot' ? '$'+(S.potInstall*S.potCount).toFixed(2) : '$0';
+  var schedBody = '';
   if (S.payPlan==='pot') {
-    var schedBody = dr(S.potCount+' installments of $'+S.potInstall.toFixed(2),'$'+S.potInstall.toFixed(2)+'/'+S.potFreqLabel,'#fbbf24') +
-      dr('Plan ends','Aug 30, 2026') +
+    schedBody = dr(S.potCount+' installments of $'+S.potInstall.toFixed(2),'$'+S.potInstall.toFixed(2)+'/'+S.potFreqLabel,'#fbbf24') +
+      dr('Plan ends','Aug 1, 2026') +
       '<button class="see-costs-btn" style="margin-top:8px;" data-nav="s-manage-pot">Manage scheduled payments</button>';
-    makeSR('sum-sched','#fbbf24','#fbbf24','Scheduled payments','$'+(S.potInstall*S.potCount).toFixed(2),schedBody);
+  } else {
+    schedBody = '<div style="font-size:12px;color:rgba(255,255,255,.38);padding:4px 0;">No scheduled payments yet.</div>';
+    if (S.payPlan !== 'full-now') schedBody += '<button class="action-inline-btn" data-nav="s-howpay">Set up a payment plan</button>';
   }
+  makeSR('sum-scheduled','#fbbf24','#fbbf24','Scheduled payments',schedAmt,schedBody);
 
-  // Already covered
-  var coveredAmt = S.payPlan==='full-now' ? '$8,500' : (S.payPlan==='pot' ? '$2,845' : '$2,300');
-  var coveredBody = '';
-  if (S.payPlan==='pot') coveredBody += dr('Down payment','&#8722;$545.00','#4ade80');
-  if (S.payPlan==='full-now') coveredBody += dr('Full payment','&#8722;$6,200.00','#4ade80');
-  coveredBody += dr('Merit scholarship','&#8722;$1,200.00','#4ade80');
-  coveredBody += dr('Federal Pell Grant','&#8722;$1,100.00','#4ade80');
-  coveredBody += '<div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.07);padding-top:4px;">' +
-    '<button data-nav="s-history" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:10px 0;font-family:\'DM Sans\',sans-serif;">' +
-    '<span style="font-size:13px;color:#60a5fa;">Payment history</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg></button>' +
-    '<div style="height:1px;background:rgba(255,255,255,.06);"></div>' +
-    '<button data-nav="s-costs" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:10px 0;font-family:\'DM Sans\',sans-serif;">' +
-    '<span style="font-size:13px;color:#60a5fa;">Financial aid details</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg></button></div>';
-  makeSR('sum-covered','#4ade80','#4ade80','Already covered',coveredAmt,coveredBody);
+  // 3. Financial aid
+  var aidTotal = appliedAid + anticipatedAid;
+  var aidBody = dr('Merit scholarship','&#8722;$1,200.00','#4ade80') +
+    dr('Federal Pell Grant','&#8722;$1,100.00','#4ade80') +
+    dr('Fed. Subsidized Loan (anticipated)','&#8722;$1,000.00 <span style="font-size:10px;color:rgba(255,255,255,.38);">expected Apr 1</span>','#4ade80') +
+    '<button data-nav="s-costs" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:8px 0;font-family:\'DM Sans\',sans-serif;">' +
+    '<span style="font-size:13px;color:#60a5fa;">View aid details</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg></button>';
+  makeSR('sum-aid','#4ade80','#4ade80','Financial aid','&#8722;$'+aidTotal.toLocaleString(),aidBody);
 
-  // Anticipated aid (cyan)
-  var antBody = dr('Fed. Subsidized Loan','&#8722;$1,000.00 (in process)','rgba(34,211,238,.6)') +
-    '<div style="font-size:11px;color:rgba(255,255,255,.35);padding-top:6px;line-height:1.4;">Not counted in your balance until applied.</div>';
-  makeSR('sum-ant','#22d3ee','#22d3ee','Anticipated aid','$1,000',antBody);
+  // 4. Payments made
+  var paidAmt = paymentsMade > 0 ? '$'+paymentsMade.toLocaleString() : '$0';
+  var paidBody = '';
+  if (S.payPlan==='pot' && paymentsMade > 0) {
+    paidBody = dr('Down payment','&#8722;$520.00','#60a5fa') + dr('Nelnet enrollment fee','&#8722;$25.00','rgba(255,255,255,.5)');
+  } else if (S.payPlan==='full-now') {
+    paidBody = dr('Full payment','&#8722;$5,200.00','#60a5fa');
+  } else {
+    paidBody = '<div style="font-size:12px;color:rgba(255,255,255,.38);padding:4px 0;">No payments made yet.</div>';
+  }
+  paidBody += '<button data-nav="s-history" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:8px 0;font-family:\'DM Sans\',sans-serif;">' +
+    '<span style="font-size:13px;color:#60a5fa;">Payment history</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/></svg></button>';
+  makeSR('sum-paid','#60a5fa','#60a5fa','Payments made',paidAmt,paidBody);
 
   var divider = document.createElement('div'); divider.className = 'sumrow-divider'; sr.appendChild(divider);
 
@@ -4289,7 +4364,7 @@ function buildHome() {
       apNote.innerHTML = '&#128197; <strong style="color:#fbbf24;">Auto-payment coming up</strong><br>$'+S.potInstall.toFixed(2)+' will be charged on '+nextPayLabel+' via '+(S.methodType==='ach'?'Bank account (ACH)':'credit card')+'.';
     }
     var mr=document.getElementById('mpot-remain'); if(mr) mr.textContent='$'+(S.potInstall*S.potCount).toFixed(2);
-    var ms=document.getElementById('mpot-sub'); if(ms) ms.textContent='$'+S.potInstall.toFixed(2)+' per '+S.potFreqLabel+' \u00b7 '+S.potCount+' installments left \u00b7 ends Aug 30, 2026';
+    var ms=document.getElementById('mpot-sub'); if(ms) ms.textContent='$'+S.potInstall.toFixed(2)+' per '+S.potFreqLabel+' \u00b7 '+S.potCount+' installments left \u00b7 ends Aug 1, 2026';
     var msegs=document.getElementById('mpot-segs'); if(msegs){var sh2='';for(var j=0;j<Math.min(S.potCount,6);j++) sh2+='<div class="prog-seg" style="background:#fbbf24;"></div>';msegs.innerHTML=sh2;}
     // Build schedule rows
     buildMpotSchedule();
@@ -4364,7 +4439,7 @@ function pcfInit() {
 function pcfSubmit() {
   nav('s-pay-success');
   var msg=document.getElementById('pay-success-msg');
-  if(msg) msg.textContent='$6,200.00 submitted via '+(S.methodType==='ach'?'Bank account (ACH)':'credit card')+'. Processing time: 1-2 business days.';
+  if(msg) msg.textContent='$5,200.00 submitted via '+(S.methodType==='ach'?'Bank account (ACH)':'credit card')+'. Processing time: 1-2 business days.';
 }
 function pnFmtAmt(inp) { var v=inp.value.replace(/[^0-9.]/g,''); inp.value=v?'$'+v:''; }
 
@@ -4402,7 +4477,7 @@ function schedPayConfirm() {
   var d=document.getElementById('sched-date');
   if(!d||!d.value){setBad('sched-date','Please select a date before May 1, 2026.');return;}
   S.payPlan='full-sched';
-  showToast('Payment of $6,200 scheduled for '+d.value);
+  showToast('Payment of $5,200 scheduled for '+d.value);
   obFinish();
 }
 function histTab(btn, tab) {
@@ -4449,7 +4524,7 @@ function buildHistory() {
   if (txnEl) {
     var txns = [];
     if (S.insAccepted) txns.push({icon:'&#128737;',bg:'rgba(96,165,250,.1)',title:'Tuition insurance purchased',sub:'GradGuard policy active',amt:'-$'+(S.insPremium||162).toFixed(2),color:'#4ade80',date:'Today'});
-    if (S.payPlan==='full-now') txns.push({icon:'&#128179;',bg:'rgba(74,222,128,.1)',title:'Full balance payment',sub:S.methodType==='ach'?'ACH bank transfer':'Credit card payment',amt:'-$6,200.00',color:'#4ade80',date:'Today'});
+    if (S.payPlan==='full-now') txns.push({icon:'&#128179;',bg:'rgba(74,222,128,.1)',title:'Full balance payment',sub:S.methodType==='ach'?'ACH bank transfer':'Credit card payment',amt:'-$5,200.00',color:'#4ade80',date:'Today'});
     if (S.payPlan==='pot') {
       txns.push({icon:'&#127970;',bg:'rgba(74,222,128,.1)',title:'Down payment — '+(S.methodType==='ach'?'ACH':'Card'),sub:'Pay Over Time enrollment · $545',amt:'-$545.00',color:'#4ade80',date:'Today'});
       txns.push({icon:'&#128197;',bg:'rgba(251,191,36,.1)',title:'Pay Over Time enrolled',sub:'$'+S.potInstall.toFixed(2)+' per '+S.potFreqLabel+' · '+S.potCount+' payments',amt:'',color:'',date:'Today'});
@@ -4497,7 +4572,7 @@ function buildHistory() {
       pd.className='txn-item'; pd.style.borderBottom='none';
       pd.innerHTML='<div class="txn-icon" style="background:rgba(251,191,36,.1);">&#128197;</div>'+
         '<div class="txn-main"><div class="txn-title">Pay Over Time plan enrolled</div>'+
-        '<div class="txn-sub">$'+S.potInstall.toFixed(2)+' per '+S.potFreqLabel+' · '+S.potCount+' payments · ends Aug 30, 2026</div></div>'+
+        '<div class="txn-sub">$'+S.potInstall.toFixed(2)+' per '+S.potFreqLabel+' · '+S.potCount+' payments · ends Aug 1, 2026</div></div>'+
         '<div class="txn-right"><div class="txn-date">Today</div></div>'+
         '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-linecap="round"/></svg>';
       pd.onclick=function(){showToast('Pay Over Time enrolled');};
@@ -4876,22 +4951,51 @@ function insInit() {
   document.getElementById('ins-A').style.display = 'block';
   var t=document.getElementById('ins-title'); if(t) t.textContent = 'Protect your tuition';
   ['ins-yes','ins-no'].forEach(function(id){var b=document.getElementById(id);if(b)b.classList.remove('sel');});
+  var inline=document.getElementById('ins-state-inline'); if(inline) inline.style.display='none';
+  var req=document.getElementById('ins-sel-required'); if(req) req.style.display='none';
+  ['ins-state-yes','ins-state-no'].forEach(function(id){var b=document.getElementById(id);if(b)b.classList.remove('sel');});
+  var sp=document.getElementById('ins-state-picker'); if(sp) sp.style.display='none';
 }
 function insSel(choice) {
   S.insChoice = choice;
   ['yes','no'].forEach(function(k){var b=document.getElementById('ins-'+k);if(b)b.classList.toggle('sel',k===choice);});
-  setTimeout(function() {
-    if (choice === 'no') { nav('s-howpay'); return; }
-    document.getElementById('ins-A').style.display = 'none';
-    document.getElementById('ins-B').style.display = 'block';
-    var t=document.getElementById('ins-title'); if(t) t.textContent = 'Your state of residence';
-  }, 180);
+}
+function insSelMark(choice) {
+  S.insChoice = choice;
+  ['yes','no'].forEach(function(k){var b=document.getElementById('ins-'+k);if(b)b.classList.toggle('sel',k===choice);});
+  var inline = document.getElementById('ins-state-inline');
+  if (inline) inline.style.display = choice === 'yes' ? 'block' : 'none';
+  if (choice === 'yes') {
+    // reset state selections
+    ['ins-state-yes','ins-state-no'].forEach(function(id){var b=document.getElementById(id);if(b)b.classList.remove('sel');});
+    var sp = document.getElementById('ins-state-picker'); if(sp) sp.style.display='none';
+    S.insState = '';
+    setTimeout(function(){ var el=document.getElementById('ins-state-inline'); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'}); }, 80);
+  }
+  // hide the required error
+  var req=document.getElementById('ins-sel-required'); if(req) req.style.display='none';
+}
+function insANext() {
+  if (!S.insChoice) {
+    var req=document.getElementById('ins-sel-required'); if(req) req.style.display='block'; return;
+  }
+  if (S.insChoice === 'no') { nav('s-howpay'); return; }
+  // yes was selected — check state
+  if (!S.insState) {
+    // state not yet chosen — scroll to inline state picker
+    var inline=document.getElementById('ins-state-inline'); if(inline) inline.scrollIntoView({behavior:'smooth',block:'nearest'});
+    showToast('Please select your state of residence to continue.');
+    return;
+  }
+  // proceed to offer
+  document.getElementById('ins-A').style.display = 'none';
+  insShowOffer(S.insState === 'Claude' ? 'State of Claude' : S.insState);
 }
 function insState(answer) {
   ['ins-state-yes','ins-state-no'].forEach(function(id){var b=document.getElementById(id);if(b)b.classList.toggle('sel',id==='ins-state-'+answer);});
   if (answer === 'yes') {
     S.insState = 'Claude';
-    setTimeout(function(){ document.getElementById('ins-B').style.display='none'; insShowOffer('State of Claude'); }, 180);
+    var sp = document.getElementById('ins-state-picker'); if(sp) sp.style.display='none';
   } else {
     document.getElementById('ins-state-picker').style.display = 'block';
   }
@@ -4901,7 +5005,6 @@ function insStateSelected() {
   var state = sel ? sel.value : '';
   if (!state) return;
   S.insState = state;
-  setTimeout(function(){ document.getElementById('ins-B').style.display='none'; insShowOffer(state); }, 180);
 }
 function insShowOffer(stateName) {
   document.getElementById('ins-C').style.display = 'block';
@@ -4921,22 +5024,24 @@ function insToggleDetails() {
   if(!d) return; var open=d.style.display==='block';
   d.style.display=open?'none':'block'; if(c) c.style.transform=open?'':'rotate(180deg)';
 }
+function insMtype(t) {
+  S.insMethType = t;
+  var ach=document.getElementById('ins-mt-ach'); var card=document.getElementById('ins-mt-card');
+  var ma=document.getElementById('ins-m-ach'); var mc=document.getElementById('ins-m-card');
+  if(ma) ma.style.display=t==='ach'?'block':'none';
+  if(mc) mc.style.display=t==='card'?'block':'none';
+  var selStyle='flex:1;padding:11px 0;border-radius:12px;background:rgba(74,222,128,.1);border:1.5px solid #4ade80;color:#4ade80;font-size:13px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;';
+  var defStyle='flex:1;padding:11px 0;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.52);font-size:13px;cursor:pointer;font-family:"DM Sans",sans-serif;';
+  if(ach) ach.style.cssText=t==='ach'?selStyle:defStyle;
+  if(card) card.style.cssText=t==='card'?selStyle:defStyle;
+}
 function insAccept() {
   document.getElementById('ins-C').style.display = 'none';
   document.getElementById('ins-D').style.display = 'block';
   var t=document.getElementById('ins-title'); if(t) t.textContent = 'Confirm insurance payment';
-  var ud=document.getElementById('ins-use-default'); var nd=document.getElementById('ins-no-default');
-  if (S.methodSaved) {
-    if(ud) ud.style.display='block'; if(nd) nd.style.display='none';
-    var icon=S.methodType==='ach'?'🏦':'💳';
-    var name=S.methodType==='ach'?'Bank account (ACH)':'Credit card';
-    var mi=document.getElementById('ins-meth-icon'); if(mi) mi.textContent=icon;
-    var mn=document.getElementById('ins-meth-name'); if(mn) mn.textContent=name;
-    var pb=document.getElementById('ins-pay-btn'); if(pb){pb.disabled=false;pb.style.opacity='1';}
-  } else {
-    if(ud) ud.style.display='none'; if(nd) nd.style.display='block';
-    var pb=document.getElementById('ins-pay-btn'); if(pb){pb.disabled=true;pb.style.opacity='.4';}
-  }
+  S.insMethType = 'ach';
+  var ma=document.getElementById('ins-m-ach'); if(ma) ma.style.display='block';
+  var mc=document.getElementById('ins-m-card'); if(mc) mc.style.display='none';
 }
 function insDeclineFromOffer() {
   S.insAccepted = false;
@@ -4944,6 +5049,21 @@ function insDeclineFromOffer() {
   nav('s-howpay');
 }
 function insPayConfirm() {
+  var ok = true;
+  if (!S.insMethType || S.insMethType === 'ach') {
+    if (!val('ins-ach-name')) { setBad('ins-ach-name','Required.'); ok=false; }
+    if (!/^\d{9}$/.test(val('ins-ach-rt'))) { setBad('ins-ach-rt','Must be exactly 9 digits.'); ok=false; }
+    if (!val('ins-ach-ac')) { setBad('ins-ach-ac','Required.'); ok=false; }
+    var at=document.getElementById('ins-ach-type'); if(at && !at.value) { setBad('ins-ach-type','Please select an account type.'); ok=false; }
+  } else {
+    if (val('ins-cd-num').replace(/\s/g,'').length!==16) { setBad('ins-cd-num','Enter a valid 16-digit card number.'); ok=false; }
+    if (!/^\d{2} \/ \d{2}$/.test(val('ins-cd-exp'))) { setBad('ins-cd-exp','Enter MM / YY.'); ok=false; }
+    if (val('ins-cd-cvv').length<3) { setBad('ins-cd-cvv','3 or 4 digits required.'); ok=false; }
+    if (!val('ins-cd-name')) { setBad('ins-cd-name','Required.'); ok=false; }
+  }
+  if (!ok) return;
+  var saveChk=document.getElementById('ins-save-default');
+  if (saveChk && saveChk.checked) { S.methodSaved=true; S.methodType=S.insMethType||'ach'; }
   S.insAccepted = true;
   document.getElementById('ins-D').style.display = 'none';
   document.getElementById('ins-E').style.display = 'block';
