@@ -574,11 +574,12 @@ textarea.inp { resize: vertical; min-height: 80px; }
         <div class="page-sub">Set up your sender identity and email branding before configuring individual communications.</div>
       </div>
 
-      <!-- Card: Department branding -->
+      <!-- Card: Branding mode — must be selected first, no default -->
       <div class="card">
-        <div class="card-title" style="margin-bottom:14px;">How do you want to manage email branding?</div>
+        <div class="card-title" style="margin-bottom:6px;">How do you want to manage email branding?</div>
+        <div style="font-size:13px;color:var(--text3);margin-bottom:16px;">Choose how your institution's email branding is structured before filling out the details below.</div>
         <div class="brand-mode-cards">
-          <div class="brand-card selected" id="brand-card-school" onclick="selectBrandMode('school')">
+          <div class="brand-card" id="brand-card-school" onclick="selectBrandMode('school')">
             <div class="brand-card-radio"><div class="brand-card-radio-dot"></div></div>
             <div class="brand-card-title">One brand for everything</div>
             <div class="brand-card-sub">Use the same from address, header, and footer for all communications from your school.</div>
@@ -586,140 +587,228 @@ textarea.inp { resize: vertical; min-height: 80px; }
           <div class="brand-card" id="brand-card-dept" onclick="selectBrandMode('dept')">
             <div class="brand-card-radio"><div class="brand-card-radio-dot"></div></div>
             <div class="brand-card-title">By department</div>
-            <div class="brand-card-sub">Set up separate branding for each department (Bursar, Financial Aid, Housing, Parking, etc.).</div>
-          </div>
-        </div>
-
-        <div id="dept-branding-section">
-          <div style="font-size:12px;color:var(--text3);margin-bottom:12px;">Configure branding per department. These settings override the school-wide defaults for that department's emails.</div>
-
-          <div class="dept-card">
-            <div class="dept-card-header">
-              <div class="dept-icon">🏦</div>
-              <div class="dept-name">Bursar's Office</div>
-            </div>
-            <div class="dept-fields">
-              <div>
-                <div class="field-label">From email</div>
-                <input type="email" class="inp" style="font-size:13px;" placeholder="bursar@university.edu"/>
-              </div>
-              <div>
-                <div class="field-label">Header image</div>
-                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
-                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dept-card">
-            <div class="dept-card-header">
-              <div class="dept-icon">🎓</div>
-              <div class="dept-name">Financial Aid</div>
-            </div>
-            <div class="dept-fields">
-              <div>
-                <div class="field-label">From email</div>
-                <input type="email" class="inp" style="font-size:13px;" placeholder="finaid@university.edu"/>
-              </div>
-              <div>
-                <div class="field-label">Header image</div>
-                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
-                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dept-card">
-            <div class="dept-card-header">
-              <div class="dept-icon">🏠</div>
-              <div class="dept-name">Housing</div>
-            </div>
-            <div class="dept-fields">
-              <div>
-                <div class="field-label">From email</div>
-                <input type="email" class="inp" style="font-size:13px;" placeholder="housing@university.edu"/>
-              </div>
-              <div>
-                <div class="field-label">Header image</div>
-                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
-                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dept-card">
-            <div class="dept-card-header">
-              <div class="dept-icon">🚗</div>
-              <div class="dept-name">Parking</div>
-            </div>
-            <div class="dept-fields">
-              <div>
-                <div class="field-label">From email</div>
-                <input type="email" class="inp" style="font-size:13px;" placeholder="parking@university.edu"/>
-              </div>
-              <div>
-                <div class="field-label">Header image</div>
-                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
-                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-                </div>
-              </div>
-            </div>
+            <div class="brand-card-sub">Set up separate branding per department. Each department gets its own from address, header, and footer.</div>
           </div>
         </div>
       </div>
 
-      <!-- Card: Sender identity -->
-      <div class="card">
-        <div class="card-title">Sender identity</div>
-        <div class="card-desc">These fields define who emails appear to be from in student inboxes.</div>
-        <div class="field-group">
-          <div class="field-label">From email address</div>
-          <input type="email" class="inp" id="from-email" placeholder="noreply@university.edu"/>
-          <div class="inp-error-msg" id="from-email-err">A from address is required before continuing.</div>
-          <div class="field-note">This is the sender address students will see. Use a monitored inbox or no-reply address.</div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">Display name</div>
-          <input type="text" class="inp" id="display-name" placeholder="Claude University Billing"/>
-        </div>
-      </div>
+      <!-- School-wide branding (shown only when "One brand" is selected) -->
+      <div id="school-branding-section" style="display:none;">
 
-      <!-- Card: Email header image -->
-      <div class="card">
-        <div class="card-title">Email header image</div>
-        <div class="card-desc">Upload a header image or banner that appears at the top of all outgoing emails. Recommended: 600px wide, PNG or JPG.</div>
-        <div class="upload-zone" onclick="showToast('File upload — coming soon')">
-          <div class="upload-zone-icon">📎</div>
-          <div class="upload-zone-text">Click to upload or drag &amp; drop</div>
-          <div class="upload-zone-sub">PNG, JPG, GIF · max 2MB</div>
-        </div>
-        <div style="margin-bottom:16px;">
-          <div class="field-note" style="margin-bottom:8px;">Preview</div>
-          <div class="email-header-preview">
-            <div class="logo-mark-sm">N</div>
-            <div class="email-header-preview-text">Claude University</div>
+        <!-- Card: Sender identity -->
+        <div class="card">
+          <div class="card-title">Sender identity</div>
+          <div class="card-desc">These fields define who emails appear to be from in student inboxes.</div>
+          <div class="field-group">
+            <div class="field-label">From email address</div>
+            <input type="email" class="inp" id="from-email" placeholder="noreply@university.edu"/>
+            <div class="inp-error-msg" id="from-email-err">A from address is required before continuing.</div>
+            <div class="field-note">This is the sender address students will see. Use a monitored inbox or no-reply address.</div>
           </div>
-          <div class="field-note">This is how your header will appear in outgoing emails.</div>
+          <div class="field-group">
+            <div class="field-label">Display name</div>
+            <input type="text" class="inp" id="display-name" placeholder="Claude University Billing"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Card: Email footer -->
-      <div class="card">
-        <div class="card-title">Email footer</div>
-        <div class="card-desc">Appears at the bottom of all emails. You can include your institution's address, links to privacy policy, and an unsubscribe option.</div>
-        <div class="field-group">
-          <div class="field-label">Footer text</div>
-          <textarea class="inp" id="email-footer" rows="4" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
-          <div class="field-note">You can include basic HTML links in your footer text.</div>
+        <!-- Card: Email header image -->
+        <div class="card">
+          <div class="card-title">Email header image</div>
+          <div class="card-desc">Upload a header image or banner that appears at the top of all outgoing emails. Recommended: 600px wide, PNG or JPG.</div>
+          <div class="upload-zone" onclick="showToast('File upload — coming soon')">
+            <div class="upload-zone-icon">📎</div>
+            <div class="upload-zone-text">Click to upload or drag &amp; drop</div>
+            <div class="upload-zone-sub">PNG, JPG, GIF · max 2MB</div>
+          </div>
+          <div style="margin-bottom:4px;">
+            <div class="field-note" style="margin-bottom:8px;">Preview</div>
+            <div class="email-header-preview">
+              <div class="logo-mark-sm">N</div>
+              <div class="email-header-preview-text">Claude University</div>
+            </div>
+            <div class="field-note">This is how your header will appear in outgoing emails.</div>
+          </div>
         </div>
-      </div>
+
+        <!-- Card: Email footer -->
+        <div class="card">
+          <div class="card-title">Email footer</div>
+          <div class="card-desc">Appears at the bottom of all emails. Include your institution's address, links to your privacy policy, and an unsubscribe option.</div>
+          <div class="field-group">
+            <div class="field-label">Footer text</div>
+            <textarea class="inp" id="email-footer" rows="4" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
+            <div class="field-note">You can include basic HTML links in your footer text.</div>
+          </div>
+        </div>
+
+      </div><!-- /school-branding-section -->
+
+      <!-- Department branding (shown only when "By department" is selected) -->
+      <div id="dept-branding-section" style="display:none;">
+
+        <div style="background:var(--blue-pale);border:1px solid rgba(37,99,235,.22);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:13px;color:#bfdbfe;line-height:1.6;">
+          <strong style="color:#fff;">Each department needs its own branding.</strong> The <strong>Default</strong> department is used as a fallback when no specific department applies to a communication. Set it up first.
+        </div>
+
+        <!-- Default / Fallback department -->
+        <div class="dept-card" style="border-color:rgba(37,99,235,.35);background:rgba(37,99,235,.06);">
+          <div class="dept-card-header">
+            <div class="dept-icon" style="background:var(--blue-pale);">🏫</div>
+            <div>
+              <div class="dept-name">Default (School-wide Fallback)</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:1px;">Used when no specific department applies to a communication</div>
+            </div>
+            <span style="margin-left:auto;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--blue-light);background:var(--blue-pale);padding:2px 8px;border-radius:5px;">Default</span>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+            <div>
+              <div class="field-label">From email <span style="color:var(--red);">*</span></div>
+              <input type="email" class="inp" style="font-size:13px;" id="dept-default-email" placeholder="billing@university.edu"/>
+            </div>
+            <div>
+              <div class="field-label">Display name</div>
+              <input type="text" class="inp" style="font-size:13px;" placeholder="Claude University Billing"/>
+            </div>
+            <div>
+              <div class="field-label">Header image</div>
+              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
+                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+              </div>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
+            <div>
+              <div class="field-label">Footer text</div>
+              <textarea class="inp" id="email-footer" rows="2" style="font-size:13px;" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bursar's Office -->
+        <div class="dept-card">
+          <div class="dept-card-header">
+            <div class="dept-icon">🏦</div>
+            <div class="dept-name">Bursar's Office</div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+            <div>
+              <div class="field-label">From email</div>
+              <input type="email" class="inp" style="font-size:13px;" placeholder="bursar@university.edu"/>
+            </div>
+            <div>
+              <div class="field-label">Display name</div>
+              <input type="text" class="inp" style="font-size:13px;" placeholder="Bursar's Office"/>
+            </div>
+            <div>
+              <div class="field-label">Header image</div>
+              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
+                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+              </div>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
+            <div>
+              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Aid -->
+        <div class="dept-card">
+          <div class="dept-card-header">
+            <div class="dept-icon">🎓</div>
+            <div class="dept-name">Financial Aid</div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+            <div>
+              <div class="field-label">From email</div>
+              <input type="email" class="inp" style="font-size:13px;" placeholder="finaid@university.edu"/>
+            </div>
+            <div>
+              <div class="field-label">Display name</div>
+              <input type="text" class="inp" style="font-size:13px;" placeholder="Financial Aid Office"/>
+            </div>
+            <div>
+              <div class="field-label">Header image</div>
+              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
+                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+              </div>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
+            <div>
+              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Housing -->
+        <div class="dept-card">
+          <div class="dept-card-header">
+            <div class="dept-icon">🏠</div>
+            <div class="dept-name">Housing</div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+            <div>
+              <div class="field-label">From email</div>
+              <input type="email" class="inp" style="font-size:13px;" placeholder="housing@university.edu"/>
+            </div>
+            <div>
+              <div class="field-label">Display name</div>
+              <input type="text" class="inp" style="font-size:13px;" placeholder="Housing Office"/>
+            </div>
+            <div>
+              <div class="field-label">Header image</div>
+              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
+                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+              </div>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
+            <div>
+              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Parking -->
+        <div class="dept-card">
+          <div class="dept-card-header">
+            <div class="dept-icon">🚗</div>
+            <div class="dept-name">Parking</div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+            <div>
+              <div class="field-label">From email</div>
+              <input type="email" class="inp" style="font-size:13px;" placeholder="parking@university.edu"/>
+            </div>
+            <div>
+              <div class="field-label">Display name</div>
+              <input type="text" class="inp" style="font-size:13px;" placeholder="Parking Services"/>
+            </div>
+            <div>
+              <div class="field-label">Header image</div>
+              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
+                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+              </div>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
+            <div>
+              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dept-branding-section -->
 
       <div class="step-footer">
-        <span style="font-size:13px;color:var(--text3);">Fields marked will appear in all outgoing emails.</span>
-        <button class="btn-next" onclick="saveStep1()">
+        <span style="font-size:13px;color:var(--text3);" id="step1-footer-hint">Select a branding option above to continue.</span>
+        <button class="btn-next" id="step1-continue-btn" onclick="saveStep1()" style="opacity:.35;pointer-events:none;">
           Save &amp; Continue
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
@@ -883,7 +972,7 @@ textarea.inp { resize: vertical; min-height: 80px; }
 // ── STATE ──
 var S = {
   step: 1,
-  brandMode: 'school',
+  brandMode: null,
   comms: {}
 };
 
@@ -1304,22 +1393,44 @@ function selectBrandMode(mode) {
   S.brandMode = mode;
   document.getElementById('brand-card-school').classList.toggle('selected', mode === 'school');
   document.getElementById('brand-card-dept').classList.toggle('selected', mode === 'dept');
+  // Show the relevant branding section, hide the other
+  document.getElementById('school-branding-section').style.display = mode === 'school' ? 'block' : 'none';
   document.getElementById('dept-branding-section').style.display = mode === 'dept' ? 'block' : 'none';
+  // Unlock the continue button now that a choice has been made
+  var btn = document.getElementById('step1-continue-btn');
+  var hint = document.getElementById('step1-footer-hint');
+  if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+  if (hint) hint.textContent = 'Fields marked will appear in all outgoing emails.';
 }
 
 // ── STEP 1 SAVE ──
 function saveStep1() {
-  var fromEmail = document.getElementById('from-email').value.trim();
-  var errEl = document.getElementById('from-email-err');
-  var inpEl = document.getElementById('from-email');
-  if (!fromEmail) {
-    inpEl.classList.add('error');
-    errEl.classList.add('show');
-    inpEl.focus();
-    return;
+  if (!S.brandMode) { showToast('Please select a branding option first.'); return; }
+
+  if (S.brandMode === 'school') {
+    var fromEmail = document.getElementById('from-email').value.trim();
+    var errEl = document.getElementById('from-email-err');
+    var inpEl = document.getElementById('from-email');
+    if (!fromEmail) {
+      inpEl.classList.add('error');
+      errEl.classList.add('show');
+      inpEl.focus();
+      return;
+    }
+    inpEl.classList.remove('error');
+    errEl.classList.remove('show');
+  } else {
+    // Dept mode: require the Default fallback email
+    var defEmail = document.getElementById('dept-default-email');
+    if (defEmail && !defEmail.value.trim()) {
+      defEmail.classList.add('error');
+      defEmail.focus();
+      showToast('A from email for the Default department is required.');
+      return;
+    }
+    if (defEmail) defEmail.classList.remove('error');
   }
-  inpEl.classList.remove('error');
-  errEl.classList.remove('show');
+
   goStep(2);
 }
 
