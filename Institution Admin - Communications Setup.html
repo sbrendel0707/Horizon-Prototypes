@@ -153,6 +153,29 @@ textarea.inp { resize: vertical; min-height: 80px; }
 .upload-zone-text { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 3px; }
 .upload-zone-sub { font-size: 11px; color: var(--text3); }
 
+/* ── DEPT HEADER IMAGE UPLOAD ── */
+.dept-header-wrap { margin-bottom: 14px; }
+.dept-header-img {
+  width: 100%; height: 120px; object-fit: cover; border-radius: 8px;
+  display: block; border: 1px solid var(--border);
+}
+.dept-header-actions {
+  display: flex; align-items: center; gap: 14px; margin-top: 8px;
+}
+.dept-header-change-btn {
+  font-size: 12px; font-weight: 600; color: var(--blue-light);
+  cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.dept-header-change-btn:hover { text-decoration: underline; }
+.dept-header-remove-btn {
+  font-size: 12px; color: var(--text3); background: none; border: none;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; padding: 0;
+}
+.dept-header-remove-btn:hover { color: #f87171; }
+.dept-header-zone {
+  display: block; text-align: center; cursor: pointer; margin-bottom: 0;
+}
+
 /* ── EMAIL HEADER PREVIEW ── */
 .email-header-preview {
   background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
@@ -651,6 +674,7 @@ textarea.inp { resize: vertical; min-height: 80px; }
         </div>
 
         <!-- Default / Fallback department -->
+        <!-- Default / Fallback -->
         <div class="dept-card" style="border-color:rgba(37,99,235,.35);background:rgba(37,99,235,.06);">
           <div class="dept-card-header">
             <div class="dept-icon" style="background:var(--blue-pale);">🏫</div>
@@ -660,7 +684,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
             </div>
             <span style="margin-left:auto;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--blue-light);background:var(--blue-pale);padding:2px 8px;border-radius:5px;">Default</span>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+          <!-- Banner preview -->
+          <div class="field-label" style="margin-bottom:8px;">Email header banner</div>
+          <div class="dept-header-wrap" id="dept-header-default">
+            <div id="dept-header-default-placeholder">
+              <div class="email-header-preview" style="margin-bottom:0;max-width:100%;">
+                <div class="logo-mark-sm">N</div>
+                <div class="email-header-preview-text">Claude University</div>
+              </div>
+            </div>
+            <img id="dept-header-default-img" src="" alt="" class="dept-header-img" style="display:none;"/>
+            <div class="dept-header-actions">
+              <label class="dept-header-change-btn" for="upload-default">📎 Upload a different image</label>
+              <input type="file" id="upload-default" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'default')"/>
+              <button class="dept-header-remove-btn" id="dept-header-default-remove" onclick="removeDeptHeader('default')" style="display:none;">↩ Revert to placeholder</button>
+            </div>
+          </div>
+          <!-- Identity fields -->
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr;margin-top:16px;">
             <div>
               <div class="field-label">From email <span style="color:var(--red);">*</span></div>
               <input type="email" class="inp" style="font-size:13px;" id="dept-default-email" placeholder="billing@university.edu"/>
@@ -669,18 +710,10 @@ textarea.inp { resize: vertical; min-height: 80px; }
               <div class="field-label">Display name</div>
               <input type="text" class="inp" style="font-size:13px;" placeholder="Claude University Billing"/>
             </div>
-            <div>
-              <div class="field-label">Header image</div>
-              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
-                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-              </div>
-            </div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
-            <div>
-              <div class="field-label">Footer text</div>
-              <textarea class="inp" id="email-footer" rows="2" style="font-size:13px;" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
-            </div>
+          <div style="margin-top:10px;">
+            <div class="field-label">Footer text</div>
+            <textarea class="inp" id="email-footer" rows="2" style="font-size:13px;" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
           </div>
         </div>
 
@@ -690,7 +723,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
             <div class="dept-icon">🏦</div>
             <div class="dept-name">Bursar's Office</div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="field-label" style="margin-bottom:8px;">Email header banner</div>
+          <div class="dept-header-wrap" id="dept-header-bursar">
+            <div id="dept-header-bursar-empty">
+              <label class="upload-zone dept-header-zone" for="upload-bursar">
+                <div class="upload-zone-icon">🖼️</div>
+                <div class="upload-zone-text">Click to upload header banner</div>
+                <div class="upload-zone-sub">Recommended 600 × 120 px · PNG or JPG · max 2 MB</div>
+              </label>
+              <input type="file" id="upload-bursar" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'bursar')"/>
+            </div>
+            <img id="dept-header-bursar-img" src="" alt="" class="dept-header-img" style="display:none;"/>
+            <div class="dept-header-actions" id="dept-header-bursar-actions" style="display:none;">
+              <label class="dept-header-change-btn" for="upload-bursar-change">📎 Change image</label>
+              <input type="file" id="upload-bursar-change" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'bursar')"/>
+              <button class="dept-header-remove-btn" onclick="removeDeptHeader('bursar')">✕ Remove</button>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr;margin-top:16px;">
             <div>
               <div class="field-label">From email</div>
               <input type="email" class="inp" style="font-size:13px;" placeholder="bursar@university.edu"/>
@@ -699,18 +749,10 @@ textarea.inp { resize: vertical; min-height: 80px; }
               <div class="field-label">Display name</div>
               <input type="text" class="inp" style="font-size:13px;" placeholder="Bursar's Office"/>
             </div>
-            <div>
-              <div class="field-label">Header image</div>
-              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
-                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-              </div>
-            </div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
-            <div>
-              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
-              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
-            </div>
+          <div style="margin-top:10px;">
+            <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+            <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
           </div>
         </div>
 
@@ -720,7 +762,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
             <div class="dept-icon">🎓</div>
             <div class="dept-name">Financial Aid</div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="field-label" style="margin-bottom:8px;">Email header banner</div>
+          <div class="dept-header-wrap" id="dept-header-finaid">
+            <div id="dept-header-finaid-empty">
+              <label class="upload-zone dept-header-zone" for="upload-finaid">
+                <div class="upload-zone-icon">🖼️</div>
+                <div class="upload-zone-text">Click to upload header banner</div>
+                <div class="upload-zone-sub">Recommended 600 × 120 px · PNG or JPG · max 2 MB</div>
+              </label>
+              <input type="file" id="upload-finaid" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'finaid')"/>
+            </div>
+            <img id="dept-header-finaid-img" src="" alt="" class="dept-header-img" style="display:none;"/>
+            <div class="dept-header-actions" id="dept-header-finaid-actions" style="display:none;">
+              <label class="dept-header-change-btn" for="upload-finaid-change">📎 Change image</label>
+              <input type="file" id="upload-finaid-change" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'finaid')"/>
+              <button class="dept-header-remove-btn" onclick="removeDeptHeader('finaid')">✕ Remove</button>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr;margin-top:16px;">
             <div>
               <div class="field-label">From email</div>
               <input type="email" class="inp" style="font-size:13px;" placeholder="finaid@university.edu"/>
@@ -729,18 +788,10 @@ textarea.inp { resize: vertical; min-height: 80px; }
               <div class="field-label">Display name</div>
               <input type="text" class="inp" style="font-size:13px;" placeholder="Financial Aid Office"/>
             </div>
-            <div>
-              <div class="field-label">Header image</div>
-              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
-                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-              </div>
-            </div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
-            <div>
-              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
-              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
-            </div>
+          <div style="margin-top:10px;">
+            <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+            <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
           </div>
         </div>
 
@@ -750,7 +801,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
             <div class="dept-icon">🏠</div>
             <div class="dept-name">Housing</div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="field-label" style="margin-bottom:8px;">Email header banner</div>
+          <div class="dept-header-wrap" id="dept-header-housing">
+            <div id="dept-header-housing-empty">
+              <label class="upload-zone dept-header-zone" for="upload-housing">
+                <div class="upload-zone-icon">🖼️</div>
+                <div class="upload-zone-text">Click to upload header banner</div>
+                <div class="upload-zone-sub">Recommended 600 × 120 px · PNG or JPG · max 2 MB</div>
+              </label>
+              <input type="file" id="upload-housing" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'housing')"/>
+            </div>
+            <img id="dept-header-housing-img" src="" alt="" class="dept-header-img" style="display:none;"/>
+            <div class="dept-header-actions" id="dept-header-housing-actions" style="display:none;">
+              <label class="dept-header-change-btn" for="upload-housing-change">📎 Change image</label>
+              <input type="file" id="upload-housing-change" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'housing')"/>
+              <button class="dept-header-remove-btn" onclick="removeDeptHeader('housing')">✕ Remove</button>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr;margin-top:16px;">
             <div>
               <div class="field-label">From email</div>
               <input type="email" class="inp" style="font-size:13px;" placeholder="housing@university.edu"/>
@@ -759,18 +827,10 @@ textarea.inp { resize: vertical; min-height: 80px; }
               <div class="field-label">Display name</div>
               <input type="text" class="inp" style="font-size:13px;" placeholder="Housing Office"/>
             </div>
-            <div>
-              <div class="field-label">Header image</div>
-              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
-                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-              </div>
-            </div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
-            <div>
-              <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
-              <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
-            </div>
+          <div style="margin-top:10px;">
+            <div class="field-label">Footer text <span style="font-size:11px;color:var(--text3);font-weight:400;">(leave blank to use Default)</span></div>
+            <textarea class="inp" rows="2" style="font-size:13px;" placeholder="Inherits from Default if left blank"></textarea>
           </div>
         </div>
 
@@ -780,7 +840,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
             <div class="dept-icon">🚗</div>
             <div class="dept-name">Parking</div>
           </div>
-          <div class="dept-fields" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="field-label" style="margin-bottom:8px;">Email header banner</div>
+          <div class="dept-header-wrap" id="dept-header-parking">
+            <div id="dept-header-parking-empty">
+              <label class="upload-zone dept-header-zone" for="upload-parking">
+                <div class="upload-zone-icon">🖼️</div>
+                <div class="upload-zone-text">Click to upload header banner</div>
+                <div class="upload-zone-sub">Recommended 600 × 120 px · PNG or JPG · max 2 MB</div>
+              </label>
+              <input type="file" id="upload-parking" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'parking')"/>
+            </div>
+            <img id="dept-header-parking-img" src="" alt="" class="dept-header-img" style="display:none;"/>
+            <div class="dept-header-actions" id="dept-header-parking-actions" style="display:none;">
+              <label class="dept-header-change-btn" for="upload-parking-change">📎 Change image</label>
+              <input type="file" id="upload-parking-change" accept="image/*" style="display:none;" onchange="previewDeptHeader(this,'parking')"/>
+              <button class="dept-header-remove-btn" onclick="removeDeptHeader('parking')">✕ Remove</button>
+            </div>
+          </div>
+          <div class="dept-fields" style="grid-template-columns:1fr 1fr;margin-top:16px;">
             <div>
               <div class="field-label">From email</div>
               <input type="email" class="inp" style="font-size:13px;" placeholder="parking@university.edu"/>
@@ -788,12 +865,6 @@ textarea.inp { resize: vertical; min-height: 80px; }
             <div>
               <div class="field-label">Display name</div>
               <input type="text" class="inp" style="font-size:13px;" placeholder="Parking Services"/>
-            </div>
-            <div>
-              <div class="field-label">Header image</div>
-              <div class="upload-zone" style="padding:10px 14px;" onclick="showToast('File upload — coming soon')">
-                <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
-              </div>
             </div>
           </div>
           <div class="dept-fields" style="grid-template-columns:1fr;margin-top:6px;">
@@ -1466,6 +1537,39 @@ function showToast(msg) {
   el.classList.add('show');
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2800);
+}
+
+// ── DEPT HEADER IMAGE UPLOAD ──
+function previewDeptHeader(input, deptId) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var emptyEl = document.getElementById('dept-header-' + deptId + '-empty');
+    var placeholder = document.getElementById('dept-header-' + deptId + '-placeholder');
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (placeholder) placeholder.style.display = 'none';
+    var img = document.getElementById('dept-header-' + deptId + '-img');
+    if (img) { img.src = e.target.result; img.style.display = 'block'; }
+    var actions = document.getElementById('dept-header-' + deptId + '-actions');
+    if (actions) actions.style.display = 'flex';
+    var removeBtn = document.getElementById('dept-header-' + deptId + '-remove');
+    if (removeBtn) removeBtn.style.display = 'inline-block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeDeptHeader(deptId) {
+  var emptyEl = document.getElementById('dept-header-' + deptId + '-empty');
+  var placeholder = document.getElementById('dept-header-' + deptId + '-placeholder');
+  if (emptyEl) emptyEl.style.display = 'block';
+  if (placeholder) placeholder.style.display = 'block';
+  var img = document.getElementById('dept-header-' + deptId + '-img');
+  if (img) { img.src = ''; img.style.display = 'none'; }
+  var actions = document.getElementById('dept-header-' + deptId + '-actions');
+  if (actions) actions.style.display = 'none';
+  var removeBtn = document.getElementById('dept-header-' + deptId + '-remove');
+  if (removeBtn) removeBtn.style.display = 'none';
 }
 
 // ── KEYBOARD ──
