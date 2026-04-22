@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Communications Setup — Nelnet Campus Commerce</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0a1628;
+  --navy2: #111f3a;
+  --navy3: #1a2f55;
+  --blue: #2563eb;
+  --blue-light: #3b82f6;
+  --blue-pale: rgba(37,99,235,.12);
+  --green: #10b981;
+  --green-pale: rgba(16,185,129,.12);
+  --amber: #f59e0b;
+  --amber-pale: rgba(245,158,11,.12);
+  --red: #ef4444;
+  --red-pale: rgba(239,68,68,.1);
+  --border: rgba(255,255,255,.08);
+  --border2: rgba(255,255,255,.13);
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --card: rgba(255,255,255,.04);
+  --card2: rgba(255,255,255,.07);
+  --input-bg: rgba(255,255,255,.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+html, body { height: 100%; font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--text); overflow: hidden; }
+
+/* ── LAYOUT ── */
+#app { display: flex; height: 100vh; }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: 280px; flex-shrink: 0; background: var(--navy2);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow-y: auto;
+}
+.sidebar-logo { padding: 22px 24px 18px; border-bottom: 1px solid var(--border); }
+.logo-mark { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.logo-n {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: #fff; flex-shrink: 0;
+}
+.logo-name { font-size: 15px; font-weight: 700; }
+.logo-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.sidebar-uni { padding: 14px 24px; border-bottom: 1px solid var(--border); }
+.uni-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 3px; }
+.uni-name { font-size: 14px; font-weight: 600; }
+.sidebar-draft { padding: 12px 24px; border-bottom: 1px solid var(--border); }
+.draft-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--green-pale); border: 1px solid rgba(16,185,129,.25);
+  border-radius: 8px; padding: 5px 10px; font-size: 11px; font-weight: 600; color: var(--green);
+}
+.draft-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.steps-section { padding: 16px 0 24px; flex: 1; }
+.steps-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; padding: 0 24px; margin-bottom: 10px; }
+.step-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 9px 24px; position: relative; cursor: default;
+}
+.step-item:not(:last-child)::after {
+  content: ''; position: absolute; left: 34px; top: 38px; height: 14px;
+  width: 1px; background: var(--border2);
+}
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; margin-top: 1px;
+  background: var(--card2); border: 1.5px solid var(--border2); color: var(--text3);
+  transition: all .2s;
+}
+.step-item.active .step-num { background: var(--blue); border-color: var(--blue); color: #fff; }
+.step-item.done .step-num { background: var(--green); border-color: var(--green); color: #fff; font-size: 12px; }
+.step-title { font-size: 13px; font-weight: 600; color: var(--text3); line-height: 1.3; }
+.step-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.step-item.active .step-title { color: var(--text); }
+.step-item.done .step-title { color: var(--text2); }
+
+/* ── TOPBAR ── */
+#topbar {
+  height: 52px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
+  background: rgba(17,31,58,.6); backdrop-filter: blur(8px);
+}
+.topbar-breadcrumb { font-size: 12px; color: var(--text3); }
+.topbar-breadcrumb span { color: var(--text2); font-weight: 500; }
+.topbar-user {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff;
+}
+
+/* ── MAIN ── */
+#main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#main { flex: 1; overflow-y: auto; padding: 40px 48px; }
+
+/* ── PANELS ── */
+.panel { display: none; flex-direction: column; animation: fadeIn .2s ease; }
+.panel.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── PAGE HEADER ── */
+.page-header { margin-bottom: 32px; }
+.page-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: .7px; color: var(--blue-light); font-weight: 600; margin-bottom: 8px; }
+.page-title { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+.page-sub { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 600px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 16px;
+}
+.card-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.card-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 18px; }
+
+/* ── FORM FIELDS ── */
+.field-group { margin-bottom: 18px; }
+.field-group:last-child { margin-bottom: 0; }
+.field-label {
+  font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px;
+  font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;
+}
+.field-note { font-size: 12px; color: var(--text3); margin-top: 6px; line-height: 1.5; }
+.inp {
+  width: 100%; background: var(--input-bg); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); padding: 10px 14px; font-size: 14px; color: var(--text);
+  outline: none; font-family: 'DM Sans', sans-serif; transition: border-color .15s, background .15s;
+}
+.inp:focus { border-color: var(--blue-light); background: rgba(59,130,246,.07); }
+.inp.error { border-color: var(--red); }
+.inp-error-msg { font-size: 11px; color: #fca5a5; margin-top: 5px; display: none; }
+.inp-error-msg.show { display: block; }
+textarea.inp { resize: vertical; min-height: 80px; }
+
+/* ── UPLOAD ZONE ── */
+.upload-zone {
+  border: 1.5px dashed var(--border2); border-radius: var(--radius);
+  padding: 28px 20px; text-align: center; cursor: pointer;
+  transition: border-color .15s, background .15s; margin-bottom: 14px;
+}
+.upload-zone:hover { border-color: var(--blue-light); background: var(--blue-pale); }
+.upload-zone-icon { font-size: 22px; margin-bottom: 6px; }
+.upload-zone-text { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 3px; }
+.upload-zone-sub { font-size: 11px; color: var(--text3); }
+
+/* ── EMAIL HEADER PREVIEW ── */
+.email-header-preview {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+  border-radius: 8px; padding: 20px 28px; max-width: 600px;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 4px;
+}
+.email-header-preview .logo-mark-sm {
+  width: 28px; height: 28px; background: rgba(255,255,255,.25); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff; flex-shrink: 0;
+}
+.email-header-preview-text { font-size: 16px; font-weight: 700; color: #fff; }
+
+/* ── BRAND MODE CARDS ── */
+.brand-mode-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 0; }
+.brand-card {
+  border: 2px solid var(--border); border-radius: var(--radius); padding: 16px 18px;
+  cursor: pointer; transition: border-color .15s, background .15s; position: relative;
+  background: var(--card);
+}
+.brand-card:hover { border-color: var(--border2); background: var(--card2); }
+.brand-card.selected { border-color: var(--blue); background: var(--blue-pale); }
+.brand-card-radio {
+  width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--border2);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+  transition: border-color .15s;
+}
+.brand-card.selected .brand-card-radio { border-color: var(--blue); }
+.brand-card-radio-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
+  display: none;
+}
+.brand-card.selected .brand-card-radio-dot { display: block; }
+.brand-card-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.brand-card-sub { font-size: 12px; color: var(--text3); line-height: 1.5; }
+
+/* ── DEPT BRANDING SECTION ── */
+#dept-branding-section {
+  display: none; margin-top: 16px;
+  animation: fadeIn .2s ease;
+}
+.dept-card {
+  background: var(--card2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; margin-bottom: 10px;
+}
+.dept-card-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.dept-icon { font-size: 18px; }
+.dept-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.dept-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── STEP FOOTER ── */
+.step-footer {
+  margin-top: 32px; padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.btn-next {
+  padding: 11px 26px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+  border: none; background: var(--blue); color: #fff;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-next:hover { background: var(--blue-light); }
+.btn-back {
+  padding: 11px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-back:hover { background: var(--card2); color: var(--text); }
+.btn-primary {
+  background: var(--blue); color: #fff; border: none; border-radius: var(--radius-sm);
+  padding: 10px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--blue-light); }
+.btn-ghost {
+  background: transparent; border: 1px solid var(--border2); color: var(--text2);
+  border-radius: var(--radius-sm); padding: 10px 22px; font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { background: var(--card2); color: var(--text); }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--card2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 16px; margin-bottom: 20px; gap: 16px; flex-wrap: wrap;
+}
+.legend { display: flex; align-items: center; gap: 16px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend-dot.required { background: #ef4444; }
+.legend-dot.recommended { background: var(--amber); }
+.legend-dot.optional { background: var(--text3); }
+.show-disabled-wrap { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); cursor: pointer; }
+.show-disabled-wrap input[type=checkbox] { width: 14px; height: 14px; accent-color: var(--blue); cursor: pointer; }
+
+/* ── COMM SECTION ── */
+.comm-section { margin-bottom: 8px; }
+.section-hdr {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700;
+  color: var(--text2); text-transform: uppercase; letter-spacing: .5px;
+  padding: 12px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 4px;
+}
+.section-hdr-icon { font-size: 16px; }
+
+/* ── COMM ROW ── */
+.comm-row {
+  display: flex; align-items: center; gap: 12px; padding: 12px 4px;
+  border-bottom: 1px solid var(--border); transition: background .1s;
+}
+.comm-row:last-child { border-bottom: none; }
+.comm-row:hover { background: rgba(255,255,255,.02); border-radius: 6px; }
+.comm-info { flex: 1; min-width: 0; }
+.comm-name { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.comm-desc { font-size: 12px; color: var(--text3); margin-top: 2px; line-height: 1.4; }
+.comm-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+/* ── TOGGLE PILLS ── */
+.pill-toggle {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  cursor: pointer; border: 1.5px solid; transition: all .15s; white-space: nowrap;
+  user-select: none;
+}
+.pill-toggle.on.email { background: var(--green-pale); border-color: rgba(16,185,129,.35); color: var(--green); }
+.pill-toggle.off.email { background: transparent; border-color: var(--border2); color: var(--text3); }
+.pill-toggle.on.sms { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.35); color: var(--blue-light); }
+.pill-toggle.off.sms { background: transparent; border-color: var(--border2); color: var(--text3); }
+.pill-toggle:hover:not(.locked) { opacity: .8; }
+.pill-toggle.locked { cursor: default; }
+
+/* ── REQUIRED BADGE ── */
+.required-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--blue-pale); border: 1px solid rgba(37,99,235,.25);
+  color: var(--blue-light); font-size: 11px; font-weight: 600; border-radius: 6px; padding: 3px 8px;
+  white-space: nowrap;
+}
+.tier-badge {
+  display: inline-flex; align-items: center;
+  font-size: 10px; font-weight: 600; border-radius: 4px; padding: 2px 6px;
+  white-space: nowrap;
+}
+.tier-badge.recommended { background: var(--amber-pale); color: var(--amber); border: 1px solid rgba(245,158,11,.25); }
+.tier-badge.optional { background: rgba(100,116,139,.12); color: var(--text3); border: 1px solid rgba(100,116,139,.2); }
+
+/* ── DEPT DROPDOWN ── */
+.dept-select {
+  appearance: none; -webkit-appearance: none;
+  background: var(--input-bg); border: 1px solid var(--border); border-radius: 6px;
+  padding: 5px 26px 5px 10px; font-size: 12px; color: var(--text2);
+  font-family: 'DM Sans', sans-serif; outline: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center;
+  transition: border-color .15s;
+}
+.dept-select:focus { border-color: var(--blue-light); }
+.dept-select option { background: #0d1630; }
+
+/* ── PREVIEW BUTTON ── */
+.btn-preview {
+  padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600;
+  border: 1px solid var(--border2); background: transparent; color: var(--text2);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .15s; white-space: nowrap;
+}
+.btn-preview:hover { background: var(--blue-pale); border-color: rgba(37,99,235,.4); color: var(--blue-light); }
+
+/* ── MODAL ── */
+#preview-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75);
+  z-index: 1000; align-items: center; justify-content: center; padding: 24px;
+  backdrop-filter: blur(4px);
+}
+#preview-overlay.open { display: flex; animation: fadeIn .15s ease; }
+#preview-modal {
+  background: #0f1e38; border: 1px solid var(--border2); border-radius: 16px;
+  max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 20px 24px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.modal-header-left { display: flex; align-items: center; gap: 10px; }
+.modal-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.modal-preview-badge {
+  background: var(--card2); border: 1px solid var(--border2); border-radius: 6px;
+  padding: 2px 8px; font-size: 11px; color: var(--text3); font-weight: 600;
+}
+.btn-close {
+  background: transparent; border: none; cursor: pointer; color: var(--text3);
+  font-size: 20px; line-height: 1; padding: 4px; border-radius: 6px; transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-close:hover { background: var(--red-pale); color: var(--red); }
+.modal-tabs { display: flex; gap: 4px; padding: 14px 24px 0; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.modal-tab {
+  padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text3);
+  border: none; background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s;
+}
+.modal-tab.active { color: var(--blue-light); border-bottom-color: var(--blue-light); }
+.modal-tab-content { display: none; padding: 0; }
+.modal-tab-content.active { display: block; }
+.modal-body { padding: 20px 24px 24px; flex: 1; }
+
+/* ── EMAIL MOCKUP ── */
+.email-mockup {
+  border-radius: 10px; overflow: hidden; border: 1px solid rgba(0,0,0,.15);
+  box-shadow: 0 4px 24px rgba(0,0,0,.3);
+}
+.email-mock-header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+  padding: 18px 24px; display: flex; align-items: center; gap: 10px;
+}
+.email-mock-header .logo-n-sm {
+  width: 26px; height: 26px; background: rgba(255,255,255,.25); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #fff; flex-shrink: 0;
+}
+.email-mock-header-text { font-size: 15px; font-weight: 700; color: #fff; }
+.email-mock-body {
+  background: #fff; padding: 28px 32px; color: #1a1a2e; font-family: 'DM Sans', sans-serif;
+}
+.email-mock-greeting { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 14px; }
+.email-mock-p {
+  font-size: 14px; color: #374151; line-height: 1.7; margin-bottom: 14px;
+  position: relative; padding: 10px 12px; border-radius: 6px; transition: background .15s;
+}
+.email-mock-p:hover .edit-btn { opacity: 1; }
+.email-mock-p.editable:hover { background: rgba(37,99,235,.05); }
+.edit-btn {
+  position: absolute; top: 6px; right: 8px; opacity: 0;
+  background: var(--blue-pale); border: 1px solid rgba(37,99,235,.3); border-radius: 5px;
+  padding: 3px 8px; font-size: 10px; font-weight: 600; color: var(--blue-light);
+  cursor: pointer; transition: opacity .15s; font-family: 'DM Sans', sans-serif;
+}
+.compliance-block {
+  background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); border-radius: 8px;
+  padding: 12px 14px; margin-bottom: 14px;
+}
+.compliance-label {
+  display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700;
+  color: var(--amber); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px;
+}
+.compliance-text { font-size: 12px; color: #6b5e3a; line-height: 1.6; }
+.email-mock-divider { height: 1px; background: #e5e7eb; margin: 18px 0; }
+.email-mock-footer { font-size: 11px; color: #9ca3af; line-height: 1.6; }
+.email-mock-cta {
+  display: inline-block; background: #2563eb; color: #fff; padding: 10px 22px;
+  border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none;
+  margin: 8px 0 14px; border: none; cursor: default;
+}
+
+/* ── EDIT AREA ── */
+.edit-area-section {
+  margin-top: 16px; background: var(--navy3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); overflow: hidden; display: none;
+}
+.edit-area-section.open { display: block; animation: fadeIn .15s ease; }
+.edit-area-header {
+  padding: 10px 14px; background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border);
+  font-size: 12px; font-weight: 600; color: var(--text2);
+}
+.edit-area-body { padding: 14px; }
+.edit-textarea {
+  width: 100%; background: var(--input-bg); border: 1px solid var(--border2);
+  border-radius: var(--radius-sm); padding: 10px 12px; font-size: 13px; color: var(--text);
+  outline: none; font-family: 'DM Sans', sans-serif; resize: vertical; min-height: 90px;
+  transition: border-color .15s;
+}
+.edit-textarea:focus { border-color: var(--blue-light); }
+.edit-area-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+
+/* ── SMS MOCKUP ── */
+.sms-mockup {
+  max-width: 340px; margin: 0 auto; background: #1c1c1e; border-radius: 16px; padding: 20px 16px;
+}
+.sms-from { font-size: 11px; color: #9ca3af; text-align: center; margin-bottom: 14px; }
+.sms-bubble {
+  background: #1d4ed8; color: #fff; border-radius: 18px 18px 4px 18px;
+  padding: 12px 16px; font-size: 13px; line-height: 1.6; margin-bottom: 8px;
+}
+.sms-time { font-size: 10px; color: #6b7280; text-align: right; margin-top: 4px; }
+
+/* ── MODAL FOOTER ── */
+.modal-footer {
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-shrink: 0;
+}
+
+/* ── SUCCESS PANEL ── */
+.success-panel {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 40px; min-height: 60vh;
+}
+.success-ring {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--green-pale); border: 2px solid rgba(16,185,129,.35);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+  font-size: 36px;
+}
+.success-title { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); margin-bottom: 10px; }
+.success-sub { font-size: 14px; color: var(--text2); line-height: 1.65; max-width: 440px; margin-bottom: 28px; }
+.summary-card {
+  background: var(--card2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px 28px; margin-bottom: 32px; display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;
+}
+.summary-stat { text-align: center; }
+.summary-stat-num { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--text); line-height: 1; margin-bottom: 4px; }
+.summary-stat-label { font-size: 12px; color: var(--text3); }
+.success-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #1e293b; border: 1px solid var(--border2); border-radius: 10px;
+  padding: 11px 20px; font-size: 13px; font-weight: 500; color: var(--text2);
+  z-index: 9999; pointer-events: none; opacity: 0;
+  transition: opacity .2s, transform .2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Home button -->
+<a href="/index.html" style="position:fixed;top:16px;left:16px;z-index:9999;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:7px 14px;font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+  Home
+</a>
+
+<div id="app">
+
+<!-- ── SIDEBAR ── -->
+<div id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-n">N</div>
+      <div>
+        <div class="logo-name">Nelnet Campus Commerce</div>
+      </div>
+    </div>
+    <div class="logo-sub">Admin Portal</div>
+  </div>
+  <div class="sidebar-uni">
+    <div class="uni-label">Setting up</div>
+    <div class="uni-name">Claude University</div>
+  </div>
+  <div class="sidebar-draft">
+    <div class="draft-badge">
+      <div class="draft-dot"></div>
+      Draft — not yet published
+    </div>
+  </div>
+  <div class="steps-section">
+    <div class="steps-label">Communications Setup</div>
+    <div class="step-item active" id="nav-1">
+      <div class="step-num" id="num-1">1</div>
+      <div>
+        <div class="step-title">Communication Essentials</div>
+        <div class="step-sub">Brand &amp; from address setup</div>
+      </div>
+    </div>
+    <div class="step-item" id="nav-2">
+      <div class="step-num" id="num-2">2</div>
+      <div>
+        <div class="step-title">Configure Communications</div>
+        <div class="step-sub">Toggle, preview, and edit</div>
+      </div>
+    </div>
+    <div class="step-item" id="nav-3">
+      <div class="step-num" id="num-3">3</div>
+      <div>
+        <div class="step-title">Complete</div>
+        <div class="step-sub">Setup finished</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN WRAP ── -->
+<div id="main-wrap">
+  <div id="topbar">
+    <div class="topbar-breadcrumb">Claude University &rsaquo; <span id="topbar-step">Communication Essentials</span></div>
+    <div class="topbar-user">SA</div>
+  </div>
+  <div id="main">
+
+    <!-- ══ STEP 1 ══ -->
+    <div class="panel active" id="panel-1">
+      <div class="page-header">
+        <div class="page-eyebrow">Step 1 of 3</div>
+        <div class="page-title">Communication Essentials</div>
+        <div class="page-sub">Set up your sender identity and email branding before configuring individual communications.</div>
+      </div>
+
+      <!-- Card: Sender identity -->
+      <div class="card">
+        <div class="card-title">Sender identity</div>
+        <div class="card-desc">These fields define who emails appear to be from in student inboxes.</div>
+        <div class="field-group">
+          <div class="field-label">From email address</div>
+          <input type="email" class="inp" id="from-email" placeholder="noreply@university.edu"/>
+          <div class="inp-error-msg" id="from-email-err">A from address is required before continuing.</div>
+          <div class="field-note">This is the sender address students will see. Use a monitored inbox or no-reply address.</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Display name</div>
+          <input type="text" class="inp" id="display-name" placeholder="Claude University Billing"/>
+        </div>
+      </div>
+
+      <!-- Card: Email branding -->
+      <div class="card">
+        <div class="card-title">Email header image</div>
+        <div class="card-desc">Upload a header image or banner that appears at the top of all outgoing emails. Recommended: 600px wide, PNG or JPG.</div>
+        <div class="upload-zone" onclick="showToast('File upload — coming soon')">
+          <div class="upload-zone-icon">📎</div>
+          <div class="upload-zone-text">Click to upload or drag &amp; drop</div>
+          <div class="upload-zone-sub">PNG, JPG, GIF · max 2MB</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="field-note" style="margin-bottom:8px;">Preview</div>
+          <div class="email-header-preview">
+            <div class="logo-mark-sm">N</div>
+            <div class="email-header-preview-text">Claude University</div>
+          </div>
+          <div class="field-note">This is how your header will appear in outgoing emails.</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Email footer</div>
+          <textarea class="inp" id="email-footer" rows="4" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
+          <div class="field-note">Appears at the bottom of all emails. You can include links using HTML.</div>
+        </div>
+      </div>
+
+      <!-- Card: Department branding -->
+      <div class="card">
+        <div class="card-title" style="margin-bottom:14px;">How do you want to manage email branding?</div>
+        <div class="brand-mode-cards">
+          <div class="brand-card selected" id="brand-card-school" onclick="selectBrandMode('school')">
+            <div class="brand-card-radio"><div class="brand-card-radio-dot"></div></div>
+            <div class="brand-card-title">One brand for everything</div>
+            <div class="brand-card-sub">Use the same from address, header, and footer for all communications from your school.</div>
+          </div>
+          <div class="brand-card" id="brand-card-dept" onclick="selectBrandMode('dept')">
+            <div class="brand-card-radio"><div class="brand-card-radio-dot"></div></div>
+            <div class="brand-card-title">By department</div>
+            <div class="brand-card-sub">Set up separate branding for each department (Bursar, Financial Aid, Housing, Parking, etc.).</div>
+          </div>
+        </div>
+
+        <div id="dept-branding-section">
+          <div style="font-size:12px;color:var(--text3);margin-bottom:12px;">Configure branding per department. These settings override the school-wide defaults for that department's emails.</div>
+
+          <div class="dept-card">
+            <div class="dept-card-header">
+              <div class="dept-icon">🏦</div>
+              <div class="dept-name">Bursar's Office</div>
+            </div>
+            <div class="dept-fields">
+              <div>
+                <div class="field-label">From email</div>
+                <input type="email" class="inp" style="font-size:13px;" placeholder="bursar@university.edu"/>
+              </div>
+              <div>
+                <div class="field-label">Header image</div>
+                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
+                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-card">
+            <div class="dept-card-header">
+              <div class="dept-icon">🎓</div>
+              <div class="dept-name">Financial Aid</div>
+            </div>
+            <div class="dept-fields">
+              <div>
+                <div class="field-label">From email</div>
+                <input type="email" class="inp" style="font-size:13px;" placeholder="finaid@university.edu"/>
+              </div>
+              <div>
+                <div class="field-label">Header image</div>
+                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
+                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-card">
+            <div class="dept-card-header">
+              <div class="dept-icon">🏠</div>
+              <div class="dept-name">Housing</div>
+            </div>
+            <div class="dept-fields">
+              <div>
+                <div class="field-label">From email</div>
+                <input type="email" class="inp" style="font-size:13px;" placeholder="housing@university.edu"/>
+              </div>
+              <div>
+                <div class="field-label">Header image</div>
+                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
+                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-card">
+            <div class="dept-card-header">
+              <div class="dept-icon">🚗</div>
+              <div class="dept-name">Parking</div>
+            </div>
+            <div class="dept-fields">
+              <div>
+                <div class="field-label">From email</div>
+                <input type="email" class="inp" style="font-size:13px;" placeholder="parking@university.edu"/>
+              </div>
+              <div>
+                <div class="field-label">Header image</div>
+                <div class="upload-zone" style="padding:12px 16px;" onclick="showToast('File upload — coming soon')">
+                  <div style="font-size:11px;color:var(--text3);">📎 Upload header</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-footer">
+        <span style="font-size:13px;color:var(--text3);">Fields marked will appear in all outgoing emails.</span>
+        <button class="btn-next" onclick="saveStep1()">
+          Save &amp; Continue
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2 ══ -->
+    <div class="panel" id="panel-2">
+      <div class="page-header">
+        <div class="page-eyebrow">Step 2 of 3</div>
+        <div class="page-title">Configure Communications</div>
+        <div class="page-sub">Turn on the communications you want students to receive, preview them, and customize the content.</div>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot required"></div> Required</div>
+          <div class="legend-item"><div class="legend-dot recommended"></div> Recommended</div>
+          <div class="legend-item"><div class="legend-dot optional"></div> Optional</div>
+        </div>
+        <label class="show-disabled-wrap">
+          <input type="checkbox" id="show-disabled" checked onchange="filterRows()"/>
+          Show disabled
+        </label>
+      </div>
+
+      <!-- Section: Compliance -->
+      <div class="comm-section">
+        <div class="section-hdr"><span class="section-hdr-icon">🔒</span> Required — Compliance</div>
+        <div id="comms-compliance"></div>
+      </div>
+
+      <!-- Section: Payment Plans -->
+      <div class="comm-section">
+        <div class="section-hdr"><span class="section-hdr-icon">📅</span> Payment Plans</div>
+        <div id="comms-plans"></div>
+      </div>
+
+      <!-- Section: Billing -->
+      <div class="comm-section">
+        <div class="section-hdr"><span class="section-hdr-icon">🧾</span> Billing</div>
+        <div id="comms-billing"></div>
+      </div>
+
+      <!-- Section: Refunds -->
+      <div class="comm-section">
+        <div class="section-hdr"><span class="section-hdr-icon">💸</span> Refunds</div>
+        <div id="comms-refunds"></div>
+      </div>
+
+      <!-- Section: Account & Access -->
+      <div class="comm-section">
+        <div class="section-hdr"><span class="section-hdr-icon">👤</span> Account &amp; Access</div>
+        <div id="comms-account"></div>
+      </div>
+
+      <div class="step-footer">
+        <button class="btn-back" onclick="goStep(1)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back
+        </button>
+        <button class="btn-next" onclick="saveStep2()">
+          Save &amp; Continue
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 3 ══ -->
+    <div class="panel" id="panel-3">
+      <div class="success-panel">
+        <div class="success-ring">✅</div>
+        <div class="success-title">Communications configured!</div>
+        <div class="success-sub">Your communication settings have been saved as a draft. Review and publish when ready.</div>
+
+        <div class="summary-card" id="summary-card">
+          <div class="summary-stat">
+            <div class="summary-stat-num" id="stat-enabled">—</div>
+            <div class="summary-stat-label">Communications enabled</div>
+          </div>
+          <div class="summary-stat">
+            <div class="summary-stat-num" id="stat-required">—</div>
+            <div class="summary-stat-label">Required (always on)</div>
+          </div>
+          <div class="summary-stat">
+            <div class="summary-stat-num" id="stat-sms">—</div>
+            <div class="summary-stat-label">With SMS also enabled</div>
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <button class="btn-ghost" onclick="goStep(2)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to configure
+          </button>
+          <button class="btn-primary" onclick="markComplete()">
+            Mark as complete
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /main-wrap -->
+</div><!-- /app -->
+
+<!-- ── PREVIEW MODAL ── -->
+<div id="preview-overlay" onclick="overlayClick(event)">
+  <div id="preview-modal">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-title" id="modal-comm-name">Preview</div>
+        <div class="modal-preview-badge">Preview</div>
+      </div>
+      <button class="btn-close" onclick="closePreview()">×</button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-email" onclick="switchTab('email')">✉ Email Preview</button>
+      <button class="modal-tab" id="tab-sms" onclick="switchTab('sms')">💬 SMS Preview</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tab-content active" id="tab-content-email">
+        <div class="email-mockup" id="email-mockup-content"></div>
+        <div class="edit-area-section" id="edit-area">
+          <div class="edit-area-header">✏ Edit email body</div>
+          <div class="edit-area-body">
+            <textarea class="edit-textarea" id="edit-textarea" rows="5"></textarea>
+            <div class="edit-area-actions">
+              <button class="btn-ghost" style="padding:7px 14px;font-size:12px;" onclick="closeEditArea()">Cancel</button>
+              <button class="btn-primary" style="padding:7px 14px;font-size:12px;" onclick="saveEdit()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-tab-content" id="tab-content-sms">
+        <div class="sms-mockup" id="sms-mockup-content"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closePreview()">Close preview</button>
+      <button class="btn-primary" onclick="saveEdit()">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<script>
+// ── STATE ──
+var S = {
+  step: 1,
+  brandMode: 'school',
+  comms: {}
+};
+
+// ── COMM DEFINITIONS ──
+var COMMS = [
+  // section, id, name, desc, tier (required/recommended/optional), hasSMS
+  { section:'compliance', id:'payment-receipt', name:'Payment receipt', desc:'Sent immediately after every payment is processed.', tier:'required', hasSMS:false },
+  { section:'compliance', id:'plan-enroll-confirm', name:'Payment plan enrollment confirmation', desc:'Confirms the student\'s plan setup with full terms.', tier:'required', hasSMS:false },
+  { section:'compliance', id:'refund-confirm', name:'Refund confirmation', desc:'Confirms a refund has been issued to the student.', tier:'required', hasSMS:false },
+  { section:'plans', id:'plan-invite', name:'Payment plan invite', desc:'Sent to students when a payment plan is available for them to enroll in.', tier:'recommended', hasSMS:true },
+  { section:'plans', id:'plan-invite-reminder', name:'Payment plan invite reminder', desc:'Follow-up if the student hasn\'t enrolled after 7 days.', tier:'recommended', hasSMS:true },
+  { section:'plans', id:'scheduled-payment-reminder', name:'Scheduled payment reminder', desc:'Reminder sent 3 days before each automatic payment.', tier:'recommended', hasSMS:true },
+  { section:'plans', id:'payment-failed', name:'Payment failed notice', desc:'Notifies the student when an automatic payment fails.', tier:'recommended', hasSMS:true },
+  { section:'plans', id:'plan-expiration', name:'Upcoming plan expiration', desc:'Sent 30 days before a plan ends with remaining balance info.', tier:'optional', hasSMS:false },
+  { section:'billing', id:'new-bill', name:'New bill available', desc:'Notifies students when a new billing statement is ready.', tier:'recommended', hasSMS:true },
+  { section:'billing', id:'bill-due', name:'Bill due reminder', desc:'Sent 7 days before the balance due date.', tier:'recommended', hasSMS:true },
+  { section:'billing', id:'past-due', name:'Past due notice', desc:'Sent when a balance becomes past due.', tier:'recommended', hasSMS:true },
+  { section:'refunds', id:'refund-initiated', name:'Refund initiated', desc:'Confirms a refund has been requested and is being processed.', tier:'recommended', hasSMS:false },
+  { section:'refunds', id:'refund-in-process', name:'Refund in process', desc:'Update sent when the refund is en route to the student\'s bank.', tier:'optional', hasSMS:false },
+  { section:'refunds', id:'refund-sent', name:'Refund sent to your bank', desc:'Final confirmation when the refund has been sent.', tier:'recommended', hasSMS:false },
+  { section:'account', id:'welcome', name:'Welcome / account created', desc:'Sent to students when their account is first created.', tier:'recommended', hasSMS:false },
+  { section:'account', id:'password-reset', name:'Password reset', desc:'Triggered when a student requests a password reset.', tier:'required', hasSMS:false },
+  { section:'account', id:'auth-payer-invite', name:'Authorized payer invite', desc:'Sent when a student invites a guest/authorized payer.', tier:'optional', hasSMS:false }
+];
+
+// ── PREVIEW CONTENT ──
+var PREVIEW_CONTENT = {
+  'payment-receipt': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your payment of <strong>$600.00</strong> was successfully processed on November 15, 2026. Your updated account balance is <strong>$4,600.00</strong>.<br/><br/>Payment method: Visa ending in 4242<br/>Confirmation number: TXN-2026-887341</p>',
+    emailCTA: null,
+    smsText: 'Claude University: Your payment of $600.00 was received on Nov 15. Confirmation: TXN-2026-887341. Questions? Visit billing.university.edu'
+  },
+  'plan-enroll-confirm': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">You have successfully enrolled in the <strong>Fall 2026 Pay Over Time Plan</strong>. Your plan details are below:</p><p class="email-mock-p editable" id="editable-second" style="background:rgba(37,99,235,.04);border-radius:8px;padding:12px 14px;">Plan total: <strong>$5,200.00</strong><br/>Down payment: <strong>$1,300.00</strong><br/>Remaining payments: 4 × $975.00<br/>Next payment date: <strong>November 15, 2026</strong></p>',
+    emailCTA: 'View My Plan',
+    smsText: 'Claude University: You\'re enrolled in the Fall 2026 Pay Over Time plan. Next payment of $975.00 due Nov 15. Log in to view details.'
+  },
+  'refund-confirm': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">A refund of <strong>$1,000.00</strong> has been issued to your account. The refund was processed on November 12, 2026 and should appear within 3–5 business days depending on your financial institution.<br/><br/>Refund reference: REF-2026-221019</p>',
+    emailCTA: null,
+    smsText: 'Claude University: A refund of $1,000.00 was issued on Nov 12. Please allow 3-5 business days. Ref: REF-2026-221019'
+  },
+  'plan-invite': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Claude University has made a <strong>Pay Over Time plan</strong> available for your Fall 2026 balance of <strong>$5,200.00</strong>. Instead of paying the full amount at once, you can spread your payments over the semester.</p><p class="email-mock-p editable" id="editable-second">Enrollment is quick and takes less than 5 minutes. Your plan options and payment schedule are available when you log in to your student billing portal.</p>',
+    emailCTA: 'View My Plan Options',
+    smsText: 'Claude University: A Pay Over Time plan is available for your Fall 2026 balance. Enroll by Oct 31 to avoid late fees. billing.university.edu'
+  },
+  'plan-invite-reminder': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">This is a friendly reminder that you have a <strong>Pay Over Time plan</strong> available for your Fall 2026 balance. You have <strong>7 days remaining</strong> to enroll before the deadline.</p><p class="email-mock-p editable" id="editable-second">Enrolling takes less than 5 minutes. Log in to your student portal to get started.</p>',
+    emailCTA: 'Enroll Now',
+    smsText: 'Claude University REMINDER: Your Pay Over Time plan invite expires in 7 days. Enroll now at billing.university.edu'
+  },
+  'scheduled-payment-reminder': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">This is a reminder that your scheduled payment of <strong>$600.00</strong> will be automatically processed on <strong>November 15, 2026</strong>.</p><p class="email-mock-p editable" id="editable-second">Please ensure that your payment method on file has sufficient funds. If you need to update your payment method, log in to your student portal before November 14, 2026.</p>',
+    emailCTA: 'Manage Payment Method',
+    smsText: 'Claude University: Reminder — $600.00 will be charged on Nov 15 for your Fall 2026 plan. Update payment info at billing.university.edu'
+  },
+  'payment-failed': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your scheduled payment of <strong>$600.00</strong> on November 15, 2026 was <strong>unsuccessful</strong>. This may be due to insufficient funds, an expired card, or a bank hold on your account.</p><p class="email-mock-p editable" id="editable-second">Please update your payment method or make a manual payment as soon as possible to avoid late fees on your account.</p>',
+    emailCTA: 'Update Payment Method',
+    smsText: 'Claude University: Your payment of $600.00 failed on Nov 15. Please update your payment method at billing.university.edu to avoid late fees.'
+  },
+  'plan-expiration': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your Fall 2026 Pay Over Time plan expires in <strong>30 days</strong>. Your current remaining balance is <strong>$1,200.00</strong>, which will be due in full upon plan expiration.</p>',
+    emailCTA: 'View My Balance',
+    smsText: 'Claude University: Your payment plan expires in 30 days. Remaining balance: $1,200.00. View details at billing.university.edu'
+  },
+  'new-bill': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your <strong>Fall 2026</strong> billing statement is now available. Your current balance is <strong>$5,200.00</strong>, due by <strong>September 1, 2026</strong>.</p><p class="email-mock-p editable" id="editable-second">Log in to your student billing portal to view your full statement, set up a payment plan, or make a payment.</p>',
+    emailCTA: 'View My Bill',
+    smsText: 'Claude University: Your Fall 2026 bill is ready. Balance due: $5,200.00 by Sep 1. View at billing.university.edu'
+  },
+  'bill-due': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your Fall 2026 balance of <strong>$5,200.00</strong> is due in <strong>7 days</strong> on <strong>September 1, 2026</strong>. Please log in to make a payment or set up a payment plan before the due date to avoid late fees.</p>',
+    emailCTA: 'Make a Payment',
+    smsText: 'Claude University: REMINDER — Your $5,200.00 bill is due in 7 days (Sep 1). Pay now at billing.university.edu'
+  },
+  'past-due': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your Fall 2026 balance of <strong>$5,200.00</strong> is now <strong>past due</strong>. A late fee may be applied to your account. Please log in and make a payment as soon as possible.</p><p class="email-mock-p editable" id="editable-second">If you are experiencing financial hardship, please contact the Bursar\'s Office to discuss your options.</p>',
+    emailCTA: 'Pay Now',
+    smsText: 'Claude University: Your account has a PAST DUE balance of $5,200.00. Pay now or contact us at billing.university.edu to avoid holds.'
+  },
+  'refund-initiated': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your refund of <strong>$1,000.00</strong> has been initiated and is currently being processed. You will receive a follow-up email when the funds are on their way to your bank.</p><p class="email-mock-p editable" id="editable-second">Processing typically takes 2–3 business days. If you have questions, please contact the Bursar\'s Office.</p>',
+    emailCTA: null,
+    smsText: 'Claude University: Your refund of $1,000.00 has been initiated. You\'ll receive an update when it\'s on its way to your bank.'
+  },
+  'refund-in-process': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Great news! Your refund of <strong>$1,000.00</strong> is now <strong>en route</strong> to your bank. Please allow 1–3 business days for the funds to appear in your account.</p>',
+    emailCTA: null,
+    smsText: 'Claude University: Your $1,000.00 refund is on its way to your bank. Allow 1-3 business days to appear.'
+  },
+  'refund-sent': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your refund of <strong>$1,000.00</strong> has been sent to your bank. Your financial institution should post the funds within 1–2 business days.<br/><br/>Refund reference: REF-2026-221019</p>',
+    emailCTA: null,
+    smsText: 'Claude University: Your $1,000.00 refund has been sent to your bank. Funds should appear within 1-2 business days. Ref: REF-2026-221019'
+  },
+  'welcome': {
+    emailBody: '<p class="email-mock-greeting">Welcome to Claude University Billing, AJ!</p><p class="email-mock-p editable" id="editable-main">Your student billing account has been created. You can now view your balance, make payments, and set up a Pay Over Time plan — all from your student billing portal.</p><p class="email-mock-p editable" id="editable-second">Log in using your university credentials. If you have any questions, the Bursar\'s Office is here to help.</p>',
+    emailCTA: 'Go to My Billing Portal',
+    smsText: 'Claude University: Your billing account is ready. Log in to view your balance and payment options at billing.university.edu'
+  },
+  'password-reset': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">We received a request to reset the password for your Claude University billing account. Click the button below to set a new password. This link is valid for <strong>24 hours</strong>.</p><p class="email-mock-p editable" id="editable-second">If you did not request a password reset, you can safely ignore this email. Your password will not change.</p>',
+    emailCTA: 'Reset My Password',
+    smsText: null
+  },
+  'auth-payer-invite': {
+    emailBody: '<p class="email-mock-greeting">Hello,</p><p class="email-mock-p editable" id="editable-main">AJ Johnson has invited you as an <strong>Authorized Payer</strong> on their Claude University billing account. As an authorized payer, you can view their balance, make payments, and manage payment methods on their behalf.</p><p class="email-mock-p editable" id="editable-second">Click the button below to accept the invitation and set up your authorized payer account.</p>',
+    emailCTA: 'Accept Invitation',
+    smsText: null
+  }
+};
+
+var currentPreviewId = null;
+var editedContent = {};
+
+// ── INIT ──
+function init() {
+  COMMS.forEach(function(c) {
+    S.comms[c.id] = {
+      email: c.tier === 'required' || c.tier === 'recommended',
+      sms: false,
+      dept: 'school-wide'
+    };
+  });
+  renderComms();
+}
+
+// ── RENDER COMMS ──
+function renderComms() {
+  var sections = { compliance:'comms-compliance', plans:'comms-plans', billing:'comms-billing', refunds:'comms-refunds', account:'comms-account' };
+  Object.keys(sections).forEach(function(sec) {
+    var el = document.getElementById(sections[sec]);
+    var comms = COMMS.filter(function(c){ return c.section === sec; });
+    el.innerHTML = comms.map(function(c){ return renderCommRow(c); }).join('');
+  });
+}
+
+function renderCommRow(c) {
+  var state = S.comms[c.id];
+  var isRequired = c.tier === 'required';
+  var showDept = S.brandMode === 'dept';
+  var deptOptions = ['School-wide','Bursar\'s Office','Financial Aid','Housing','Parking'];
+
+  var deptDropdown = '';
+  if (showDept) {
+    deptDropdown = '<select class="dept-select" onchange="S.comms[\''+c.id+'\'].dept=this.value">' +
+      deptOptions.map(function(d){ return '<option'+(state.dept===d?' selected':'')+'>'+d+'</option>'; }).join('') +
+      '</select>';
+  }
+
+  var emailToggle, smsToggle;
+  if (isRequired) {
+    emailToggle = '<span class="required-badge">🔒 Required</span>';
+    smsToggle = '';
+  } else {
+    var emailOn = state.email;
+    var smsOn = state.sms;
+    emailToggle = '<span class="pill-toggle email '+(emailOn?'on':'off')+'" onclick="toggleComm(\''+c.id+'\',\'email\')">✉ Email</span>';
+    if (c.hasSMS) {
+      smsToggle = '<span class="pill-toggle sms '+(smsOn?'on':'off')+'" onclick="toggleComm(\''+c.id+'\',\'sms\')">💬 SMS</span>';
+    } else {
+      smsToggle = '';
+    }
+  }
+
+  var tierBadge = '';
+  if (!isRequired) {
+    tierBadge = '<span class="tier-badge '+c.tier+'">'+capitalize(c.tier)+'</span>';
+  }
+
+  return '<div class="comm-row" data-id="'+c.id+'" data-enabled="'+(isRequired || state.email)+'">' +
+    '<div class="comm-info">' +
+      '<div class="comm-name">'+c.name+'</div>' +
+      '<div class="comm-desc">'+c.desc+'</div>' +
+    '</div>' +
+    '<div class="comm-controls">' +
+      tierBadge +
+      (showDept ? deptDropdown : '') +
+      emailToggle +
+      smsToggle +
+      '<button class="btn-preview" onclick="openPreview(\''+c.id+'\')">Preview</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+// ── TOGGLE COMM ──
+function toggleComm(id, channel) {
+  var comm = COMMS.find(function(c){ return c.id === id; });
+  if (!comm || comm.tier === 'required') return;
+  S.comms[id][channel] = !S.comms[id][channel];
+  renderComms();
+  filterRows();
+}
+
+// ── FILTER ROWS ──
+function filterRows() {
+  var showDisabled = document.getElementById('show-disabled').checked;
+  document.querySelectorAll('.comm-row').forEach(function(row) {
+    var id = row.getAttribute('data-id');
+    var comm = COMMS.find(function(c){ return c.id === id; });
+    var isRequired = comm && comm.tier === 'required';
+    var isEnabled = isRequired || (S.comms[id] && S.comms[id].email);
+    if (!showDisabled && !isEnabled) {
+      row.style.display = 'none';
+    } else {
+      row.style.display = 'flex';
+    }
+  });
+}
+
+// ── PREVIEW MODAL ──
+function openPreview(id) {
+  var comm = COMMS.find(function(c){ return c.id === id; });
+  if (!comm) return;
+  currentPreviewId = id;
+
+  var content = PREVIEW_CONTENT[id] || {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">This is a preview of the <strong>'+comm.name+'</strong> communication. The body content will be customized for your institution.</p>',
+    emailCTA: null,
+    smsText: 'Claude University: This is a preview of the ' + comm.name + ' notification.'
+  };
+
+  document.getElementById('modal-comm-name').textContent = comm.name;
+
+  var footerText = document.getElementById('email-footer').value || 'Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe';
+
+  // Compliance language
+  var complianceMap = {
+    'payment-receipt': 'This payment confirmation is required by applicable law and Nelnet Campus Commerce service agreement. Please retain this record for your files. [Transaction ID: TXN-2026-XXXXXX]',
+    'plan-enroll-confirm': 'By enrolling in a payment plan, you agree to the terms and conditions set forth by Claude University and administered by Nelnet Campus Commerce. This enrollment confirmation serves as your binding agreement.',
+    'refund-confirm': 'This refund confirmation is issued in accordance with Title IV refund regulations and applicable federal and state law. Please retain this notice for your financial records.'
+  };
+  var complianceLang = complianceMap[id] || null;
+
+  var bodyHTML = content.emailBody;
+
+  // Check if we have edited content
+  if (editedContent[id]) {
+    bodyHTML = bodyHTML.replace(/(id="editable-main"[^>]*>)[^<]*/g, function(match, prefix) {
+      return prefix + editedContent[id];
+    });
+  }
+
+  var ctaHTML = content.emailCTA ? '<a class="email-mock-cta" href="#">'+content.emailCTA+'</a>' : '';
+  var complianceHTML = complianceLang ? '<div class="compliance-block"><div class="compliance-label"><span>🔒</span> Compliance language — cannot be edited by your institution</div><div class="compliance-text">'+complianceLang+'</div></div>' : '';
+
+  document.getElementById('email-mockup-content').innerHTML =
+    '<div class="email-mock-header"><div class="logo-n-sm">N</div><div class="email-mock-header-text">Claude University</div></div>' +
+    '<div class="email-mock-body">' +
+      bodyHTML +
+      ctaHTML +
+      complianceHTML +
+      '<div class="email-mock-divider"></div>' +
+      '<div class="email-mock-footer">'+footerText+'</div>' +
+    '</div>';
+
+  // Wire up edit buttons
+  document.querySelectorAll('#email-mockup-content .editable').forEach(function(p) {
+    var btn = document.createElement('button');
+    btn.className = 'edit-btn';
+    btn.textContent = '✏ Edit';
+    btn.onclick = function(e) { e.stopPropagation(); showEditArea(id, p.innerText); };
+    p.style.position = 'relative';
+    p.appendChild(btn);
+  });
+
+  // SMS
+  var smsText = content.smsText || 'This notification is not available as SMS.';
+  var hasSMS = comm.hasSMS && content.smsText;
+  document.getElementById('tab-sms').style.display = hasSMS ? 'block' : 'none';
+  document.getElementById('sms-mockup-content').innerHTML =
+    '<div class="sms-from">From: Claude University Billing</div>' +
+    '<div class="sms-bubble">'+smsText+'</div>' +
+    '<div class="sms-time">Delivered · Just now</div>';
+
+  // Close edit area if open
+  document.getElementById('edit-area').classList.remove('open');
+  switchTab('email');
+
+  document.getElementById('preview-overlay').classList.add('open');
+}
+
+function closePreview() {
+  document.getElementById('preview-overlay').classList.remove('open');
+  currentPreviewId = null;
+}
+
+function overlayClick(e) {
+  if (e.target === document.getElementById('preview-overlay')) closePreview();
+}
+
+function switchTab(tab) {
+  document.getElementById('tab-email').classList.toggle('active', tab === 'email');
+  document.getElementById('tab-sms').classList.toggle('active', tab === 'sms');
+  document.getElementById('tab-content-email').classList.toggle('active', tab === 'email');
+  document.getElementById('tab-content-sms').classList.toggle('active', tab === 'sms');
+}
+
+function showEditArea(id, currentText) {
+  var area = document.getElementById('edit-area');
+  var textarea = document.getElementById('edit-textarea');
+  textarea.value = editedContent[id] || currentText.replace(/\n/g, ' ').trim();
+  area.classList.add('open');
+  textarea.focus();
+}
+
+function closeEditArea() {
+  document.getElementById('edit-area').classList.remove('open');
+}
+
+function saveEdit() {
+  if (!currentPreviewId) return;
+  var textarea = document.getElementById('edit-textarea');
+  if (textarea.value.trim()) {
+    editedContent[currentPreviewId] = textarea.value.trim();
+  }
+  showToast('Content saved');
+  closeEditArea();
+}
+
+// ── STEP NAVIGATION ──
+function goStep(n) {
+  S.step = n;
+
+  // Update panels
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('panel-'+n).classList.add('active');
+
+  // Update sidebar
+  for (var i = 1; i <= 3; i++) {
+    var nav = document.getElementById('nav-'+i);
+    var num = document.getElementById('num-'+i);
+    nav.classList.remove('active','done');
+    if (i < n) { nav.classList.add('done'); num.textContent = '✓'; }
+    else if (i === n) { nav.classList.add('active'); num.textContent = i; }
+    else { num.textContent = i; }
+  }
+
+  // Update topbar
+  var titles = { 1:'Communication Essentials', 2:'Configure Communications', 3:'Complete' };
+  document.getElementById('topbar-step').textContent = titles[n] || '';
+
+  // Scroll to top
+  document.getElementById('main').scrollTop = 0;
+}
+
+// ── BRAND MODE ──
+function selectBrandMode(mode) {
+  S.brandMode = mode;
+  document.getElementById('brand-card-school').classList.toggle('selected', mode === 'school');
+  document.getElementById('brand-card-dept').classList.toggle('selected', mode === 'dept');
+  document.getElementById('dept-branding-section').style.display = mode === 'dept' ? 'block' : 'none';
+}
+
+// ── STEP 1 SAVE ──
+function saveStep1() {
+  var fromEmail = document.getElementById('from-email').value.trim();
+  var errEl = document.getElementById('from-email-err');
+  var inpEl = document.getElementById('from-email');
+  if (!fromEmail) {
+    inpEl.classList.add('error');
+    errEl.classList.add('show');
+    inpEl.focus();
+    return;
+  }
+  inpEl.classList.remove('error');
+  errEl.classList.remove('show');
+  goStep(2);
+}
+
+// ── STEP 2 SAVE ──
+function saveStep2() {
+  goStep(3);
+  calculateStats();
+}
+
+function calculateStats() {
+  var enabled = 0, required = 0, smsEnabled = 0;
+  COMMS.forEach(function(c) {
+    var state = S.comms[c.id];
+    var isRequired = c.tier === 'required';
+    if (isRequired) { enabled++; required++; }
+    else if (state.email) { enabled++; }
+    if (state.sms) { smsEnabled++; }
+  });
+  document.getElementById('stat-enabled').textContent = enabled;
+  document.getElementById('stat-required').textContent = required;
+  document.getElementById('stat-sms').textContent = smsEnabled;
+}
+
+function markComplete() {
+  showToast('Communications setup complete!');
+}
+
+// ── TOAST ──
+var toastTimer = null;
+function showToast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2800);
+}
+
+// ── KEYBOARD ──
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('preview-overlay').classList.contains('open')) {
+    closePreview();
+  }
+});
+
+// ── RUN ──
+init();
+</script>
+</body>
+</html>
