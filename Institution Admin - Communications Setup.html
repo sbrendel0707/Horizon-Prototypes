@@ -471,6 +471,24 @@ textarea.inp { resize: vertical; min-height: 80px; }
 .summary-stat-label { font-size: 12px; color: var(--text3); }
 .success-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
+.test-email-bar {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+#modal-footer-view, #modal-footer-edit {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+#view-only-notice {
+  display: flex;
+  align-items: flex-start;
+}
+
 /* ── TOAST ── */
 #toast {
   position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
@@ -554,46 +572,6 @@ textarea.inp { resize: vertical; min-height: 80px; }
         <div class="page-eyebrow">Step 1 of 3</div>
         <div class="page-title">Communication Essentials</div>
         <div class="page-sub">Set up your sender identity and email branding before configuring individual communications.</div>
-      </div>
-
-      <!-- Card: Sender identity -->
-      <div class="card">
-        <div class="card-title">Sender identity</div>
-        <div class="card-desc">These fields define who emails appear to be from in student inboxes.</div>
-        <div class="field-group">
-          <div class="field-label">From email address</div>
-          <input type="email" class="inp" id="from-email" placeholder="noreply@university.edu"/>
-          <div class="inp-error-msg" id="from-email-err">A from address is required before continuing.</div>
-          <div class="field-note">This is the sender address students will see. Use a monitored inbox or no-reply address.</div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">Display name</div>
-          <input type="text" class="inp" id="display-name" placeholder="Claude University Billing"/>
-        </div>
-      </div>
-
-      <!-- Card: Email branding -->
-      <div class="card">
-        <div class="card-title">Email header image</div>
-        <div class="card-desc">Upload a header image or banner that appears at the top of all outgoing emails. Recommended: 600px wide, PNG or JPG.</div>
-        <div class="upload-zone" onclick="showToast('File upload — coming soon')">
-          <div class="upload-zone-icon">📎</div>
-          <div class="upload-zone-text">Click to upload or drag &amp; drop</div>
-          <div class="upload-zone-sub">PNG, JPG, GIF · max 2MB</div>
-        </div>
-        <div style="margin-bottom:16px;">
-          <div class="field-note" style="margin-bottom:8px;">Preview</div>
-          <div class="email-header-preview">
-            <div class="logo-mark-sm">N</div>
-            <div class="email-header-preview-text">Claude University</div>
-          </div>
-          <div class="field-note">This is how your header will appear in outgoing emails.</div>
-        </div>
-        <div class="field-group">
-          <div class="field-label">Email footer</div>
-          <textarea class="inp" id="email-footer" rows="4" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
-          <div class="field-note">Appears at the bottom of all emails. You can include links using HTML.</div>
-        </div>
       </div>
 
       <!-- Card: Department branding -->
@@ -693,6 +671,52 @@ textarea.inp { resize: vertical; min-height: 80px; }
         </div>
       </div>
 
+      <!-- Card: Sender identity -->
+      <div class="card">
+        <div class="card-title">Sender identity</div>
+        <div class="card-desc">These fields define who emails appear to be from in student inboxes.</div>
+        <div class="field-group">
+          <div class="field-label">From email address</div>
+          <input type="email" class="inp" id="from-email" placeholder="noreply@university.edu"/>
+          <div class="inp-error-msg" id="from-email-err">A from address is required before continuing.</div>
+          <div class="field-note">This is the sender address students will see. Use a monitored inbox or no-reply address.</div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Display name</div>
+          <input type="text" class="inp" id="display-name" placeholder="Claude University Billing"/>
+        </div>
+      </div>
+
+      <!-- Card: Email header image -->
+      <div class="card">
+        <div class="card-title">Email header image</div>
+        <div class="card-desc">Upload a header image or banner that appears at the top of all outgoing emails. Recommended: 600px wide, PNG or JPG.</div>
+        <div class="upload-zone" onclick="showToast('File upload — coming soon')">
+          <div class="upload-zone-icon">📎</div>
+          <div class="upload-zone-text">Click to upload or drag &amp; drop</div>
+          <div class="upload-zone-sub">PNG, JPG, GIF · max 2MB</div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="field-note" style="margin-bottom:8px;">Preview</div>
+          <div class="email-header-preview">
+            <div class="logo-mark-sm">N</div>
+            <div class="email-header-preview-text">Claude University</div>
+          </div>
+          <div class="field-note">This is how your header will appear in outgoing emails.</div>
+        </div>
+      </div>
+
+      <!-- Card: Email footer -->
+      <div class="card">
+        <div class="card-title">Email footer</div>
+        <div class="card-desc">Appears at the bottom of all emails. You can include your institution's address, links to privacy policy, and an unsubscribe option.</div>
+        <div class="field-group">
+          <div class="field-label">Footer text</div>
+          <textarea class="inp" id="email-footer" rows="4" placeholder="Claude University · 123 Campus Drive · Claude, VA 22000 | Privacy Policy | Unsubscribe"></textarea>
+          <div class="field-note">You can include basic HTML links in your footer text.</div>
+        </div>
+      </div>
+
       <div class="step-footer">
         <span style="font-size:13px;color:var(--text3);">Fields marked will appear in all outgoing emails.</span>
         <button class="btn-next" onclick="saveStep1()">
@@ -721,12 +745,6 @@ textarea.inp { resize: vertical; min-height: 80px; }
           <input type="checkbox" id="show-disabled" checked onchange="filterRows()"/>
           Show disabled
         </label>
-      </div>
-
-      <!-- Section: Compliance -->
-      <div class="comm-section">
-        <div class="section-hdr"><span class="section-hdr-icon">🔒</span> Required — Compliance</div>
-        <div id="comms-compliance"></div>
       </div>
 
       <!-- Section: Payment Plans -->
@@ -820,6 +838,10 @@ textarea.inp { resize: vertical; min-height: 80px; }
     </div>
     <div class="modal-body">
       <div class="modal-tab-content active" id="tab-content-email">
+        <div id="view-only-notice" style="display:none;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#fde68a;align-items:center;gap:8px;">
+          <span>🔒</span>
+          <span>This communication is required for compliance and <strong>cannot be customized</strong> by your institution. Shown here for reference only.</span>
+        </div>
         <div class="email-mockup" id="email-mockup-content"></div>
         <div class="edit-area-section" id="edit-area">
           <div class="edit-area-header">✏ Edit email body</div>
@@ -836,8 +858,19 @@ textarea.inp { resize: vertical; min-height: 80px; }
         <div class="sms-mockup" id="sms-mockup-content"></div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn-ghost" onclick="closePreview()">Close preview</button>
+    <div class="test-email-bar" id="test-email-bar">
+      <div style="font-size:12px;color:var(--text3);margin-bottom:6px;">Send a test email to preview in your inbox:</div>
+      <div style="display:flex;gap:8px;">
+        <input type="email" class="inp" id="test-email-input" placeholder="test@youremail.com" style="flex:1;font-size:13px;"/>
+        <button class="btn-primary" style="white-space:nowrap;padding:8px 16px;font-size:13px;" onclick="sendTestEmail()">Send test</button>
+      </div>
+    </div>
+    <div class="modal-footer" id="modal-footer-view">
+      <button class="btn-ghost" onclick="closePreview()">Close</button>
+      <button class="btn-primary" id="modal-edit-entry-btn" onclick="enterEditMode()">✏ Edit this email</button>
+    </div>
+    <div class="modal-footer" id="modal-footer-edit" style="display:none;">
+      <button class="btn-ghost" onclick="exitEditMode()">Cancel editing</button>
       <button class="btn-primary" onclick="saveEdit()">Save changes</button>
     </div>
   </div>
@@ -857,17 +890,18 @@ var S = {
 // ── COMM DEFINITIONS ──
 var COMMS = [
   // section, id, name, desc, tier (required/recommended/optional), hasSMS
-  { section:'compliance', id:'payment-receipt', name:'Payment receipt', desc:'Sent immediately after every payment is processed.', tier:'required', hasSMS:false },
-  { section:'compliance', id:'plan-enroll-confirm', name:'Payment plan enrollment confirmation', desc:'Confirms the student\'s plan setup with full terms.', tier:'required', hasSMS:false },
-  { section:'compliance', id:'refund-confirm', name:'Refund confirmation', desc:'Confirms a refund has been issued to the student.', tier:'required', hasSMS:false },
+  { section:'plans', id:'payment-receipt', name:'Payment receipt', desc:'Sent immediately after every payment is processed.', tier:'required', hasSMS:false },
+  { section:'plans', id:'plan-enroll-confirm', name:'Payment plan enrollment confirmation', desc:'Confirms the student\'s plan setup with full terms.', tier:'required', hasSMS:false },
   { section:'plans', id:'plan-invite', name:'Payment plan invite', desc:'Sent to students when a payment plan is available for them to enroll in.', tier:'recommended', hasSMS:true },
   { section:'plans', id:'plan-invite-reminder', name:'Payment plan invite reminder', desc:'Follow-up if the student hasn\'t enrolled after 7 days.', tier:'recommended', hasSMS:true },
   { section:'plans', id:'scheduled-payment-reminder', name:'Scheduled payment reminder', desc:'Reminder sent 3 days before each automatic payment.', tier:'recommended', hasSMS:true },
   { section:'plans', id:'payment-failed', name:'Payment failed notice', desc:'Notifies the student when an automatic payment fails.', tier:'recommended', hasSMS:true },
   { section:'plans', id:'plan-expiration', name:'Upcoming plan expiration', desc:'Sent 30 days before a plan ends with remaining balance info.', tier:'optional', hasSMS:false },
+  { section:'billing', id:'payment-receipt-billing', name:'Payment receipt', desc:'Sent immediately after every payment is processed.', tier:'required', hasSMS:false },
   { section:'billing', id:'new-bill', name:'New bill available', desc:'Notifies students when a new billing statement is ready.', tier:'recommended', hasSMS:true },
   { section:'billing', id:'bill-due', name:'Bill due reminder', desc:'Sent 7 days before the balance due date.', tier:'recommended', hasSMS:true },
   { section:'billing', id:'past-due', name:'Past due notice', desc:'Sent when a balance becomes past due.', tier:'recommended', hasSMS:true },
+  { section:'refunds', id:'refund-confirm', name:'Refund confirmation', desc:'Confirms a refund has been issued to the student.', tier:'required', hasSMS:false },
   { section:'refunds', id:'refund-initiated', name:'Refund initiated', desc:'Confirms a refund has been requested and is being processed.', tier:'recommended', hasSMS:false },
   { section:'refunds', id:'refund-in-process', name:'Refund in process', desc:'Update sent when the refund is en route to the student\'s bank.', tier:'optional', hasSMS:false },
   { section:'refunds', id:'refund-sent', name:'Refund sent to your bank', desc:'Final confirmation when the refund has been sent.', tier:'recommended', hasSMS:false },
@@ -962,11 +996,17 @@ var PREVIEW_CONTENT = {
     emailBody: '<p class="email-mock-greeting">Hello,</p><p class="email-mock-p editable" id="editable-main">AJ Johnson has invited you as an <strong>Authorized Payer</strong> on their Claude University billing account. As an authorized payer, you can view their balance, make payments, and manage payment methods on their behalf.</p><p class="email-mock-p editable" id="editable-second">Click the button below to accept the invitation and set up your authorized payer account.</p>',
     emailCTA: 'Accept Invitation',
     smsText: null
+  },
+  'payment-receipt-billing': {
+    emailBody: '<p class="email-mock-greeting">Dear AJ Johnson,</p><p class="email-mock-p editable" id="editable-main">Your payment of <strong>$600.00</strong> was successfully processed on November 15, 2026. Your updated account balance is <strong>$4,600.00</strong>.<br/><br/>Payment method: Visa ending in 4242<br/>Confirmation number: TXN-2026-887341</p>',
+    emailCTA: null,
+    smsText: null
   }
 };
 
 var currentPreviewId = null;
 var editedContent = {};
+var _editMode = false;
 
 // ── INIT ──
 function init() {
@@ -977,12 +1017,13 @@ function init() {
       dept: 'school-wide'
     };
   });
+  S.comms['payment-receipt-billing'] = { email: true, sms: false, dept: 'school-wide' };
   renderComms();
 }
 
 // ── RENDER COMMS ──
 function renderComms() {
-  var sections = { compliance:'comms-compliance', plans:'comms-plans', billing:'comms-billing', refunds:'comms-refunds', account:'comms-account' };
+  var sections = { plans:'comms-plans', billing:'comms-billing', refunds:'comms-refunds', account:'comms-account' };
   Object.keys(sections).forEach(function(sec) {
     var el = document.getElementById(sections[sec]);
     var comms = COMMS.filter(function(c){ return c.section === sec; });
@@ -1006,7 +1047,13 @@ function renderCommRow(c) {
   var emailToggle, smsToggle;
   if (isRequired) {
     emailToggle = '<span class="required-badge">🔒 Required</span>';
-    smsToggle = '';
+    // SMS is still optional for required comms
+    if (c.hasSMS) {
+      var smsOn = state.sms;
+      smsToggle = '<span class="pill-toggle sms '+(smsOn?'on':'off')+'" onclick="toggleComm(\''+c.id+'\',\'sms\')">💬 SMS</span>';
+    } else {
+      smsToggle = '';
+    }
   } else {
     var emailOn = state.email;
     var smsOn = state.sms;
@@ -1043,7 +1090,9 @@ function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 // ── TOGGLE COMM ──
 function toggleComm(id, channel) {
   var comm = COMMS.find(function(c){ return c.id === id; });
-  if (!comm || comm.tier === 'required') return;
+  if (!comm) return;
+  // Required comms: email channel is locked, but SMS can still be toggled
+  if (comm.tier === 'required' && channel === 'email') return;
   S.comms[id][channel] = !S.comms[id][channel];
   renderComms();
   filterRows();
@@ -1084,6 +1133,7 @@ function openPreview(id) {
   // Compliance language
   var complianceMap = {
     'payment-receipt': 'This payment confirmation is required by applicable law and Nelnet Campus Commerce service agreement. Please retain this record for your files. [Transaction ID: TXN-2026-XXXXXX]',
+    'payment-receipt-billing': 'This payment confirmation is required by applicable law and Nelnet Campus Commerce service agreement. Please retain this record for your files. [Transaction ID: TXN-2026-XXXXXX]',
     'plan-enroll-confirm': 'By enrolling in a payment plan, you agree to the terms and conditions set forth by Claude University and administered by Nelnet Campus Commerce. This enrollment confirmation serves as your binding agreement.',
     'refund-confirm': 'This refund confirmation is issued in accordance with Title IV refund regulations and applicable federal and state law. Please retain this notice for your financial records.'
   };
@@ -1111,15 +1161,30 @@ function openPreview(id) {
       '<div class="email-mock-footer">'+footerText+'</div>' +
     '</div>';
 
-  // Wire up edit buttons
-  document.querySelectorAll('#email-mockup-content .editable').forEach(function(p) {
-    var btn = document.createElement('button');
-    btn.className = 'edit-btn';
-    btn.textContent = '✏ Edit';
-    btn.onclick = function(e) { e.stopPropagation(); showEditArea(id, p.innerText); };
-    p.style.position = 'relative';
-    p.appendChild(btn);
-  });
+  // View-only comms (compliance/required non-customizable)
+  var viewOnlyComms = ['payment-receipt','plan-enroll-confirm','refund-confirm','password-reset','payment-receipt-billing'];
+  var isViewOnly = viewOnlyComms.indexOf(id) !== -1;
+  var noticeEl = document.getElementById('view-only-notice');
+  var editEntryBtn = document.getElementById('modal-edit-entry-btn');
+  if (noticeEl) noticeEl.style.display = isViewOnly ? 'flex' : 'none';
+  if (editEntryBtn) editEntryBtn.style.display = isViewOnly ? 'none' : '';
+  // Reset edit mode
+  _editMode = false;
+  document.getElementById('modal-footer-view').style.display = 'flex';
+  document.getElementById('modal-footer-edit').style.display = 'none';
+  var editArea = document.getElementById('edit-area');
+  if (editArea) editArea.classList.remove('open');
+  // Wire up inline edit buttons only for non-view-only comms
+  if (!isViewOnly) {
+    document.querySelectorAll('#email-mockup-content .editable').forEach(function(p) {
+      var btn = document.createElement('button');
+      btn.className = 'edit-btn';
+      btn.textContent = '✏ Edit';
+      btn.onclick = function(e) { e.stopPropagation(); enterEditMode(); };
+      p.style.position = 'relative';
+      p.appendChild(btn);
+    });
+  }
 
   // SMS
   var smsText = content.smsText || 'This notification is not available as SMS.';
@@ -1172,7 +1237,40 @@ function saveEdit() {
     editedContent[currentPreviewId] = textarea.value.trim();
   }
   showToast('Content saved');
-  closeEditArea();
+  exitEditMode();
+}
+
+function enterEditMode() {
+  _editMode = true;
+  document.getElementById('modal-footer-view').style.display = 'none';
+  document.getElementById('modal-footer-edit').style.display = 'flex';
+  // Show edit area
+  var editArea = document.getElementById('edit-area');
+  if (editArea) editArea.classList.add('open');
+  // Pre-populate textarea with current body text
+  var textarea = document.getElementById('edit-textarea');
+  var bodyEl = document.querySelector('#email-mockup-content .editable');
+  if (textarea && bodyEl) {
+    textarea.value = editedContent[currentPreviewId] || bodyEl.innerText.trim();
+    textarea.focus();
+  }
+}
+
+function exitEditMode() {
+  _editMode = false;
+  document.getElementById('modal-footer-view').style.display = 'flex';
+  document.getElementById('modal-footer-edit').style.display = 'none';
+  var editArea = document.getElementById('edit-area');
+  if (editArea) editArea.classList.remove('open');
+}
+
+function sendTestEmail() {
+  var inp = document.getElementById('test-email-input');
+  if (!inp || !inp.value.trim()) { showToast('Please enter an email address.'); return; }
+  var email = inp.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email address.'); return; }
+  showToast('Test email sent to ' + email);
+  inp.value = '';
 }
 
 // ── STEP NAVIGATION ──
