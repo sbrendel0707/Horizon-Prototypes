@@ -394,68 +394,49 @@ textarea { resize: vertical; min-height: 80px; }
   <div class="steps-section">
     <div class="steps-section-label">Setup Steps</div>
     <div class="step-item active" id="nav-welcome" onclick="goStep('welcome')">
-      <div class="step-num"><span class="step-num-val">✦</span></div>
-      <div class="step-text">
-        <div class="step-title">Welcome</div>
-        <div class="step-sub">Purchased solutions</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-solutions" onclick="goStep('solutions')">
-      <div class="step-num"><span class="step-num-val">1</span></div>
-      <div class="step-text">
-        <div class="step-title">Plan Types</div>
-        <div class="step-sub">Select active plan categories</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-integration" onclick="goStep('integration')">
-      <div class="step-num"><span class="step-num-val">2</span></div>
-      <div class="step-text">
-        <div class="step-title">ERP Integration</div>
-        <div class="step-sub">System & method selection</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-branding" onclick="goStep('branding')">
-      <div class="step-num"><span class="step-num-val">3</span></div>
-      <div class="step-text">
-        <div class="step-title">Branding & Email</div>
-        <div class="step-sub">Banner image & sender address</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-charges" onclick="goStep('charges')">
-      <div class="step-num"><span class="step-num-val">4</span></div>
-      <div class="step-text">
-        <div class="step-title">Charge Categories</div>
-        <div class="step-sub">ERP codes & financial accounts</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-remittance" onclick="goStep('remittance')">
-      <div class="step-num"><span class="step-num-val">5</span></div>
-      <div class="step-text">
-        <div class="step-title">Remittance Schedule</div>
-        <div class="step-sub">When Nelnet sends funds</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-mids" onclick="goStep('mids')">
-      <div class="step-num"><span class="step-num-val">6</span></div>
-      <div class="step-text">
-        <div class="step-title">MID Configuration</div>
-        <div class="step-sub">Merchant IDs & payment routing</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-planrules" onclick="goStep('planrules')">
-      <div class="step-num"><span class="step-num-val">7</span></div>
-      <div class="step-text">
-        <div class="step-title">Payment Plan Rules</div>
-        <div class="step-sub">End dates & eligibility</div>
-      </div>
-    </div>
-    <div class="step-item" id="nav-users" onclick="goStep('users')">
-      <div class="step-num"><span class="step-num-val">8</span></div>
-      <div class="step-text">
-        <div class="step-title">Invite Users</div>
-        <div class="step-sub">Roles & access levels</div>
-      </div>
-    </div>
+  <div class="step-num"><span class="step-num-val">✦</span></div>
+  <div class="step-text"><div class="step-title">Welcome</div><div class="step-sub">Overview & purchased solutions</div></div>
+</div>
+<div class="step-item" id="nav-solutions" onclick="goStep('solutions')">
+  <div class="step-num"><span class="step-num-val">1</span></div>
+  <div class="step-text"><div class="step-title">Plan Types</div><div class="step-sub">Select active plan categories</div></div>
+</div>
+<div class="step-item" id="nav-erp" onclick="goStep('erp')">
+  <div class="step-num"><span class="step-num-val">2</span></div>
+  <div class="step-text"><div class="step-title">ERP Information</div><div class="step-sub">ERP system & integration methods</div></div>
+</div>
+<div class="step-item" id="nav-studentlogin" onclick="goStep('studentlogin')">
+  <div class="step-num"><span class="step-num-val">3</span></div>
+  <div class="step-text"><div class="step-title">Student Login Setup</div><div class="step-sub">How students access the portal</div></div>
+</div>
+<div class="step-item" id="nav-contacts" onclick="goStep('contacts')">
+  <div class="step-num"><span class="step-num-val">4</span></div>
+  <div class="step-text"><div class="step-title">School Contacts</div><div class="step-sub">Department contacts & question routing</div></div>
+</div>
+<div class="step-item" id="nav-branding" onclick="goStep('branding')">
+  <div class="step-num"><span class="step-num-val">5</span></div>
+  <div class="step-text"><div class="step-title">Branding &amp; Email</div><div class="step-sub">Banner image & sender address</div></div>
+</div>
+<div class="step-item" id="nav-charges" onclick="goStep('charges')">
+  <div class="step-num"><span class="step-num-val">6</span></div>
+  <div class="step-text"><div class="step-title">Charge Categories</div><div class="step-sub">ERP codes & financial accounts</div></div>
+</div>
+<div class="step-item" id="nav-remittance" onclick="goStep('remittance')">
+  <div class="step-num"><span class="step-num-val">7</span></div>
+  <div class="step-text"><div class="step-title">Remittance Schedule</div><div class="step-sub">When Nelnet sends funds</div></div>
+</div>
+<div class="step-item" id="nav-mids" onclick="goStep('mids')">
+  <div class="step-num"><span class="step-num-val">8</span></div>
+  <div class="step-text"><div class="step-title">MID Configuration</div><div class="step-sub">Merchant IDs & payment routing</div></div>
+</div>
+<div class="step-item" id="nav-planrules" onclick="goStep('planrules')">
+  <div class="step-num"><span class="step-num-val">9</span></div>
+  <div class="step-text"><div class="step-title">Payment Plan Rules</div><div class="step-sub">Enrollment, payoff & eligibility</div></div>
+</div>
+<div class="step-item" id="nav-users" onclick="goStep('users')">
+  <div class="step-num"><span class="step-num-val">10</span></div>
+  <div class="step-text"><div class="step-title">Invite Users</div><div class="step-sub">Roles & access levels</div></div>
+</div>
   </div>
 </div>
 
@@ -491,7 +472,8 @@ textarea { resize: vertical; min-height: 80px; }
 
           <div class="welcome-divider"></div>
 
-          <p style="font-size:13px;color:var(--text2);margin-bottom:28px;line-height:1.8;">This implementation wizard will walk you through <strong style="color:var(--text);">8 configuration steps</strong>. Your progress is saved automatically — you can return and continue at any time.</p>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.8;">This implementation wizard will walk you through <strong style="color:var(--text);">10 configuration steps</strong>. Your progress is saved automatically — you can return and continue at any time.</p>
+          <div class="callout green" style="margin-bottom:28px;"><div class="callout-icon">📝</div><div class="callout-body"><strong>No rush — this stays in draft.</strong> Everything you fill in here remains in a <strong style="color:var(--text);">draft state</strong> until you're ready to go live. You can come back at any time to complete or adjust any step before activating.</div></div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:36px;">
             <div class="card" style="margin:0;padding:16px;">
@@ -505,15 +487,10 @@ textarea { resize: vertical; min-height: 80px; }
             </div>
           </div>
 
-          <div class="callout blue" style="margin-bottom:28px;">
-            <div class="callout-icon">💡</div>
-            <div class="callout-body"><strong>Have these ready before you begin:</strong> Your ERP charge codes and financial account details, institutional banner image (1200×300px recommended), and email addresses for users you want to invite.</div>
-          </div>
-
           <button class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:15px;" onclick="goStep('solutions')">
             Begin Setup &nbsp;→
           </button>
-          <div class="welcome-cta">Step 1 of 8: Select your active payment plan types</div>
+          <div class="welcome-cta">Step 1 of 10: Select your active payment plan types</div>
         </div>
       </div>
     </div>
@@ -557,14 +534,14 @@ textarea { resize: vertical; min-height: 80px; }
 
       <div class="callout amber" id="pastdue-notice" style="display:none;">
         <div class="callout-icon">⚠️</div>
-        <div class="callout-body"><strong>Past due plans selected:</strong> In Step 3 (Charge Categories), you will define which charge groups apply to past due terms vs. current terms. You'll also define what your current term is before setting up groups — this is required to correctly separate the plan types.</div>
+        <div class="callout-body"><strong>Past due plans selected:</strong> In Step 6 (Charge Categories), you will define which charge groups apply to past due terms vs. current terms. You'll also define what your current term is before setting up groups — this is required to correctly separate the plan types.</div>
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 1 of 8</div>
+        <div class="step-footer-left">Step 1 of 10</div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('welcome')">← Back</button>
-          <button class="btn btn-primary" onclick="goStep('integration')">Continue →</button>
+          <button class="btn btn-primary" onclick="goStep('erp')">Continue →</button>
         </div>
       </div>
     </div>
@@ -573,9 +550,9 @@ textarea { resize: vertical; min-height: 80px; }
     <!-- ═══════════════════════════════════════════════════════ -->
     <!-- SCREEN: ERP INTEGRATION (Step 2) -->
     <!-- ═══════════════════════════════════════════════════════ -->
-    <div class="screen" id="screen-integration">
+    <div class="screen" id="screen-erp">
       <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
-      <div class="section-header"><div class="section-num">2</div><h1 class="page-title" style="margin:0;">ERP Integration Setup</h1></div>
+      <div class="section-header"><div class="section-num">2</div><h1 class="page-title" style="margin:0;">ERP Information</h1></div>
       <p class="page-sub">Tell us about your institution's ERP system and which integration methods you plan to use. This information helps your Nelnet integration specialist configure the connection during implementation.</p>
 
       <div class="callout green" style="margin-bottom:24px;">
@@ -621,47 +598,11 @@ textarea { resize: vertical; min-height: 80px; }
 
         <div class="callout blue" style="margin-bottom:20px;">
           <div class="callout-icon">ℹ️</div>
-          <div class="callout-body">Most institutions use <strong>SSO + RTPN + RTAA</strong> as their core integration set. RTAN is commonly added when payment plan agreement tracking is needed. File Processing is used when real-time methods are not available or as a fallback.</div>
+          <div class="callout-body">Most institutions use <strong>RTPN + RTAA</strong> as their core integration set. RTAN is commonly added when payment plan agreement tracking is needed. Balance Compare is recommended for all institutions. EOD file processing is used when real-time methods are not available or as a fallback.</div>
         </div>
 
         <!-- Method cards — each expandable with full description -->
         <div style="display:flex;flex-direction:column;gap:10px;" id="integration-methods">
-
-          <!-- SSO -->
-          <div class="integration-method-card" id="method-sso">
-            <div class="method-header" onclick="toggleMethod('sso')">
-              <div class="choice-card" id="choice-sso" onclick="event.stopPropagation();toggleIntMethod('sso',this)" style="flex:1;margin:0;border:none;padding:0;background:transparent;">
-                <div class="choice-check" id="check-sso"></div>
-                <div style="flex:1;">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div class="choice-title">SSO — Pass-Through Authentication</div>
-                    <span class="badge badge-green">Recommended</span>
-                  </div>
-                  <div class="choice-sub">Single sign-on: students authenticate once in your ERP and are passed seamlessly into Nelnet without logging in again.</div>
-                </div>
-              </div>
-              <button onclick="event.stopPropagation();toggleMethod('sso')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;white-space:nowrap;padding:4px 8px;">
-                <span id="method-sso-toggle-label">Learn more ▾</span>
-              </button>
-            </div>
-            <div class="method-detail" id="detail-sso" style="display:none;">
-              <div class="divider" style="margin:12px 0 14px;"></div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                <div>
-                  <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">How it works</div>
-                  <p style="font-size:12px;color:var(--text3);line-height:1.7;">Your ERP generates a time-sensitive authenticated token that is passed to Nelnet when a student navigates to the payment portal from your student self-service portal. The student is automatically logged in to Nelnet with their correct student account loaded — no separate username or password required.</p>
-                </div>
-                <div>
-                  <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">Best for</div>
-                  <p style="font-size:12px;color:var(--text3);line-height:1.7;">All institutions. SSO significantly reduces login friction for students and prevents them from needing to manage a separate Nelnet credential. Strongly recommended for all implementations.</p>
-                  <div style="margin-top:10px;"><span class="badge badge-blue">PeopleSoft</span> <span class="badge badge-blue">Banner</span> <span class="badge badge-blue">Workday</span> <span class="badge badge-blue">Colleague</span></div>
-                </div>
-              </div>
-              <div style="margin-top:12px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);">
-                <strong style="color:#6ee7b7;">IT requirement:</strong> Your ERP or portal must be configured to pass an authentication hash/token to Nelnet's endpoint. Your Nelnet integration specialist will provide the endpoint URL and token format documentation.
-              </div>
-            </div>
-          </div>
 
           <!-- RTPN -->
           <div class="integration-method-card" id="method-rtpn">
@@ -771,46 +712,77 @@ textarea { resize: vertical; min-height: 80px; }
             </div>
           </div>
 
-          <!-- File Processing -->
-          <div class="integration-method-card" id="method-file">
-            <div class="method-header" onclick="toggleMethod('file')">
-              <div class="choice-card" id="choice-file" onclick="event.stopPropagation();toggleIntMethod('file',this)" style="flex:1;margin:0;border:none;padding:0;background:transparent;">
-                <div class="choice-check" id="check-file"></div>
-                <div style="flex:1;">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div class="choice-title">File Processing — EOD &amp; Balance Compare</div>
-                    <span class="badge badge-slate">Optional</span>
-                  </div>
-                  <div class="choice-sub">Scheduled batch file transfers between your ERP and Nelnet. Used for end-of-day reconciliation or as a fallback when real-time methods are not available.</div>
-                </div>
-              </div>
-              <button onclick="event.stopPropagation();toggleMethod('file')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;white-space:nowrap;padding:4px 8px;">
-                <span id="method-file-toggle-label">Learn more ▾</span>
-              </button>
-            </div>
-            <div class="method-detail" id="detail-file" style="display:none;">
-              <div class="divider" style="margin:12px 0 14px;"></div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-                <div>
-                  <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">How it works</div>
-                  <p style="font-size:12px;color:var(--text3);line-height:1.7;">Your ERP generates flat files (typically CSV or fixed-width) on a scheduled basis — usually end of day — and delivers them to a Nelnet SFTP location. Nelnet processes these files to load updated student balances, post payments, or reconcile differences between systems. A Balance Compare file can flag discrepancies between Nelnet and ERP balances so your team can investigate.</p>
-                </div>
-                <div>
-                  <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">Best for</div>
-                  <p style="font-size:12px;color:var(--text3);line-height:1.7;">Institutions whose ERP does not support real-time web service integrations, or as a supplement to real-time methods for overnight reconciliation. Also used by institutions migrating from an older Nelnet setup that was file-based.</p>
-                  <div style="margin-top:10px;"><span class="badge badge-blue">All ERPs</span> <span class="badge badge-blue">Homegrown</span></div>
-                </div>
-              </div>
-              <div style="margin-top:12px;">
-                <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:8px;">File types supported</div>
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                  <div style="padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text3);"><span class="mono" style="color:#7dd3fc;font-family:Fira Code,monospace;">EOD</span> End-of-Day payment file</div>
-                  <div style="padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text3);"><span class="mono" style="color:#7dd3fc;font-family:Fira Code,monospace;">BAL</span> Balance Compare file</div>
-                  <div style="padding:6px 12px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;font-size:11px;color:var(--text3);"><span class="mono" style="color:#7dd3fc;font-family:Fira Code,monospace;">CHRG</span> Charges / student account load</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- EOD File Processing -->
+<div class="integration-method-card" id="method-eod">
+  <div class="method-header" onclick="toggleMethod('eod')">
+    <div class="choice-card" id="choice-eod" onclick="event.stopPropagation();toggleIntMethod('eod',this)" style="flex:1;margin:0;border:none;padding:0;background:transparent;">
+      <div class="choice-check" id="check-eod"></div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="choice-title">File Processing — EOD (End of Day)</div>
+          <span class="badge badge-slate">Optional</span>
+        </div>
+        <div class="choice-sub">Scheduled end-of-day batch file from your ERP to Nelnet. Posts payments and account updates overnight.</div>
+      </div>
+    </div>
+    <button onclick="event.stopPropagation();toggleMethod('eod')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;white-space:nowrap;padding:4px 8px;">
+      <span id="method-eod-toggle-label">Learn more ▾</span>
+    </button>
+  </div>
+  <div class="method-detail" id="detail-eod" style="display:none;">
+    <div class="divider" style="margin:12px 0 14px;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">How it works</div>
+        <p style="font-size:12px;color:var(--text3);line-height:1.7;">Your ERP generates a flat file at the end of each business day and delivers it to a Nelnet SFTP location. Nelnet processes the file overnight to post payments and update student account balances. Best used when real-time methods aren't available.</p>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">Best for</div>
+        <p style="font-size:12px;color:var(--text3);line-height:1.7;">Institutions whose ERP does not support real-time integrations, or as a fallback supplement to RTPN for overnight reconciliation.</p>
+        <div style="margin-top:10px;"><span class="badge badge-blue">All ERPs</span> <span class="badge badge-blue">Homegrown</span></div>
+      </div>
+    </div>
+    <div style="margin-top:12px;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);">
+      <strong style="color:#93c5fd;">IT requirement:</strong> Your ERP must be able to generate and SFTP a flat file (CSV or fixed-width) to Nelnet's server on a nightly schedule. Nelnet provides the file format specification.
+    </div>
+  </div>
+</div>
+
+<!-- Balance Compare -->
+<div class="integration-method-card" id="method-balcompare">
+  <div class="method-header" onclick="toggleMethod('balcompare')">
+    <div class="choice-card" id="choice-balcompare" onclick="event.stopPropagation();toggleIntMethod('balcompare',this)" style="flex:1;margin:0;border:none;padding:0;background:transparent;">
+      <div class="choice-check" id="check-balcompare"></div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="choice-title">File Processing — Balance Compare</div>
+          <span class="badge badge-green">Recommended</span>
+        </div>
+        <div class="choice-sub">A daily file that compares student balances between your ERP and Nelnet, flagging any discrepancies for your team to review.</div>
+      </div>
+    </div>
+    <button onclick="event.stopPropagation();toggleMethod('balcompare')" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;white-space:nowrap;padding:4px 8px;">
+      <span id="method-balcompare-toggle-label">Learn more ▾</span>
+    </button>
+  </div>
+  <div class="method-detail" id="detail-balcompare" style="display:none;">
+    <div class="divider" style="margin:12px 0 14px;"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">How it works</div>
+        <p style="font-size:12px;color:var(--text3);line-height:1.7;">Each day, Nelnet and your ERP exchange balance data and compare student account totals. Any discrepancy — a payment that didn't post, a charge added after a plan was created, etc. — is flagged in a report delivered to your team. Keeps both systems in sync and catches data issues early.</p>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;">Best for</div>
+        <p style="font-size:12px;color:var(--text3);line-height:1.7;">All institutions. Even if you use real-time integrations, balance compare acts as a safety net to catch edge cases, batch timing issues, or configuration drift between systems. Strongly recommended.</p>
+        <div style="margin-top:10px;"><span class="badge badge-blue">All ERPs</span></div>
+      </div>
+    </div>
+    <div style="margin-top:12px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);">
+      <strong style="color:#6ee7b7;">IT requirement:</strong> Your ERP must be able to produce a daily balance file in Nelnet's BAL format. Setup is typically handled by your Nelnet integration specialist.
+    </div>
+  </div>
+</div>
 
         </div><!-- /integration-methods -->
 
@@ -829,20 +801,288 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 2 of 8</div>
+        <div class="step-footer-left">Step 2 of 10</div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('solutions')">← Back</button>
-          <button class="btn btn-primary" onclick="goStep('branding')">Continue →</button>
+          <button class="btn btn-primary" onclick="goStep('studentlogin')">Continue →</button>
         </div>
       </div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN: BRANDING & EMAIL (Step 3) -->
+    <!-- SCREEN: STUDENT LOGIN SETUP (Step 3) -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-studentlogin">
+  <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
+  <div class="section-header"><div class="section-num">3</div><h1 class="page-title" style="margin:0;">Student Login Setup</h1></div>
+  <p class="page-sub">Choose how students will authenticate when accessing the Nelnet payment portal. This affects how students are directed from your ERP or student portal into the payment experience.</p>
+
+  <div class="callout blue" style="margin-bottom:24px;">
+    <div class="callout-icon">ℹ️</div>
+    <div class="callout-body">Your selection here determines the student-facing login experience. Your Nelnet integration specialist will help configure the technical details for whichever method you choose.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom:4px;">How will students log in to the payment portal?</div>
+    <div class="card-sub" style="margin-bottom:16px;">Select the authentication method that matches your institution's setup.</div>
+    <div class="choice-grid" id="login-method-choices">
+      <div class="choice-card selected" onclick="toggleChoice(this)" data-val="sso">
+        <div class="choice-check">✓</div>
+        <div>
+          <div class="choice-title">SSO — Pass-Through Authentication</div>
+          <div class="choice-sub">Students authenticate once in your ERP and are passed seamlessly into Nelnet without a separate login. Recommended for the best student experience.</div>
+        </div>
+      </div>
+      <div class="choice-card" onclick="toggleChoice(this)" data-val="nelnet-login">
+        <div class="choice-check"></div>
+        <div>
+          <div class="choice-title">Nelnet-Managed Login</div>
+          <div class="choice-sub">Students create and manage their own Nelnet username and password. They receive an invitation email to set up their account the first time.</div>
+        </div>
+      </div>
+      <div class="choice-card" onclick="toggleChoice(this)" data-val="saml">
+        <div class="choice-check"></div>
+        <div>
+          <div class="choice-title">SAML / Federated Identity</div>
+          <div class="choice-sub">Use your institution's identity provider (e.g. Shibboleth, Azure AD, Okta) to authenticate students via SAML 2.0 federation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom:4px;">Portal Entry Point</div>
+    <div class="card-sub" style="margin-bottom:16px;">Where will students navigate from to reach the payment portal?</div>
+    <div class="choice-grid" id="entry-point-choices">
+      <div class="choice-card selected" onclick="toggleChoice(this)" data-val="erp-link">
+        <div class="choice-check">✓</div>
+        <div>
+          <div class="choice-title">Link from ERP / Student Self-Service</div>
+          <div class="choice-sub">Students click a link in your ERP portal (e.g. Banner Self-Service, PeopleSoft Student Center) that launches Nelnet.</div>
+        </div>
+      </div>
+      <div class="choice-card" onclick="toggleChoice(this)" data-val="direct-url">
+        <div class="choice-check"></div>
+        <div>
+          <div class="choice-title">Direct URL</div>
+          <div class="choice-sub">Students navigate directly to a Nelnet URL you publish on your bursar's office website or email communications.</div>
+        </div>
+      </div>
+      <div class="choice-card" onclick="toggleChoice(this)" data-val="email-invite">
+        <div class="choice-check"></div>
+        <div>
+          <div class="choice-title">Email Invitation</div>
+          <div class="choice-sub">Students receive a personalized email invitation from Nelnet with a direct link to their account.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-footer">
+    <div class="step-footer-left">Step 3 of 10</div>
+    <div class="actions" style="margin:0;">
+      <button class="btn btn-secondary" onclick="goStep('erp')">← Back</button>
+      <button class="btn btn-primary" onclick="goStep('contacts')">Continue →</button>
+    </div>
+  </div>
+</div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SCREEN: SCHOOL CONTACTS (Step 4) -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-contacts">
+  <div class="progress-bar"><div class="progress-fill" style="width:38%"></div></div>
+  <div class="section-header"><div class="section-num">4</div><h1 class="page-title" style="margin:0;">School Contacts</h1></div>
+  <p class="page-sub">Add department contacts your students can reach out to with questions. Then assign each contact to the types of questions they handle. These contacts will appear in the student-facing portal so students always know who to call.</p>
+
+  <!-- ── CONTACTS LIST ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <div>
+      <div class="section-title">Department Contacts</div>
+      <div style="font-size:12px;color:var(--text3);">Each contact needs a name and phone number — email is optional</div>
+    </div>
+    <button class="btn btn-secondary btn-sm" onclick="toggleContactForm()">+ Add contact</button>
+  </div>
+
+  <div id="contacts-list-impl" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px;"></div>
+
+  <!-- Add contact form -->
+  <div id="contact-add-form" style="display:none;background:var(--navy3);border:1px solid var(--border2);border-radius:12px;padding:20px;margin-bottom:20px;">
+    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      New Contact
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="field" style="margin:0;">
+        <label class="label">Contact Name <span style="color:var(--red);">*</span></label>
+        <input class="input" id="impl-c-name" placeholder="e.g. Bursar's Office"/>
+        <div style="font-size:11px;color:#fca5a5;margin-top:4px;display:none;" id="impl-e-name">Contact name is required</div>
+      </div>
+      <div class="field" style="margin:0;">
+        <label class="label">Phone Number <span style="color:var(--red);">*</span></label>
+        <input class="input" id="impl-c-phone" placeholder="(555) 000-0000"/>
+        <div style="font-size:11px;color:#fca5a5;margin-top:4px;display:none;" id="impl-e-phone">A valid phone number is required</div>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:14px;">
+      <label class="label">Email Address <span style="font-size:10px;color:var(--text3);font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <input class="input" id="impl-c-email" placeholder="office@university.edu" type="email"/>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn btn-secondary btn-sm" onclick="cancelContactForm()">Cancel</button>
+      <button class="btn btn-primary btn-sm" onclick="saveImplContact()">Save Contact</button>
+    </div>
+  </div>
+
+  <div id="contacts-empty-state" style="background:var(--card);border:1.5px dashed var(--border2);border-radius:12px;padding:40px 24px;text-align:center;margin-bottom:20px;">
+    <div style="font-size:32px;margin-bottom:10px;">👥</div>
+    <div style="font-size:15px;font-weight:600;color:var(--text2);margin-bottom:4px;">No contacts added yet</div>
+    <div style="font-size:13px;color:var(--text3);">Use the "Add contact" button above to add your first department contact</div>
+  </div>
+
+  <!-- ── CATEGORY ASSIGNMENT ── -->
+  <div style="margin-top:8px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <div>
+        <div class="section-title">Question Category Assignments</div>
+        <div style="font-size:12px;color:var(--text3);">Assign a contact to each type of student question</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;" id="impl-categories-list">
+
+      <!-- Category rows -->
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📅</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Pay over time day-to-day questions and changes</div>
+          <div style="font-size:11px;color:var(--text3);">Routine payment plan questions</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+          <span style="display:inline-flex;align-items:center;gap:4px;background:var(--blue-pale);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--blue-light);">Nelnet Default</span>
+          <div style="position:relative;">
+            <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;" id="cat-sel-0" onchange="implCatChanged(0,this)">
+              <option value="nelnet" selected>Nelnet Support (Nelnet)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🤝</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Pay over time extension / inability to pay</div>
+          <div style="font-size:11px;color:var(--text3);">Students struggling with payments</div>
+        </div>
+        <div style="position:relative;">
+          <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;border-color:rgba(239,68,68,.5);color:var(--text2);" id="cat-sel-1" onchange="implCatChanged(1,this)">
+            <option value="">— Select a contact —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">💳</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">How to make a payment</div>
+          <div style="font-size:11px;color:var(--text3);">General payment process questions</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+          <span style="display:inline-flex;align-items:center;gap:4px;background:var(--blue-pale);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--blue-light);">Nelnet Default</span>
+          <div style="position:relative;">
+            <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;" id="cat-sel-2" onchange="implCatChanged(2,this)">
+              <option value="nelnet" selected>Nelnet Support (Nelnet)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🔐</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">How to login to pay</div>
+          <div style="font-size:11px;color:var(--text3);">Login and portal access questions</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+          <span style="display:inline-flex;align-items:center;gap:4px;background:var(--blue-pale);border:1px solid rgba(37,99,235,.25);border-radius:6px;padding:3px 8px;font-size:10px;font-weight:600;color:var(--blue-light);">Nelnet Default</span>
+          <div style="position:relative;">
+            <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;" id="cat-sel-3" onchange="implCatChanged(3,this)">
+              <option value="nelnet" selected>Nelnet Support (Nelnet)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🎓</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Financial Aid questions</div>
+          <div style="font-size:11px;color:var(--text3);">Grants, loans, scholarships, disbursement</div>
+        </div>
+        <div style="position:relative;">
+          <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;border-color:rgba(239,68,68,.5);color:var(--text2);" id="cat-sel-4" onchange="implCatChanged(4,this)">
+            <option value="">— Select a contact —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🧾</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Charges for tuition and other student account fees</div>
+          <div style="font-size:11px;color:var(--text3);">Tuition charges, fees, and account items</div>
+        </div>
+        <div style="position:relative;">
+          <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;border-color:rgba(239,68,68,.5);color:var(--text2);" id="cat-sel-5" onchange="implCatChanged(5,this)">
+            <option value="">— Select a contact —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🏠</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Housing charges</div>
+          <div style="font-size:11px;color:var(--text3);">Room, board, and housing-related charges</div>
+        </div>
+        <div style="position:relative;">
+          <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;border-color:rgba(239,68,68,.5);color:var(--text2);" id="cat-sel-6" onchange="implCatChanged(6,this)">
+            <option value="">— Select a contact —</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🚗</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;">Parking charges</div>
+          <div style="font-size:11px;color:var(--text3);">Parking permits, fines, and related fees</div>
+        </div>
+        <div style="position:relative;">
+          <select class="select" style="min-width:180px;padding:7px 30px 7px 12px;font-size:13px;border-color:rgba(239,68,68,.5);color:var(--text2);" id="cat-sel-7" onchange="implCatChanged(7,this)">
+            <option value="">— Select a contact —</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="step-footer">
+    <div class="step-footer-left">Step 4 of 10</div>
+    <div class="actions" style="margin:0;">
+      <button class="btn btn-secondary" onclick="goStep('studentlogin')">← Back</button>
+      <button class="btn btn-primary" onclick="goStep('branding')">Continue →</button>
+    </div>
+  </div>
+</div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- SCREEN: BRANDING & EMAIL (Step 5) -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-branding">
-      <div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div>
-      <div class="section-header"><div class="section-num">2</div><h1 class="page-title" style="margin:0;">Branding &amp; Email Preferences</h1></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+      <div class="section-header"><div class="section-num">5</div><h1 class="page-title" style="margin:0;">Branding &amp; Email Preferences</h1></div>
       <p class="page-sub">Set your institutional branding used in the student payment portal and all outbound emails to students and authorized payers.</p>
 
       <div class="card">
@@ -907,9 +1147,9 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 2 of 8</div>
+        <div class="step-footer-left">Step 5 of 10</div>
         <div class="actions" style="margin:0;">
-          <button class="btn btn-secondary" onclick="goStep('integration')">← Back</button>
+          <button class="btn btn-secondary" onclick="goStep('contacts')">← Back</button>
           <button class="btn btn-primary" onclick="goStep('charges')">Continue →</button>
         </div>
       </div>
@@ -920,7 +1160,7 @@ textarea { resize: vertical; min-height: 80px; }
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-charges">
       <div class="progress-bar"><div class="progress-fill" style="width:42%"></div></div>
-      <div class="section-header"><div class="section-num">3</div><h1 class="page-title" style="margin:0;">Charge Categories &amp; Financial Accounts</h1></div>
+      <div class="section-header"><div class="section-num">6</div><h1 class="page-title" style="margin:0;">Charge Categories &amp; Financial Accounts</h1></div>
       <p class="page-sub">Define how your ERP charge codes map to financial accounts where Nelnet remits collected funds. Each group ties one or more ERP integration codes to a specific financial account and payment type routing.</p>
 
       <!-- Current Term Definition (shown if pastdue selected) -->
@@ -1092,7 +1332,7 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 3 of 8 &nbsp;·&nbsp; <span style="color:var(--amber);">1 group needs financial account</span></div>
+        <div class="step-footer-left">Step 6 of 10 &nbsp;·&nbsp; <span style="color:var(--amber);">1 group needs financial account</span></div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('branding')">← Back</button>
           <button class="btn btn-primary" onclick="goStep('remittance')">Continue →</button>
@@ -1105,7 +1345,7 @@ textarea { resize: vertical; min-height: 80px; }
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-remittance">
       <div class="progress-bar"><div class="progress-fill" style="width:57%"></div></div>
-      <div class="section-header"><div class="section-num">4</div><h1 class="page-title" style="margin:0;">Remittance Schedule</h1></div>
+      <div class="section-header"><div class="section-num">7</div><h1 class="page-title" style="margin:0;">Remittance Schedule</h1></div>
       <p class="page-sub">Define when Nelnet will transfer collected student payment funds to your institution's financial accounts. This schedule applies to all charge groups unless overridden per group.</p>
 
       <div class="card">
@@ -1195,7 +1435,7 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 4 of 8</div>
+        <div class="step-footer-left">Step 7 of 10</div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('charges')">← Back</button>
           <button class="btn btn-primary" onclick="goStep('mids')">Continue →</button>
@@ -1208,7 +1448,7 @@ textarea { resize: vertical; min-height: 80px; }
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-mids">
       <div class="progress-bar"><div class="progress-fill" style="width:71%"></div></div>
-      <div class="section-header"><div class="section-num">5</div><h1 class="page-title" style="margin:0;">MID Configuration</h1></div>
+      <div class="section-header"><div class="section-num">8</div><h1 class="page-title" style="margin:0;">MID Configuration</h1></div>
       <p class="page-sub">Merchant IDs (MIDs) are required to route payments to your institution. Map each of your charge groups to a MID by payment type. All charge groups must have a MID assigned before you can proceed.</p>
 
       <div class="callout blue" style="margin-bottom:20px;">
@@ -1299,7 +1539,7 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 5 of 8 &nbsp;·&nbsp; <span style="color:var(--amber);">2 mappings incomplete</span></div>
+        <div class="step-footer-left">Step 8 of 10 &nbsp;·&nbsp; <span style="color:var(--amber);">2 mappings incomplete</span></div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('remittance')">← Back</button>
           <button class="btn btn-primary" onclick="goStep('planrules')">Continue →</button>
@@ -1308,132 +1548,314 @@ textarea { resize: vertical; min-height: 80px; }
     </div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- SCREEN: PAYMENT PLAN RULES (Step 6) -->
+    <!-- SCREEN: PAYMENT PLAN RULES (Step 9) -->
     <!-- ═══════════════════════════════════════════════════════ -->
-    <div class="screen" id="screen-planrules">
-      <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
-      <div class="section-header"><div class="section-num">6</div><h1 class="page-title" style="margin:0;">Payment Plan Rules</h1></div>
-      <p class="page-sub">Define the payoff deadlines for each payment plan category. You can add multiple end dates within a category by specifying eligibility characteristics that qualify (or disqualify) a student for a particular deadline.</p>
+<div class="screen" id="screen-planrules">
+  <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+  <div class="section-header"><div class="section-num">9</div><h1 class="page-title" style="margin:0;">Payment Plan Rules</h1></div>
+  <p class="page-sub">Configure the rules that govern your institution's payment plans — when students can enroll, when they must pay off, what choices they have, and what fees apply.</p>
 
-      <div class="pill-tabs">
-        <div class="pill-tab active" onclick="switchPlanTab(this, 'plan-current')">Current Term Plans</div>
-        <div class="pill-tab" onclick="switchPlanTab(this, 'plan-pastdue')">Past Due Plans</div>
-      </div>
+  <div class="pill-tabs">
+    <div class="pill-tab active" onclick="switchPlanTab(this, 'plan-current')">Current Term Plans</div>
+    <div class="pill-tab" onclick="switchPlanTab(this, 'plan-pastdue')">Past Due Plans</div>
+  </div>
 
-      <!-- Current Term Rules -->
-      <div id="plan-current">
-        <div class="callout blue" style="margin-bottom:20px;">
-          <div class="callout-icon">📅</div>
-          <div class="callout-body"><strong>Current term:</strong> These rules apply to plans created for the current semester (term code 2024FA). Students must pay off their balance by the end date you define here.</div>
+  <!-- ══ CURRENT TERM ══ -->
+  <div id="plan-current">
+
+    <!-- Section 1: Enrollment Period -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Plan Enrollment Period</div>
+      <div class="card-sub" style="margin-bottom:16px;">Set when students are allowed to enroll in a payment plan for the current term.</div>
+      <div class="field-row cols-2">
+        <div class="field" style="margin:0;">
+          <label class="label">Enrollment Opens <span style="color:var(--red);">*</span></label>
+          <input class="input" type="date" id="enroll-start" value="2026-07-01"/>
+          <div class="help-text">The earliest date a student can sign up for a plan.</div>
         </div>
-
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-          <div class="section-title">End Date Rules</div>
-          <button class="btn btn-secondary btn-sm" onclick="addPlanRule('plan-current-rules')">+ Add end date rule</button>
-        </div>
-
-        <div id="plan-current-rules">
-          <div class="plan-rule">
-            <div class="plan-rule-header">
-              <span class="badge badge-blue">Default rule</span>
-              <span style="font-size:12px;color:var(--text3);">Applies to all students unless overridden below</span>
-            </div>
-            <div class="field-row cols-2">
-              <div class="field" style="margin:0;">
-                <label class="label">Plan Payoff Deadline</label>
-                <input class="input" type="date" value="2025-05-01"/>
-                <div class="help-text">Students must pay their full balance by this date.</div>
-              </div>
-              <div class="field" style="margin:0;">
-                <label class="label">Plan Start Date (earliest students can enroll)</label>
-                <input class="input" type="date" value="2024-08-01"/>
-              </div>
-            </div>
+        <div class="field" style="margin:0;">
+          <label class="label">Enrollment Closes</label>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+              <input type="radio" name="enroll-end-type" value="date" id="enroll-end-date-radio" onchange="toggleEnrollEnd()" checked style="accent-color:var(--blue);"/>
+              Set a specific end date
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+              <input type="radio" name="enroll-end-type" value="never" id="enroll-end-never-radio" onchange="toggleEnrollEnd()" style="accent-color:var(--blue);"/>
+              Never ends
+            </label>
           </div>
-
-          <div class="plan-rule" style="border-color:rgba(16,185,129,.25);">
-            <div class="plan-rule-header">
-              <span class="badge badge-green">Eligibility override</span>
-              <button class="btn btn-xs btn-danger" style="margin-left:auto;" onclick="this.closest('.plan-rule').remove()">Remove</button>
-            </div>
-            <div class="field-row cols-2" style="margin-bottom:14px;">
-              <div class="field" style="margin:0;">
-                <label class="label">Extended Payoff Deadline</label>
-                <input class="input" type="date" value="2025-07-01"/>
-              </div>
-              <div class="field" style="margin:0;">
-                <label class="label">Plan Start Date</label>
-                <input class="input" type="date" value="2024-08-01"/>
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Eligibility — Who qualifies for this extended deadline?</label>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                <select class="select" style="width:auto;flex:1;">
-                  <option selected>Student attribute</option>
-                  <option>Enrolled credit hours</option>
-                  <option>Aid package type</option>
-                  <option>Housing assignment</option>
-                  <option>Program code</option>
-                  <option>Custom field</option>
-                </select>
-                <select class="select" style="width:auto;width:120px;">
-                  <option>equals</option>
-                  <option>does not equal</option>
-                  <option>greater than</option>
-                  <option>less than</option>
-                </select>
-                <input class="input" placeholder="Value" style="width:160px;" value="Graduate"/>
-                <button class="btn btn-ghost btn-sm" onclick="this.parentElement.insertAdjacentHTML('beforebegin', this.parentElement.outerHTML.replace(/value=&quot;Graduate&quot;/g,&quot;value=''&quot;))">+ Add condition</button>
-              </div>
-              <div class="help-text">Students matching this rule get the extended deadline above instead of the default.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Past Due Rules (hidden) -->
-      <div id="plan-pastdue" style="display:none;">
-        <div class="callout amber" style="margin-bottom:20px;">
-          <div class="callout-icon">⚠️</div>
-          <div class="callout-body"><strong>Past due plans</strong> apply to balances from prior terms. These typically have stricter end dates and may not allow new enrollment after a certain date.</div>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-          <div class="section-title">Past Due End Date Rules</div>
-          <button class="btn btn-secondary btn-sm" onclick="addPlanRule('plan-pastdue-rules')">+ Add end date rule</button>
-        </div>
-        <div id="plan-pastdue-rules">
-          <div class="plan-rule">
-            <div class="plan-rule-header"><span class="badge badge-amber">Default rule — past due</span></div>
-            <div class="field-row cols-2">
-              <div class="field" style="margin:0;">
-                <label class="label">Plan Payoff Deadline</label>
-                <input class="input" type="date" value="2025-03-01"/>
-              </div>
-              <div class="field" style="margin:0;">
-                <label class="label">Plan Start Date</label>
-                <input class="input" type="date" value="2024-08-01"/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="step-footer">
-        <div class="step-footer-left">Step 6 of 8</div>
-        <div class="actions" style="margin:0;">
-          <button class="btn btn-secondary" onclick="goStep('mids')">← Back</button>
-          <button class="btn btn-primary" onclick="goStep('users')">Continue →</button>
+          <input class="input" type="date" id="enroll-end" value="2026-10-01"/>
+          <div class="help-text" id="enroll-end-help">The last date a student can enroll. After this date, new enrollments are blocked.</div>
         </div>
       </div>
     </div>
+
+    <!-- Section 2: Plan Payoff Timeline -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Plan Payoff Timeline</div>
+      <div class="card-sub" style="margin-bottom:16px;">When must students have their balance fully paid off?</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;" id="payoff-date-option">
+          <input type="radio" name="payoff-type" value="date" checked onchange="togglePayoffType()" style="accent-color:var(--blue);margin-top:2px;flex-shrink:0;"/>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;">Specific payoff date</div>
+            <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">All plans must be paid off by a fixed calendar date, regardless of when the student enrolled.</div>
+            <input class="input" type="date" id="payoff-fixed-date" value="2027-01-15" style="max-width:220px;"/>
+          </div>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;" id="payoff-months-option">
+          <input type="radio" name="payoff-type" value="months" onchange="togglePayoffType()" style="accent-color:var(--blue);margin-top:2px;flex-shrink:0;"/>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;">Number of months from enrollment</div>
+            <div style="font-size:12px;color:var(--text3);margin-bottom:10px;">The plan must be paid off within X months from the date the student signed up — the payoff date varies per student.</div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <input class="input" type="number" id="payoff-months" placeholder="e.g. 6" min="1" max="36" style="max-width:100px;" value="6"/>
+              <span style="font-size:13px;color:var(--text2);">months from enrollment date</span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Section 3: Student Power -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Giving Power to Your Students</div>
+      <div class="card-sub" style="margin-bottom:16px;">Choose what students are allowed to do on their own. All options below are enabled by default — uncheck any you don't want to allow.</div>
+
+      <div style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Payment Schedule Options</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.6;">Which payment frequencies can students choose from when setting up their plan?</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;"/>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);">Monthly payments</div>
+            <div style="font-size:11px;color:var(--text3);">One payment per month on a day they choose</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;"/>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);">Bi-weekly payments</div>
+            <div style="font-size:11px;color:var(--text3);">Every 14 days from a start date they choose</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="checkbox" checked style="accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;"/>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);">Twice a month</div>
+            <div style="font-size:11px;color:var(--text3);">Two payments per month on days they choose</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="divider" style="margin:0 0 14px;"></div>
+      <div style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Self-Service Changes</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:11px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="checkbox" id="allow-changes" checked style="accent-color:var(--blue);width:16px;height:16px;flex-shrink:0;" onchange="toggleDateChangeWindow()"/>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:500;color:var(--text);">Students can change their payment dates or cancel their plan</div>
+            <div style="font-size:11px;color:var(--text3);">Allows students to reschedule payments and self-cancel without contacting the school</div>
+          </div>
+        </label>
+        <div id="date-change-window" style="background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:12px 14px;margin-top:-4px;">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">Payment date changes are allowed within how many days of the originally scheduled date?</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <input class="input" type="number" id="date-change-days" value="14" min="1" max="30" style="max-width:80px;"/>
+            <span style="font-size:13px;color:var(--text2);">days before or after the scheduled date</span>
+          </div>
+          <div class="help-text">Default is 14 days. Students cannot move a payment outside this window.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Fees -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Fees</div>
+      <div class="card-sub" style="margin-bottom:16px;">Fees charged to students when they enroll in a payment plan.</div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <!-- Nelnet fee -->
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);">Nelnet Enrollment Fee</div>
+            <div style="font-size:11px;color:var(--text3);">Charged by Nelnet at enrollment. Fixed — cannot be changed.</div>
+          </div>
+          <div style="font-size:15px;font-weight:700;color:var(--text);">$25.00</div>
+        </div>
+
+        <!-- School CFI fee -->
+        <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">School Enrollment Fee (CFI)</div>
+              <div style="font-size:11px;color:var(--text3);">Your institution's fee as defined in your Nelnet contract.</div>
+            </div>
+            <span class="badge badge-amber">From contract</span>
+          </div>
+          <input class="input" type="number" id="school-cfi-fee" placeholder="e.g. 35.00" min="0" step="0.01" style="max-width:140px;"/>
+          <div class="help-text">Enter the CFI fee amount from your contract. Contact your Nelnet rep if unsure.</div>
+        </div>
+
+        <!-- Down payment -->
+        <div style="padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--text);">Down Payment</div>
+              <div style="font-size:11px;color:var(--text3);">Optional upfront payment required at plan enrollment.</div>
+            </div>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+              <input type="checkbox" id="down-payment-toggle" onchange="toggleDownPayment()" style="accent-color:var(--blue);width:16px;height:16px;"/>
+              Require down payment
+            </label>
+          </div>
+          <div id="down-payment-config" style="display:none;">
+            <div style="display:flex;gap:12px;align-items:flex-start;margin-top:8px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+                <input type="radio" name="down-type" value="percent" checked onchange="toggleDownType()" style="accent-color:var(--blue);"/> Percentage of amount due
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+                <input type="radio" name="down-type" value="fixed" onchange="toggleDownType()" style="accent-color:var(--blue);"/> Fixed dollar amount
+              </label>
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:10px;" id="down-percent-row">
+              <input class="input" type="number" id="down-percent" placeholder="e.g. 10" min="1" max="50" style="max-width:80px;"/>
+              <span style="font-size:13px;color:var(--text2);">% of amount due at enrollment</span>
+            </div>
+            <div style="margin-top:10px;display:flex;align-items:center;gap:10px;display:none;" id="down-fixed-row">
+              <span style="font-size:14px;color:var(--text2);">$</span>
+              <input class="input" type="number" id="down-fixed" placeholder="e.g. 250.00" min="0" step="0.01" style="max-width:140px;"/>
+              <span style="font-size:13px;color:var(--text2);">fixed amount at enrollment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: Eligibility -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Student Eligibility</div>
+      <div class="card-sub" style="margin-bottom:14px;">We automatically limit this plan to current term balances only. Do you need to set up different rules for any specific student groups?</div>
+
+      <div style="background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--text2);line-height:1.6;">
+        <strong style="color:#6ee7b7;">✓ Already configured:</strong> Only current term balances are eligible for this plan. Students with no current term charges will not see the plan as an option.
+      </div>
+
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;">Do you have any student groups that need different eligibility rules?</div>
+      <div class="choice-grid cols-2" style="margin-bottom:14px;">
+        <div class="choice-card radio" id="elig-yes" onclick="toggleEligGroups(true)">
+          <div class="choice-check"></div>
+          <div>
+            <div class="choice-title">Yes — set up group rules</div>
+            <div class="choice-sub">Define custom eligibility for specific groups of students</div>
+          </div>
+        </div>
+        <div class="choice-card radio selected" id="elig-no" onclick="toggleEligGroups(false)">
+          <div class="choice-check">✓</div>
+          <div>
+            <div class="choice-title">No — one set of rules for all</div>
+            <div class="choice-sub">The default rules above apply to all eligible students</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="elig-groups-section" style="display:none;">
+        <div class="callout blue" style="margin-bottom:14px;">
+          <div class="callout-icon">🔧</div>
+          <div class="callout-body">Your Nelnet implementation specialist will work with you to configure custom group rules during your implementation kickoff. Use the notes area below to describe the groups you have in mind.</div>
+        </div>
+        <div class="field">
+          <label class="label">Describe your student groups</label>
+          <textarea class="input" style="min-height:80px;" placeholder="e.g. Graduate students need a longer payoff period. International students in program X are not eligible. Students with holds should be excluded."></textarea>
+          <div class="help-text">Your Nelnet specialist will configure the technical rules based on your description.</div>
+        </div>
+        <div id="elig-groups-added" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+  </div><!-- /plan-current -->
+
+  <!-- ══ PAST DUE RULES ══ -->
+  <div id="plan-pastdue" style="display:none;">
+    <div class="callout amber" style="margin-bottom:20px;">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body"><strong>Past due plans</strong> apply to balances from prior terms. These typically have stricter payoff deadlines and may have different fee structures than current term plans. Configure the rules for past due plans below.</div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Plan Enrollment Period</div>
+      <div class="card-sub" style="margin-bottom:16px;">When can students enroll in a past due payment plan?</div>
+      <div class="field-row cols-2">
+        <div class="field" style="margin:0;">
+          <label class="label">Enrollment Opens <span style="color:var(--red);">*</span></label>
+          <input class="input" type="date" id="pd-enroll-start" value="2026-07-01"/>
+        </div>
+        <div class="field" style="margin:0;">
+          <label class="label">Enrollment Closes</label>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+              <input type="radio" name="pd-enroll-end-type" value="date" checked onchange="togglePdEnrollEnd()" style="accent-color:var(--blue);"/>
+              Set a specific end date
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--text2);">
+              <input type="radio" name="pd-enroll-end-type" value="never" onchange="togglePdEnrollEnd()" style="accent-color:var(--blue);"/>
+              Never ends
+            </label>
+          </div>
+          <input class="input" type="date" id="pd-enroll-end" value="2026-12-01"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Plan Payoff Timeline</div>
+      <div class="card-sub" style="margin-bottom:16px;">When must past due balances be fully paid off?</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="radio" name="pd-payoff-type" value="date" checked style="accent-color:var(--blue);margin-top:2px;flex-shrink:0;"/>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;">Specific payoff date</div>
+            <input class="input" type="date" id="pd-payoff-date" value="2027-03-01" style="max-width:220px;margin-top:8px;"/>
+          </div>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;">
+          <input type="radio" name="pd-payoff-type" value="months" style="accent-color:var(--blue);margin-top:2px;flex-shrink:0;"/>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px;">Number of months from enrollment</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+              <input class="input" type="number" id="pd-payoff-months" placeholder="e.g. 3" min="1" max="24" style="max-width:100px;"/>
+              <span style="font-size:13px;color:var(--text2);">months from enrollment date</span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title" style="margin-bottom:4px;">Eligibility</div>
+      <div class="card-sub" style="margin-bottom:14px;">Past due plans automatically apply to balances from prior terms only.</div>
+      <div style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--text2);line-height:1.6;">
+        <strong style="color:#fcd34d;">✓ Already configured:</strong> Only past-due term balances (prior term charges) are eligible for this plan. Current term charges use the current term plan rules.
+      </div>
+    </div>
+  </div>
+
+  <div class="step-footer">
+    <div class="step-footer-left">Step 9 of 10</div>
+    <div class="actions" style="margin:0;">
+      <button class="btn btn-secondary" onclick="goStep('mids')">← Back</button>
+      <button class="btn btn-primary" onclick="goStep('users')">Continue →</button>
+    </div>
+  </div>
+</div>
 
     <!-- ═══════════════════════════════════════════════════════ -->
     <!-- SCREEN: INVITE USERS (Step 7) -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <div class="screen" id="screen-users">
       <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-      <div class="section-header"><div class="section-num">7</div><h1 class="page-title" style="margin:0;">Invite Institution Users</h1></div>
+      <div class="section-header"><div class="section-num">10</div><h1 class="page-title" style="margin:0;">Invite Institution Users</h1></div>
       <p class="page-sub">Invite your team members to access the portal. Each role has a specific level of access — you can invite as many users as needed per role. Users will receive an email to create their account.</p>
 
       <div class="callout green" style="margin-bottom:20px;">
@@ -1544,7 +1966,7 @@ textarea { resize: vertical; min-height: 80px; }
       </div>
 
       <div class="step-footer">
-        <div class="step-footer-left">Step 7 of 8 — Final step!</div>
+        <div class="step-footer-left">Step 10 of 10 — Final step!</div>
         <div class="actions" style="margin:0;">
           <button class="btn btn-secondary" onclick="goStep('planrules')">← Back</button>
           <button class="btn btn-green" style="padding:10px 28px;font-size:14px;" onclick="showComplete()">🎉 Complete Setup</button>
@@ -1580,8 +2002,8 @@ textarea { resize: vertical; min-height: 80px; }
 
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────
-const stepOrder = ['welcome','solutions','integration','branding','charges','remittance','mids','planrules','users'];
-const stepNames = { welcome:'Welcome', solutions:'Plan Types', integration:'ERP Integration', branding:'Branding & Email', charges:'Charge Categories', remittance:'Remittance Schedule', mids:'MID Configuration', planrules:'Payment Plan Rules', users:'Invite Users' };
+const stepOrder = ['welcome','solutions','erp','studentlogin','contacts','branding','charges','remittance','mids','planrules','users'];
+const stepNames = { welcome:'Welcome', solutions:'Plan Types', erp:'ERP Information', studentlogin:'Student Login Setup', contacts:'School Contacts', branding:'Branding & Email', charges:'Charge Categories', remittance:'Remittance Schedule', mids:'MID Configuration', planrules:'Payment Plan Rules', users:'Invite Users' };
 let currentStep = 'welcome';
 let doneSteps = new Set();
 let hasPastDue = false;
@@ -1875,7 +2297,7 @@ function toggleIntMethod(id, card) {
 }
 
 function updateIntegrationSummary() {
-  const labels = { sso: 'SSO — Pass-Through Authentication', rtpn: 'RTPN — Real-Time Payment Notification', rtaa: 'RTAA — Real-Time Account Activity', rtan: 'RTAN — Real-Time Agreement Notification', file: 'File Processing — EOD & Balance Compare' };
+  const labels = { rtpn: 'RTPN — Real-Time Payment Notification', rtaa: 'RTAA — Real-Time Account Activity', rtan: 'RTAN — Real-Time Agreement Notification', eod: 'File Processing — EOD (End of Day)', balcompare: 'File Processing — Balance Compare' };
   const summaryEl = document.getElementById('integration-summary');
   const listEl = document.getElementById('integration-summary-list');
   if (selectedMethods.size === 0) {
@@ -1919,6 +2341,146 @@ document.getElementById('sender-name').addEventListener('input', function() {
 document.getElementById('sender-email').addEventListener('input', function() {
   document.getElementById('preview-sender-email').textContent = this.value || 'email@domain.edu';
 });
+
+// ── CONTACTS SCREEN FUNCTIONS ───────────────────────────────────────────────
+var implContacts = [];
+var implContactId = 1;
+
+function toggleContactForm() {
+  var f = document.getElementById('contact-add-form');
+  var open = f.style.display !== 'none';
+  f.style.display = open ? 'none' : 'block';
+  if (!open) setTimeout(function(){ document.getElementById('impl-c-name').focus(); }, 50);
+}
+
+function cancelContactForm() {
+  document.getElementById('contact-add-form').style.display = 'none';
+  ['impl-c-name','impl-c-phone','impl-c-email'].forEach(function(id){ document.getElementById(id).value = ''; });
+  ['impl-e-name','impl-e-phone'].forEach(function(id){ document.getElementById(id).style.display = 'none'; });
+}
+
+function saveImplContact() {
+  var name = document.getElementById('impl-c-name').value.trim();
+  var phone = document.getElementById('impl-c-phone').value.trim();
+  var email = document.getElementById('impl-c-email').value.trim();
+  var ok = true;
+  if (!name) { document.getElementById('impl-e-name').style.display = 'block'; ok = false; }
+  else document.getElementById('impl-e-name').style.display = 'none';
+  if (!phone || phone.replace(/\D/g,'').length < 7) { document.getElementById('impl-e-phone').style.display = 'block'; ok = false; }
+  else document.getElementById('impl-e-phone').style.display = 'none';
+  if (!ok) return;
+  var c = { id: implContactId++, name: name, phone: phone, email: email };
+  implContacts.push(c);
+  renderImplContacts();
+  updateCatSelects();
+  cancelContactForm();
+}
+
+function renderImplContacts() {
+  var list = document.getElementById('contacts-list-impl');
+  var empty = document.getElementById('contacts-empty-state');
+  if (implContacts.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = implContacts.map(function(c) {
+    return '<div style="background:var(--card2);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;position:relative;">' +
+      '<button onclick="removeImplContact('+c.id+')" style="position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:6px;background:transparent;border:none;cursor:pointer;color:var(--text3);font-size:12px;display:flex;align-items:center;justify-content:center;" title="Remove">✕</button>' +
+      '<div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px;padding-right:20px;">'+c.name+'</div>' +
+      '<div style="font-size:12px;color:var(--text2);">📞 '+c.phone+'</div>' +
+      (c.email ? '<div style="font-size:12px;color:var(--text2);margin-top:3px;">✉ '+c.email+'</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+function removeImplContact(id) {
+  implContacts = implContacts.filter(function(c){ return c.id !== id; });
+  renderImplContacts();
+  updateCatSelects();
+}
+
+function updateCatSelects() {
+  for (var i = 0; i <= 7; i++) {
+    var sel = document.getElementById('cat-sel-'+i);
+    if (!sel) continue;
+    var cur = sel.value;
+    var isNelnetDefault = (i === 0 || i === 2 || i === 3);
+    var opts = isNelnetDefault ? '<option value="nelnet">Nelnet Support (Nelnet)</option>' : '<option value="">— Select a contact —</option>';
+    implContacts.forEach(function(c) {
+      opts += '<option value="'+c.id+'" '+(String(cur)===String(c.id)?'selected':'')+'>'+c.name+'</option>';
+    });
+    sel.innerHTML = opts;
+    if (!cur || cur === '') sel.value = isNelnetDefault ? 'nelnet' : '';
+  }
+}
+
+function implCatChanged(idx, sel) {
+  if (sel.value && sel.value !== '') {
+    sel.style.borderColor = '';
+    sel.style.color = '';
+  } else {
+    sel.style.borderColor = 'rgba(239,68,68,.5)';
+    sel.style.color = 'var(--text2)';
+  }
+}
+
+// ── PAYMENT PLAN RULES FUNCTIONS ────────────────────────────────────────────
+function toggleEnrollEnd() {
+  var isNever = document.getElementById('enroll-end-never-radio').checked;
+  var endInput = document.getElementById('enroll-end');
+  var helpEl = document.getElementById('enroll-end-help');
+  endInput.disabled = isNever;
+  endInput.style.opacity = isNever ? '.35' : '1';
+  if (helpEl) helpEl.textContent = isNever ? 'Enrollment will never close — students can always sign up.' : 'The last date a student can enroll. After this date, new enrollments are blocked.';
+}
+
+function togglePdEnrollEnd() {
+  var isNever = document.querySelector('input[name="pd-enroll-end-type"][value="never"]').checked;
+  var endInput = document.getElementById('pd-enroll-end');
+  endInput.disabled = isNever;
+  endInput.style.opacity = isNever ? '.35' : '1';
+}
+
+function togglePayoffType() {
+  // visual only — no hide/show needed, radio controls it
+}
+
+function toggleDownPayment() {
+  var checked = document.getElementById('down-payment-toggle').checked;
+  document.getElementById('down-payment-config').style.display = checked ? 'block' : 'none';
+}
+
+function toggleDownType() {
+  var isFixed = document.querySelector('input[name="down-type"][value="fixed"]').checked;
+  document.getElementById('down-percent-row').style.display = isFixed ? 'none' : 'flex';
+  document.getElementById('down-fixed-row').style.display = isFixed ? 'flex' : 'none';
+}
+
+function toggleDateChangeWindow() {
+  var checked = document.getElementById('allow-changes').checked;
+  document.getElementById('date-change-window').style.display = checked ? 'block' : 'none';
+}
+
+function toggleEligGroups(yes) {
+  var yesCard = document.getElementById('elig-yes');
+  var noCard = document.getElementById('elig-no');
+  var section = document.getElementById('elig-groups-section');
+  if (yes) {
+    yesCard.classList.add('selected');
+    yesCard.querySelector('.choice-check').textContent = '✓';
+    noCard.classList.remove('selected');
+    noCard.querySelector('.choice-check').textContent = '';
+    section.style.display = 'block';
+  } else {
+    noCard.classList.add('selected');
+    noCard.querySelector('.choice-check').textContent = '✓';
+    yesCard.classList.remove('selected');
+    yesCard.querySelector('.choice-check').textContent = '';
+    section.style.display = 'none';
+  }
+}
 </script>
 </body>
 </html>
