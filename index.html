@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nelnet Prototypes</title>
+<title>Horizon Prototypes</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,10 +63,40 @@ a:hover {
   color: #f1f5f9;
   line-height: 1.4;
 }
+.section-sep {
+  width: 100%;
+  max-width: 900px;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin: 48px 0 32px;
+}
+.section-heading {
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 6px;
+}
+.section-heading h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+.section-heading p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+.scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 60px;
+}
 </style>
 </head>
 <body>
-  <h1>Nelnet Prototypes</h1>
+  <h1>Horizon Prototypes</h1>
   <p>Select a prototype to preview</p>
   <div class="grid">
     <a href="/University Implementation Flow.html">
@@ -90,5 +120,88 @@ a:hover {
       <div class="title">Implementation Flow — Communications</div>
     </a>
   </div>
+
+  <hr class="section-sep"/>
+  <div class="section-heading">
+    <h2>Institution Pay Over Time Setup Scenarios</h2>
+    <p>Select a configuration to preview the institution admin setup and the resulting consumer enrollment experience</p>
+  </div>
+  <div id="scenarios-grid" class="scenarios-grid"></div>
+
+<script>
+const scenarios = [
+  // Standard-only
+  {id:'1c', title:'Standard Plans Only — 1 Plan', plans:['Standard'], note:'Single plan option available'},
+  {id:'2c', title:'Standard Plans Only — 2 Plans', plans:['Standard'], note:'Two plan options available'},
+  // Standard + others
+  {id:'3c', title:'Standard + Past Due', plans:['Standard','Past Due']},
+  {id:'4c', title:'Standard + Long-Term (LTPP)', plans:['Standard','Long-Term']},
+  {id:'5c', title:'Standard + International', plans:['Standard','International']},
+  {id:'6c', title:'Standard + Hidden', plans:['Standard','Hidden']},
+  {id:'7c', title:'Standard + Custom', plans:['Standard','Custom']},
+  {id:'8c', title:'Standard + Past Due + Custom', plans:['Standard','Past Due','Custom']},
+  {id:'9c', title:'Standard + Past Due + Hidden', plans:['Standard','Past Due','Hidden']},
+  {id:'10c', title:'Standard + Hidden + Custom', plans:['Standard','Hidden','Custom']},
+  {id:'11c', title:'Standard + Past Due + Hidden + Custom', plans:['Standard','Past Due','Hidden','Custom']},
+  {id:'12c', title:'Standard + LTPP + Past Due', plans:['Standard','Long-Term','Past Due']},
+  {id:'13c', title:'Standard + LTPP + Custom', plans:['Standard','Long-Term','Custom']},
+  {id:'14c', title:'Standard + LTPP + Past Due + Custom', plans:['Standard','Long-Term','Past Due','Custom']},
+  {id:'15c', title:'Standard + LTPP + Past Due + Hidden + Custom', plans:['Standard','Long-Term','Past Due','Hidden','Custom']},
+  {id:'16c', title:'Standard + International + Past Due', plans:['Standard','International','Past Due']},
+  {id:'17c', title:'Standard + International + LTPP', plans:['Standard','International','Long-Term']},
+  {id:'18c', title:'All Standard-Compatible Plans', plans:['Standard','International','Long-Term','Past Due','Hidden','Custom'], note:'Maximum standard-family config'},
+  // Non-standard, non-guarantee
+  {id:'19c', title:'Past Due Only', plans:['Past Due']},
+  {id:'20c', title:'Long-Term (LTPP) Only', plans:['Long-Term']},
+  {id:'21c', title:'International Only', plans:['International']},
+  {id:'22c', title:'Hidden Only', plans:['Hidden']},
+  {id:'23c', title:'Custom Only', plans:['Custom']},
+  {id:'24c', title:'Past Due + Custom', plans:['Past Due','Custom']},
+  {id:'25c', title:'Past Due + Hidden', plans:['Past Due','Hidden']},
+  {id:'26c', title:'Past Due + Hidden + Custom', plans:['Past Due','Hidden','Custom']},
+  {id:'27c', title:'LTPP + Past Due', plans:['Long-Term','Past Due']},
+  {id:'28c', title:'LTPP + Custom', plans:['Long-Term','Custom']},
+  // Guarantee-based (cannot combine with Standard)
+  {id:'29c', title:'Guarantee Only', plans:['Guarantee']},
+  {id:'30c', title:'Guarantee + Past Due', plans:['Guarantee','Past Due']},
+  {id:'31c', title:'Guarantee + Long-Term (LTPP)', plans:['Guarantee','Long-Term']},
+  {id:'32c', title:'Guarantee + International', plans:['Guarantee','International']},
+  {id:'33c', title:'Guarantee + Hidden', plans:['Guarantee','Hidden']},
+  {id:'34c', title:'Guarantee + Custom', plans:['Guarantee','Custom']},
+  {id:'35c', title:'Guarantee + Past Due + Custom', plans:['Guarantee','Past Due','Custom']},
+  {id:'36c', title:'Guarantee + Past Due + Hidden', plans:['Guarantee','Past Due','Hidden']},
+  {id:'37c', title:'Guarantee + Hidden + Custom', plans:['Guarantee','Hidden','Custom']},
+  {id:'38c', title:'Guarantee + Past Due + Hidden + Custom', plans:['Guarantee','Past Due','Hidden','Custom']},
+  {id:'39c', title:'Guarantee + LTPP + Past Due', plans:['Guarantee','Long-Term','Past Due']},
+  {id:'40c', title:'Guarantee + LTPP + Custom', plans:['Guarantee','Long-Term','Custom']},
+  {id:'41c', title:'Guarantee + LTPP + Past Due + Hidden + Custom', plans:['Guarantee','Long-Term','Past Due','Hidden','Custom']},
+  {id:'42c', title:'All Guarantee-Compatible Plans', plans:['Guarantee','International','Long-Term','Past Due','Hidden','Custom'], note:'Maximum guarantee-family config'},
+];
+
+const planColors = {
+  'Standard': '#2563eb',
+  'Past Due': '#dc2626',
+  'Long-Term': '#7c3aed',
+  'International': '#0891b2',
+  'Hidden': '#6b7280',
+  'Custom': '#d97706',
+  'Guarantee': '#059669',
+};
+
+const grid = document.getElementById('scenarios-grid');
+scenarios.forEach(s => {
+  const tags = s.plans.map(p =>
+    `<span style="display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;background:${planColors[p]}22;color:${planColors[p]};border:1px solid ${planColors[p]}44;margin:2px 2px 0 0">${p}</span>`
+  ).join('');
+  const noteHtml = s.note ? `<div style="font-size:11px;color:#64748b;margin-top:6px">${s.note}</div>` : '';
+  grid.innerHTML += `
+    <a href="./inst-pot-scenario.html?id=${s.id}" style="padding:18px">
+      <div class="label">Scenario ${s.id}</div>
+      <div class="title" style="font-size:14px;margin-bottom:8px">${s.title}</div>
+      <div>${tags}</div>
+      ${noteHtml}
+    </a>`;
+});
+</script>
 </body>
 </html>

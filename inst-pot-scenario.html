@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Institution Pay Over Time Setup</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #0a1628; color: #f1f5f9; min-height: 100vh; }
+
+/* Top nav */
+.top-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 56px;
+  background: #0d1f3c; border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.nav-logo { font-size: 15px; font-weight: 700; color: #f1f5f9; letter-spacing: -.3px; }
+.nav-logo span { color: #2563eb; }
+.scenario-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  background: rgba(37,99,235,.15); color: #60a5fa; border: 1px solid rgba(37,99,235,.3);
+  border-radius: 6px; padding: 4px 12px;
+}
+
+/* Admin sidebar */
+.layout { display: flex; min-height: calc(100vh - 56px); }
+.sidebar {
+  width: 200px; flex-shrink: 0;
+  background: #0d1f3c; border-right: 1px solid rgba(255,255,255,.06);
+  padding: 24px 0;
+}
+.sidebar-item {
+  display: block; padding: 9px 20px; font-size: 13px; color: #94a3b8;
+  text-decoration: none; cursor: default;
+  transition: background .1s, color .1s;
+}
+.sidebar-item.active { background: rgba(37,99,235,.12); color: #60a5fa; font-weight: 600; border-left: 3px solid #2563eb; padding-left: 17px; }
+.sidebar-section { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #475569; padding: 16px 20px 6px; }
+
+/* Main content */
+.main { flex: 1; padding: 36px 40px; max-width: 960px; }
+.breadcrumb { font-size: 12px; color: #475569; margin-bottom: 20px; }
+.breadcrumb span { color: #64748b; }
+.breadcrumb .current { color: #94a3b8; }
+.page-title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+.page-subtitle { font-size: 14px; color: #64748b; margin-bottom: 32px; }
+
+/* Plan type cards grid */
+.plans-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.plan-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 12px; padding: 20px;
+}
+.plan-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.plan-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.plan-card-name { font-size: 14px; font-weight: 700; }
+.plan-card-desc { font-size: 12px; color: #94a3b8; line-height: 1.55; margin-bottom: 14px; }
+.plan-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; color: #10b981; }
+.plan-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block; }
+.plan-sample { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.06); }
+.plan-sample-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #475569; margin-bottom: 8px; }
+.plan-sample-item { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #94a3b8; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+.plan-sample-item:last-child { border-bottom: none; }
+.plan-sample-name { color: #cbd5e1; font-weight: 500; }
+
+/* Note banner */
+.config-note {
+  background: rgba(37,99,235,.06); border: 1px solid rgba(37,99,235,.18);
+  border-left: 3px solid #2563eb; border-radius: 8px;
+  padding: 14px 18px; font-size: 13px; color: #94a3b8; line-height: 1.6;
+  margin-bottom: 32px;
+}
+.config-note strong { color: #cbd5e1; }
+
+/* CTA */
+.cta-row { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #2563eb; color: white; font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: 10px; text-decoration: none;
+  transition: background .15s;
+}
+.cta-btn:hover { background: #1d4ed8; }
+.cta-btn .arrow { font-size: 16px; }
+.cta-back { font-size: 13px; color: #475569; text-decoration: none; }
+.cta-back:hover { color: #94a3b8; }
+
+/* Disabled/inactive */
+.disabled-section { margin-top: 32px; }
+.disabled-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #334155; margin-bottom: 12px; }
+.disabled-plans-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.disabled-plan-chip {
+  font-size: 12px; color: #334155; background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.05); border-radius: 6px; padding: 5px 12px;
+}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-logo"><span>Horizon</span> — Institution Admin</div>
+  <div class="scenario-badge" id="scenario-badge">Scenario —</div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section">Payment Setup</div>
+    <a class="sidebar-item">Payment Methods</a>
+    <a class="sidebar-item active">Pay Over Time</a>
+    <a class="sidebar-item">Disclosures</a>
+    <a class="sidebar-item">Communications</a>
+    <div class="sidebar-section">Account</div>
+    <a class="sidebar-item">Authorized Parties</a>
+    <a class="sidebar-item">Student Access</a>
+    <div class="sidebar-section">System</div>
+    <a class="sidebar-item">ERP Integration</a>
+    <a class="sidebar-item">Access Management</a>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb">
+      Institution Admin <span>›</span> Payment Setup <span>›</span> <span class="current">Pay Over Time</span>
+    </div>
+    <div class="page-title">Pay Over Time Setup</div>
+    <div class="page-subtitle" id="page-subtitle">Loading configuration…</div>
+
+    <div class="plans-grid" id="plans-grid"></div>
+
+    <div class="config-note">
+      <strong>Consumer Experience Note:</strong> The plan types enabled above determine what payment plan options a student sees when they access the Pay Over Time enrollment flow. Each enabled plan type will appear as an option during enrollment. Hidden plans require the student to have received an admin-issued invite. Custom plans are created individually by an admin and sent directly to a student.
+    </div>
+
+    <div class="disabled-section" id="disabled-section" style="display:none">
+      <div class="disabled-section-title">Not Enabled for This Institution</div>
+      <div class="disabled-plans-row" id="disabled-plans-row"></div>
+    </div>
+
+    <div class="cta-row" style="margin-top:32px">
+      <a class="cta-btn" href="../consumer-onboarding/index.html">
+        Preview Consumer Enrollment Experience <span class="arrow">→</span>
+      </a>
+      <a class="cta-back" href="./index.html">← Back to all scenarios</a>
+    </div>
+  </main>
+</div>
+
+<script>
+const ALL_PLAN_TYPES = ['Standard','Past Due','Long-Term','International','Hidden','Custom','Guarantee'];
+
+const scenarios = [
+  {id:'1c', title:'Standard Plans Only — 1 Plan', plans:['Standard'], note:'Single plan option available to students'},
+  {id:'2c', title:'Standard Plans Only — 2 Plans', plans:['Standard'], note:'Two plan options available to students'},
+  {id:'3c', title:'Standard + Past Due', plans:['Standard','Past Due']},
+  {id:'4c', title:'Standard + Long-Term (LTPP)', plans:['Standard','Long-Term']},
+  {id:'5c', title:'Standard + International', plans:['Standard','International']},
+  {id:'6c', title:'Standard + Hidden', plans:['Standard','Hidden']},
+  {id:'7c', title:'Standard + Custom', plans:['Standard','Custom']},
+  {id:'8c', title:'Standard + Past Due + Custom', plans:['Standard','Past Due','Custom']},
+  {id:'9c', title:'Standard + Past Due + Hidden', plans:['Standard','Past Due','Hidden']},
+  {id:'10c', title:'Standard + Hidden + Custom', plans:['Standard','Hidden','Custom']},
+  {id:'11c', title:'Standard + Past Due + Hidden + Custom', plans:['Standard','Past Due','Hidden','Custom']},
+  {id:'12c', title:'Standard + LTPP + Past Due', plans:['Standard','Long-Term','Past Due']},
+  {id:'13c', title:'Standard + LTPP + Custom', plans:['Standard','Long-Term','Custom']},
+  {id:'14c', title:'Standard + LTPP + Past Due + Custom', plans:['Standard','Long-Term','Past Due','Custom']},
+  {id:'15c', title:'Standard + LTPP + Past Due + Hidden + Custom', plans:['Standard','Long-Term','Past Due','Hidden','Custom']},
+  {id:'16c', title:'Standard + International + Past Due', plans:['Standard','International','Past Due']},
+  {id:'17c', title:'Standard + International + LTPP', plans:['Standard','International','Long-Term']},
+  {id:'18c', title:'All Standard-Compatible Plans', plans:['Standard','International','Long-Term','Past Due','Hidden','Custom'], note:'Maximum standard-family configuration'},
+  {id:'19c', title:'Past Due Only', plans:['Past Due']},
+  {id:'20c', title:'Long-Term (LTPP) Only', plans:['Long-Term']},
+  {id:'21c', title:'International Only', plans:['International']},
+  {id:'22c', title:'Hidden Only', plans:['Hidden']},
+  {id:'23c', title:'Custom Only', plans:['Custom']},
+  {id:'24c', title:'Past Due + Custom', plans:['Past Due','Custom']},
+  {id:'25c', title:'Past Due + Hidden', plans:['Past Due','Hidden']},
+  {id:'26c', title:'Past Due + Hidden + Custom', plans:['Past Due','Hidden','Custom']},
+  {id:'27c', title:'LTPP + Past Due', plans:['Long-Term','Past Due']},
+  {id:'28c', title:'LTPP + Custom', plans:['Long-Term','Custom']},
+  {id:'29c', title:'Guarantee Only', plans:['Guarantee']},
+  {id:'30c', title:'Guarantee + Past Due', plans:['Guarantee','Past Due']},
+  {id:'31c', title:'Guarantee + Long-Term (LTPP)', plans:['Guarantee','Long-Term']},
+  {id:'32c', title:'Guarantee + International', plans:['Guarantee','International']},
+  {id:'33c', title:'Guarantee + Hidden', plans:['Guarantee','Hidden']},
+  {id:'34c', title:'Guarantee + Custom', plans:['Guarantee','Custom']},
+  {id:'35c', title:'Guarantee + Past Due + Custom', plans:['Guarantee','Past Due','Custom']},
+  {id:'36c', title:'Guarantee + Past Due + Hidden', plans:['Guarantee','Past Due','Hidden']},
+  {id:'37c', title:'Guarantee + Hidden + Custom', plans:['Guarantee','Hidden','Custom']},
+  {id:'38c', title:'Guarantee + Past Due + Hidden + Custom', plans:['Guarantee','Past Due','Hidden','Custom']},
+  {id:'39c', title:'Guarantee + LTPP + Past Due', plans:['Guarantee','Long-Term','Past Due']},
+  {id:'40c', title:'Guarantee + LTPP + Custom', plans:['Guarantee','Long-Term','Custom']},
+  {id:'41c', title:'Guarantee + LTPP + Past Due + Hidden + Custom', plans:['Guarantee','Long-Term','Past Due','Hidden','Custom']},
+  {id:'42c', title:'All Guarantee-Compatible Plans', plans:['Guarantee','International','Long-Term','Past Due','Hidden','Custom'], note:'Maximum guarantee-family configuration'},
+];
+
+const planMeta = {
+  'Standard': {
+    icon:'📅', color:'#2563eb',
+    desc:'Fixed-schedule payment plans available to enrolled students for current-term charges. Students select from pre-configured schedule options.',
+    samples:['Fall 2026 — 4 Month Plan','Fall 2026 — 5 Month Plan']
+  },
+  'Past Due': {
+    icon:'⚠️', color:'#dc2626',
+    desc:'Payment plans for students with past-due balances. Available after the standard enrollment window closes or for delinquent accounts.',
+    samples:['Past Due — 6 Month','Past Due — 12 Month']
+  },
+  'Long-Term': {
+    icon:'📆', color:'#7c3aed',
+    desc:'Extended payment plans (13–60 months) for large balances or accounts where standard plans are insufficient to resolve the obligation.',
+    samples:['LTPP — 24 Month','LTPP — 36 Month']
+  },
+  'International': {
+    icon:'🌐', color:'#0891b2',
+    desc:'Payment plans that accept international payment methods via a configured vendor (Flywire, Convera, etc.). Currency conversion handled at enrollment.',
+    samples:['Intl — 4 Month (Flywire)','Intl — Semester (Convera)']
+  },
+  'Hidden': {
+    icon:'🔒', color:'#6b7280',
+    desc:'Invite-only plans not visible in the standard enrollment flow. Students must receive an admin-issued invitation link to access and enroll.',
+    samples:['VIP Plan — Scholarship Hold','Exception Plan — Dean Approval']
+  },
+  'Custom': {
+    icon:'✏️', color:'#d97706',
+    desc:'One-off plans created by an admin for a specific student. Admin sets the schedule, amount, and terms individually. Not available in the self-service flow.',
+    samples:['Custom — James T. (12 mo)','Custom — Financial Aid Dispute']
+  },
+  'Guarantee': {
+    icon:'🛡️', color:'#059669',
+    desc:'Plans backed by a guarantee agreement. Student payments are guaranteed by NBS/Nelnet. Cannot be combined with Standard Plans — institutions choose one model.',
+    samples:['Guarantee — Fall 2026','Guarantee — Annual Plan']
+  },
+};
+
+// Read scenario from URL
+const params = new URLSearchParams(window.location.search);
+const scenarioId = params.get('id') || '1c';
+const scenario = scenarios.find(s => s.id === scenarioId) || scenarios[0];
+
+// Set badge and subtitle
+document.getElementById('scenario-badge').textContent = 'Scenario ' + scenario.id;
+document.getElementById('page-subtitle').textContent =
+  (scenario.note ? scenario.note + ' · ' : '') + scenario.plans.join(', ');
+
+// Render enabled plan cards
+const grid = document.getElementById('plans-grid');
+scenario.plans.forEach(planName => {
+  const m = planMeta[planName];
+  const card = document.createElement('div');
+  card.className = 'plan-card';
+  card.style.borderColor = m.color + '33';
+  card.innerHTML = `
+    <div class="plan-card-header">
+      <div class="plan-icon" style="background:${m.color}18">${m.icon}</div>
+      <div>
+        <div class="plan-card-name">${planName} Plans</div>
+        <div class="plan-status">Active</div>
+      </div>
+    </div>
+    <div class="plan-card-desc">${m.desc}</div>
+    <div class="plan-sample">
+      <div class="plan-sample-label">Sample Plans Configured</div>
+      ${m.samples.map(s => `<div class="plan-sample-item"><span class="plan-sample-name">${s}</span><span style="color:#059669;font-size:11px;font-weight:600">Active</span></div>`).join('')}
+    </div>`;
+  grid.appendChild(card);
+});
+
+// Render disabled plans
+const disabledPlans = ALL_PLAN_TYPES.filter(p => !scenario.plans.includes(p));
+if (disabledPlans.length > 0) {
+  document.getElementById('disabled-section').style.display = '';
+  document.getElementById('disabled-plans-row').innerHTML =
+    disabledPlans.map(p => `<div class="disabled-plan-chip">${p} Plans — Not Enabled</div>`).join('');
+}
+</script>
+</body>
+</html>
