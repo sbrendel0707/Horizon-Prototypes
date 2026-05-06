@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Horizon Prototypes</title>
+<title>Consumer Prototypes — Horizon</title>
 <link rel="stylesheet" href="design-system/horizon.css"/>
 <style>
 body {
@@ -31,6 +31,17 @@ h1 {
   line-height: 1.2;
   margin-bottom: 16px;
 }
+.context-block {
+  background: var(--hz-cloud);
+  border: .5px solid rgba(100,92,220,.2);
+  border-radius: var(--hz-radius-sm);
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--hz-muted);
+  line-height: 1.7;
+  max-width: 640px;
+}
+.context-block strong { color: var(--hz-text); font-weight: 600; }
 
 /* ── Section label ── */
 .section-label {
@@ -42,7 +53,6 @@ h1 {
   letter-spacing: 1px;
   color: var(--hz-hint);
 }
-.section-label + .grid { margin-bottom: 36px; }
 
 /* ── Grid ── */
 .grid {
@@ -121,7 +131,7 @@ a.tile:hover::after { opacity: 1; right: 16px; }
   line-height: 1.3;
 }
 
-/* ── Institution settings ── */
+/* ── Institution settings / scenario setup ── */
 .settings-label {
   font-size: 10px;
   font-weight: 700;
@@ -152,25 +162,23 @@ a.tile:hover::after { opacity: 1; right: 16px; }
   font-style: italic;
 }
 
-/* ── Scenario grid (PoT scenarios) ── */
+/* ── PoT scenario grid ── */
 .scenarios-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
   max-width: 880px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
 }
-.scenario-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
+a.scenario-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
   transition: border-color .15s, box-shadow .15s, transform .15s;
-  position: relative;
 }
-.scenario-card:hover {
+a.scenario-card:hover {
   border-color: rgba(100,92,220,.4);
   box-shadow: 0 4px 20px rgba(45,31,163,.08);
   transform: translateY(-2px);
@@ -181,16 +189,19 @@ a.tile:hover::after { opacity: 1; right: 16px; }
 
   <div class="header">
     <div class="eyebrow">Nelnet · UX Prototypes</div>
-    <h1>Horizon Prototypes</h1>
+    <h1>Consumer Prototypes</h1>
+    <div class="context-block">
+      <strong>Onboarding scenarios (a-series)</strong> represent students authenticating via <strong>SAML SSO</strong> directly from their university's portal, with <strong>full ERP integration</strong>. <strong>Home page scenarios (b-series)</strong> start from the consumer home page — the shared home page and all screens reachable from it are <strong>living components</strong>: editing <code style="font-family:monospace;font-size:11px;background:rgba(100,92,220,.08);padding:1px 5px;border-radius:4px;">consumer-home.html</code> propagates to all b-series prototypes.
+    </div>
   </div>
 
   <!-- ── Documentation ── -->
   <div class="section-label">Documentation</div>
-  <div class="grid" style="margin-bottom: 36px;">
-    <a class="tile hz-card" id="prd-link" href="https://sbrendel0707.github.io/consumer-onboarding/prd.html" style="border-left: 3px solid var(--hz-accent);">
+  <div class="grid" style="margin-bottom: 24px;">
+    <a class="tile hz-card" id="prd-link" href="#" style="border-left: 3px solid var(--hz-accent);">
       <div>
         <div class="tile-scenario" style="color:var(--hz-teal);">Living Document</div>
-        <div class="tile-name">Consumer Onboarding PRD</div>
+        <div class="tile-name">Product Requirements</div>
       </div>
       <div class="hz-divider"></div>
       <div>
@@ -205,12 +216,12 @@ a.tile:hover::after { opacity: 1; right: 16px; }
     </a>
   </div>
 
-  <!-- ── Consumer Onboarding ── -->
-  <div class="section-label">Consumer Onboarding Scenarios</div>
+  <!-- ── Onboarding Scenarios ── -->
+  <div class="section-label">Onboarding Scenarios</div>
   <div class="grid" style="margin-bottom: 36px;">
 
     <!-- 1a -->
-    <a class="tile hz-card" id="link-1a" href="User feedback complete student experience.html">
+    <a class="tile hz-card" id="link-1a" href="#">
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
           <span style="font-size:11px;font-weight:800;background:rgba(100,92,220,.12);color:#3C3489;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">1a</span>
@@ -230,25 +241,19 @@ a.tile:hover::after { opacity: 1; right: 16px; }
       </div>
     </a>
 
-    <!-- 2a — Charges Added -->
-    <a class="tile hz-card" id="link-2a" href="UI_ Charges added after pay over time plan exists - student and student plan owner.html">
+    <!-- 2a coming soon -->
+    <div class="tile hz-card tile-soon">
+      <span class="soon-badge">Coming soon</span>
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;font-weight:800;background:rgba(100,92,220,.12);color:#3C3489;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">2a</span>
-          <span>Student — Second Login</span>
+          <span style="font-size:11px;font-weight:800;background:rgba(100,92,220,.07);color:var(--hz-hint);padding:2px 7px;border-radius:5px;letter-spacing:.3px;">2a</span>
+          <span>Student</span>
         </div>
-        <div class="tile-name">Charges Added After Pay Over Time Plan Is Setup</div>
+        <div class="tile-name">Returning Student</div>
       </div>
       <div class="hz-divider"></div>
-      <div>
-        <div class="settings-label">Scenario Setup</div>
-        <div class="settings-chips">
-          <span class="chip highlight">Returning student</span>
-          <span class="chip">Existing PoT plan</span>
-          <span class="chip">New charge added</span>
-        </div>
-      </div>
-    </a>
+      <div><div class="settings-label">Institution Settings</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
+    </div>
 
     <!-- 3a coming soon -->
     <div class="tile hz-card tile-soon">
@@ -278,67 +283,163 @@ a.tile:hover::after { opacity: 1; right: 16px; }
       <div><div class="settings-label">Institution Settings</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
     </div>
 
-  </div>
-
-  <!-- ── Consumer Home Screen ── -->
-  <div class="section-label">Consumer Home Screen Scenarios</div>
-  <div class="grid" style="margin-bottom: 36px;">
-
-    <!-- 1b coming soon -->
+    <!-- 5a coming soon -->
     <div class="tile hz-card tile-soon">
       <span class="soon-badge">Coming soon</span>
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.10);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">1b</span>
+          <span style="font-size:11px;font-weight:800;background:rgba(100,92,220,.07);color:var(--hz-hint);padding:2px 7px;border-radius:5px;letter-spacing:.3px;">5a</span>
+          <span>Authorized Party</span>
+        </div>
+        <div class="tile-name">Authorized Party — Non-Payer</div>
+      </div>
+      <div class="hz-divider"></div>
+      <div><div class="settings-label">Institution Settings</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
+    </div>
+
+    <!-- 6a coming soon -->
+    <div class="tile hz-card tile-soon">
+      <span class="soon-badge">Coming soon</span>
+      <div>
+        <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;font-weight:800;background:rgba(100,92,220,.07);color:var(--hz-hint);padding:2px 7px;border-radius:5px;letter-spacing:.3px;">6a</span>
+          <span>Authorized Party</span>
+        </div>
+        <div class="tile-name">Returning Authorized Party</div>
+      </div>
+      <div class="hz-divider"></div>
+      <div><div class="settings-label">Institution Settings</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
+    </div>
+
+  </div>
+
+  <!-- ── Home Page Scenarios ── -->
+  <div class="section-label">Home Page Scenarios</div>
+  <div class="grid" style="margin-bottom: 48px;">
+
+    <!-- 1b -->
+    <a class="tile hz-card" id="link-1b" href="#">
+      <div>
+        <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">1b</span>
           <span style="color:var(--hz-teal);">Student · Home</span>
         </div>
         <div class="tile-name">Student Payer Plan Balance Increase</div>
       </div>
       <div class="hz-divider"></div>
-      <div><div class="settings-label">Scenario Setup</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
-    </div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">On payment plan</span>
+          <span class="chip">+$350 new lab fee</span>
+          <span class="chip">Open balance to address</span>
+        </div>
+      </div>
+    </a>
 
-    <!-- 2b coming soon -->
-    <div class="tile hz-card tile-soon">
-      <span class="soon-badge">Coming soon</span>
+    <!-- 2b -->
+    <a class="tile hz-card" id="link-2b" href="#">
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.10);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">2b</span>
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">2b</span>
           <span style="color:var(--hz-teal);">Student · Home</span>
         </div>
         <div class="tile-name">Simple Balance — No Plan</div>
       </div>
       <div class="hz-divider"></div>
-      <div><div class="settings-label">Scenario Setup</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
-    </div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">Open balance</span>
+          <span class="chip">No payment plan</span>
+          <span class="chip">Due Sep 15</span>
+        </div>
+      </div>
+    </a>
 
-    <!-- 3b coming soon -->
-    <div class="tile hz-card tile-soon">
-      <span class="soon-badge">Coming soon</span>
+    <!-- 3b -->
+    <a class="tile hz-card" id="link-3b" href="#">
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.10);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">3b</span>
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">3b</span>
           <span style="color:var(--hz-teal);">Student · Home</span>
         </div>
         <div class="tile-name">Credit Balance &amp; Refund Processing</div>
       </div>
       <div class="hz-divider"></div>
-      <div><div class="settings-label">Scenario Setup</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
-    </div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">Credit balance</span>
+          <span class="chip">Refund processing</span>
+        </div>
+      </div>
+    </a>
 
-    <!-- 4b coming soon -->
-    <div class="tile hz-card tile-soon">
-      <span class="soon-badge">Coming soon</span>
+    <!-- 4b -->
+    <a class="tile hz-card" id="link-4b" href="#">
       <div>
         <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.10);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">4b</span>
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">4b</span>
           <span style="color:var(--hz-teal);">Student · Home</span>
         </div>
         <div class="tile-name">Defaulted Payment Plan</div>
       </div>
       <div class="hz-divider"></div>
-      <div><div class="settings-label">Scenario Setup</div><div class="settings-chips"><span class="chip tbd">TBD</span></div></div>
-    </div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">Plan defaulted</span>
+          <span class="chip">Registration hold</span>
+          <span class="chip">Past due balance</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 5b -->
+    <a class="tile hz-card" id="link-5b" href="#">
+      <div>
+        <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">5b</span>
+          <span style="color:var(--hz-teal);">Student · Home</span>
+        </div>
+        <div class="tile-name">Past Due + Mixed Due Dates</div>
+      </div>
+      <div class="hz-divider"></div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">Past due balance</span>
+          <span class="chip">Mixed due dates</span>
+          <span class="chip">No plan</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 6b -->
+    <a class="tile hz-card" id="link-6b" href="#">
+      <div>
+        <div class="tile-scenario" style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;font-weight:800;background:rgba(13,122,85,.12);color:#0D7A55;padding:2px 7px;border-radius:5px;letter-spacing:.3px;">6b</span>
+          <span style="color:var(--hz-teal);">Student · Home</span>
+        </div>
+        <div class="tile-name">Active Plan + Outside-Plan Charges</div>
+      </div>
+      <div class="hz-divider"></div>
+      <div>
+        <div class="settings-label">Scenario Setup</div>
+        <div class="settings-chips">
+          <span class="chip highlight">Starts at home page</span>
+          <span class="chip">Active plan</span>
+          <span class="chip">Outside-plan charges</span>
+        </div>
+      </div>
+    </a>
 
   </div>
 
@@ -347,26 +448,32 @@ a.tile:hover::after { opacity: 1; right: 16px; }
   <div id="scenarios-grid" class="scenarios-grid"></div>
 
 <script>
-// Fix PRD + prototype links for local preview vs GitHub Pages
+// ── Set correct base URL for all prototype links ──
 (function() {
   var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  if (isLocal) {
-    var prdLink = document.getElementById('prd-link');
-    if (prdLink) prdLink.href = 'http://localhost:3001/prd.html';
-  }
+  var base = isLocal ? 'http://localhost:3001' : 'https://sbrendel0707.github.io/consumer-onboarding';
+
+  document.getElementById('prd-link').href  = base + '/prd.html';
+  document.getElementById('link-1a').href   = base + '/User%20feedback%20complete%20student%20experience.html';
+  document.getElementById('link-1b').href   = base + '/home-1b-balance-increase.html';
+  document.getElementById('link-2b').href   = base + '/home-2b-no-plan.html';
+  document.getElementById('link-3b').href   = base + '/home-3b-credit-balance.html';
+  document.getElementById('link-4b').href   = base + '/home-4b-defaulted-plan.html';
+  document.getElementById('link-5b').href   = base + '/home-5b-past-due-mixed.html';
+  document.getElementById('link-6b').href   = base + '/home-6b-outside-plan-charges.html';
 })();
 
 // ── Institution PoT scenarios ──
 const scenarios = [
-  {id:'1c', title:'Standard Plans Only — 1 Plan', plans:['Standard'], note:'Single plan option available'},
-  {id:'2c', title:'Standard Plans Only — 2 Plans', plans:['Standard'], note:'Two plan options available'},
-  {id:'3c', title:'Standard + Past Due', plans:['Standard','Past Due']},
-  {id:'4c', title:'Standard + Long-Term (LTPP)', plans:['Standard','Long-Term']},
-  {id:'5c', title:'Standard + International', plans:['Standard','International']},
-  {id:'6c', title:'Standard + Hidden', plans:['Standard','Hidden']},
-  {id:'7c', title:'Standard + Custom', plans:['Standard','Custom']},
-  {id:'8c', title:'Standard + Past Due + Custom', plans:['Standard','Past Due','Custom']},
-  {id:'9c', title:'Standard + Past Due + Hidden', plans:['Standard','Past Due','Hidden']},
+  {id:'1c',  title:'Standard Plans Only — 1 Plan', plans:['Standard'], note:'Single plan option available'},
+  {id:'2c',  title:'Standard Plans Only — 2 Plans', plans:['Standard'], note:'Two plan options available'},
+  {id:'3c',  title:'Standard + Past Due', plans:['Standard','Past Due']},
+  {id:'4c',  title:'Standard + Long-Term (LTPP)', plans:['Standard','Long-Term']},
+  {id:'5c',  title:'Standard + International', plans:['Standard','International']},
+  {id:'6c',  title:'Standard + Hidden', plans:['Standard','Hidden']},
+  {id:'7c',  title:'Standard + Custom', plans:['Standard','Custom']},
+  {id:'8c',  title:'Standard + Past Due + Custom', plans:['Standard','Past Due','Custom']},
+  {id:'9c',  title:'Standard + Past Due + Hidden', plans:['Standard','Past Due','Hidden']},
   {id:'10c', title:'Standard + Hidden + Custom', plans:['Standard','Hidden','Custom']},
   {id:'11c', title:'Standard + Past Due + Hidden + Custom', plans:['Standard','Past Due','Hidden','Custom']},
   {id:'12c', title:'Standard + LTPP + Past Due', plans:['Standard','Long-Term','Past Due']},
